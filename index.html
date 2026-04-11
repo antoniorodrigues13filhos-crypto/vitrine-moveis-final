@@ -37,16 +37,9 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    
-    <script>
-      window.lucide = {
-        createIcons: function() {}
-      };
-    </script>
-    
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <style type="text/tailwindcss">
@@ -78,16 +71,16 @@ html.lenis { height: auto; }
             background: rgba(255, 255, 255, 0.25);
         }
 .glass-fab {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease, background 0.3s ease;
         }
 .glass-fab:hover {
             transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.8);
         }
 .nav-link {
             position: relative;
@@ -109,21 +102,12 @@ html.lenis { height: auto; }
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #FFFFFF; }
 ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #CCCCCC; }
 
-#mobile-menu {
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
+#mobile-menu { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.floating-label { transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+#hero-text-container { transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
 
-.floating-label {
-    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-#hero-text-container {
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-/* --- ATENDENTE VIRTUAL: VIDRO TRANSPARENTE E TEXTO PRETO --- */
+/* --- ATENDENTE VIRTUAL ULTRA CLEAR --- */
 #atendente-container {
     position: fixed;
     bottom: 30px;
@@ -139,11 +123,11 @@ html.lenis { height: auto; }
     flex-direction: column;
     border-radius: 28px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.7); /* Vidro mais transparente */
-    backdrop-filter: blur(10px); /* Fosco reduzido para transparência */
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.7); /* VIDRO TRANSPARENTE */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     margin-bottom: 20px;
     animation: chatSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -159,7 +143,7 @@ html.lenis { height: auto; }
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     scrollbar-width: none;
 }
 #atendente-messages::-webkit-scrollbar { display: none; }
@@ -170,22 +154,22 @@ html.lenis { height: auto; }
     font-size: 14px;
     line-height: 1.5;
     max-width: 85%;
-    color: #000 !important; /* TEXTO PRETO OBRIGATÓRIO */
+    color: #000 !important; /* LETRAS PRETAS */
     font-weight: 500;
 }
-.bot-msg { background: rgba(255,255,255,0.5); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-.user-msg { background: rgba(0, 0, 0, 0.05); align-self: flex-end; border-bottom-right-radius: 4px; border: 1px solid rgba(0,0,0,0.1); }
+.bot-msg { background: rgba(0, 0, 0, 0.05); align-self: flex-start; border-bottom-left-radius: 4px; }
+.user-msg { background: rgba(255, 255, 255, 0.9); align-self: flex-end; border-bottom-right-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
 
 .atendente-input-area {
     padding: 18px;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.5);
     display: flex;
-    gap: 12px;
+    gap: 10px;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 .atendente-input-area input {
     flex: 1;
-    background: rgba(255, 255, 255, 0.8);
+    background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 10px 16px;
     border-radius: 14px;
@@ -197,75 +181,55 @@ html.lenis { height: auto; }
     background: #111;
     color: #fff;
     border: none;
-    width: 40px;
-    height: 40px;
+    padding: 10px 15px;
     border-radius: 12px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
 
-    <div id="loader" style="position: fixed; inset: 0px; background: linear-gradient(135deg, rgb(17, 17, 17), rgb(42, 42, 42)); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s; opacity: 1; visibility: visible;">
-        <div class="mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white w-16 h-16" aria-hidden="true"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path><path d="M5 18v2"></path><path d="M19 18v2"></path></svg>
-        </div>
+    <div id="loader" style="position: fixed; inset: 0px; background: #111; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s; opacity: 1; visibility: visible;">
         <h2 class="text-3xl font-serif text-white mb-2 tracking-tight uppercase">VITRINE MÓVEL</h2>
         <div style="width:16rem;height:0.5rem;background:rgba(255,255,255,0.3);border-radius:9999px;overflow:hidden;margin-top:0.5rem;">
             <div id="progress-bar" style="height: 100%; background: white; transition: 100ms ease-out; width: 0%;"></div>
         </div>
-        <p id="loading-text" class="text-white/80 mt-3 font-mono text-xs uppercase tracking-widest">Ajustando ergonomia...</p>
     </div>
 
     <header class="extreme-glass fixed top-6 left-1/2 w-[90%] max-w-7xl rounded-full z-50 flex items-center justify-between px-10 py-4">
         <nav class="hidden md:flex items-center gap-8">
-            <a href="#produtos" class="nav-link text-sm font-medium tracking-wide">Produtos</a>
+            <a href="#produtos" class="nav-link text-sm font-medium tracking-wide uppercase">Produtos</a>
         </nav>
-
-        <a href="#" class="absolute left-1/2 -translate-x-1/2 select-none hover:scale-105 transition-transform duration-300 z-20">
-            <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/user-images/207d01fe-9154-44a2-a035-5a4810effc12.webp" alt="logo" class="logo h-8 md:h-10 lg:h-11 w-auto object-contain brightness-0">
+        <a href="#" class="absolute left-1/2 -translate-x-1/2">
+            <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/user-images/207d01fe-9154-44a2-a035-5a4810effc12.webp" alt="logo" class="h-8 md:h-10 brightness-0">
         </a>
-
         <nav class="hidden md:flex items-center gap-8">
-            <a href="#solucoes" class="nav-link text-sm font-medium tracking-wide">Soluções</a>
-            <a href="#contato" class="nav-link text-sm font-medium tracking-wide">Fale Conosco</a>
+            <a href="#contato" class="nav-link text-sm font-medium tracking-wide uppercase">Fale Conosco</a>
         </nav>
-
         <button onclick="toggleMenu()" class="md:hidden ml-auto p-1 z-[60] relative">
             <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
         </button>
     </header>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-xl z-[55] translate-x-full flex flex-col items-center justify-center gap-8">
-        <a href="#produtos" onclick="toggleMenu()" class="font-serif text-3xl">Produtos</a>
-        <a href="#solucoes" onclick="toggleMenu()" class="font-serif text-3xl">Soluções</a>
-        <a href="#contato" onclick="toggleMenu()" class="font-serif text-3xl">Fale Conosco</a>
-    </div>
-
     <div id="atendente-container">
         <div id="atendente-window">
-            <div style="padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.2);">
+            <div style="padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center;">
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <div style="width:8px; height:8px; background:#000; border-radius:50%;"></div>
-                    <span style="color: #000; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Atendente Virtual</span>
+                    <div style="width:8px; height:8px; background:#25D366; border-radius:50%; box-shadow: 0 0 8px #25D366;"></div>
+                    <span style="color: #000; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Atendente Vitrine</span>
                 </div>
-                <button onclick="toggleAtendente()" style="background: none; border: none; color: #000; cursor: pointer; font-size: 20px; line-height: 1;">&times;</button>
+                <button onclick="toggleAtendente()" style="background: none; border: none; color: #000; cursor: pointer; font-size: 20px;">&times;</button>
             </div>
             <div id="atendente-messages">
-                <div class="msg-bubble bot-msg">Olá! Sou o consultor virtual da Vitrine Móvel. Como posso ajudar você hoje?</div>
+                <div class="msg-bubble bot-msg">Olá, Rodrigo! Sou o consultor virtual da Vitrine. Como posso ajudar você hoje?</div>
             </div>
             <div class="atendente-input-area">
                 <input type="text" id="atendente-input" placeholder="Sua dúvida...">
-                <button onclick="enviarAtendente()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                </button>
+                <button onclick="enviarAtendente()">></button>
             </div>
         </div>
         <div onclick="toggleAtendente()" class="glass-fab w-16 h-16 rounded-full flex items-center justify-center cursor-pointer shadow-2xl">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.9.9L21 3z"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.9.9L21 3z"></path></svg>
         </div>
     </div>
 
@@ -273,27 +237,9 @@ html.lenis { height: auto; }
         <section id="scroll-hero" style="height:400vh;position:relative;">
             <div style="position:sticky;top:0;height:100vh;width:100%;overflow:hidden;">
                 <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></canvas>
-                
-                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none">
-                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Estrutura</p>
-                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
-                </div>
-
-                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right">
-                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Revestimento</p>
-                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
-                </div>
-
-                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center">
-                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Mecanismo</p>
-                    <h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3>
-                </div>
-
-                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),rgba(0,0,0,0.2) 50%,transparent);z-index:1;"></div>
-                
-                <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6 text-center" style="padding-top: 10vh;">
-                    <span id="hero-badge" class="font-mono text-xs md:text-sm text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
-                    <h1 id="hero-title" class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-tight max-w-5xl">
+                <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6" style="padding-top: 10vh;">
+                    <span class="font-mono text-xs md:text-sm text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
+                    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-tight max-w-5xl">
                         A Arte de Equipar<br>
                         <span class="italic text-white/90 font-light">Seu Espaço</span>
                     </h1>
@@ -301,67 +247,34 @@ html.lenis { height: auto; }
             </div>
         </section>
 
-        <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto relative bg-white">
-            <div class="flex flex-col md:flex-row gap-16 items-start">
-                <div class="w-full md:w-1/3">
-                    <h2 class="font-serif text-3xl md:text-4xl leading-tight mb-6">Redefinindo o Padrão Corporativo.</h2>
-                    <div class="w-12 h-[1px] bg-primary mb-6"></div>
-                    <p class="text-sm font-mono text-primary/60 uppercase tracking-widest">Manifesto VM</p>
-                </div>
-                <div class="w-full md:w-2/3">
-                    <p class="text-lg md:text-xl text-primary/80 leading-[1.8] font-light mb-8">
-                        Acreditamos que o ambiente de trabalho molda a mente. Nossas peças não são apenas móveis; são instrumentos de foco e criação. Construídos com tolerâncias extremas e materiais que envelhecem com dignidade, cada linha é pensada para suportar a rotina sem perder a elegância.
-                    </p>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border-light pt-8">
-                        <div><span class="block font-mono text-2xl mb-1">01</span><span class="text-xs uppercase text-primary/60 font-medium">Design Autoral</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">02</span><span class="text-xs uppercase text-primary/60 font-medium">Acabamento Manual</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">03</span><span class="text-xs uppercase text-primary/60 font-medium">Ergonomia</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">04</span><span class="text-xs uppercase text-primary/60 font-medium">Garantia 10 Anos</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="produtos" class="py-24 px-6 max-w-[90rem] mx-auto border-t border-border-light">
-            <div class="flex items-end justify-between mb-16">
-                <div>
-                    <h2 class="font-serif text-4xl mb-2">Coleção Executiva</h2>
-                    <p class="font-mono text-sm text-primary/50 uppercase tracking-wider">Catálogo 2024</p>
-                </div>
-            </div>
+            <h2 class="font-serif text-4xl mb-12">Coleção Executiva</h2>
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16"></div>
         </section>
     </main>
 
-    <a href="https://wa.me/5511999999999" class="glass-fab fixed bottom-8 left-8 w-14 h-14 rounded-full flex items-center justify-center z-50 group">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary w-6 h-6"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"></path></svg>
-    </a>
-
     <script>
         function toggleAtendente() {
             const win = document.getElementById('atendente-window');
-            const isHidden = win.style.display === 'none' || win.style.display === '';
-            win.style.display = isHidden ? 'flex' : 'none';
+            win.style.display = (win.style.display === 'none' || win.style.display === '') ? 'flex' : 'none';
         }
 
         async function enviarAtendente() {
             const input = document.getElementById('atendente-input');
             const text = input.value.trim();
             if(!text) return;
-
             addMsgIA(text, 'user');
             input.value = '';
-
             try {
                 const res = await fetch('https://hook.us2.make.com/nodnz5uzkjsu6wnha8phgh8eo1ccpfdj', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ mensagem: text })
+                    body: JSON.stringify({ mensagem: text, nome: "Rodrigo" })
                 });
                 const data = await res.json();
                 if(data.resposta) addMsgIA(data.resposta, 'bot');
             } catch(e) {
-                addMsgIA("Desculpe, tive um erro de conexão. Tente novamente.", 'bot');
+                addMsgIA("Erro de conexão. Tente novamente.", 'bot');
             }
         }
 
@@ -376,32 +289,19 @@ html.lenis { height: auto; }
 
         document.getElementById('atendente-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') enviarAtendente(); });
 
-        function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
-        initLucide();
-
         const products = [
-            { id: "OF-01", name: "Cadeira Executiva Aura", material: "Couro Legítimo & Alumínio", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1200", badge: "Ergonomia Premium" },
-            { id: "ST-04", name: "Mesa Diretoria Nexus", material: "Nogueira Maciça & Vidro Temperado", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200", badge: "Ergonomia Premium" },
-            { id: "AC-12", name: "Luminária Horizon", material: "Aço Escovado & LED Matrix", image: "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&q=80&w=1200", badge: "Design Autoral" },
-            { id: "SF-08", name: "Sofá Lounge Apex", material: "Sintético Premium & Espuma D33", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200", badge: "Conforto Máximo" }
+            { id: "OF-01", name: "Cadeira Aura", material: "Couro & Alumínio", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1200" },
+            { id: "ST-04", name: "Mesa Nexus", material: "Nogueira & Vidro", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200" }
         ];
 
         const gridContainer = document.getElementById('product-grid');
         gridContainer.innerHTML = products.map(prod => `
             <div class="group cursor-pointer">
-                <div class="relative w-full h-[500px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
-                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
-                    <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
-                        <span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold">${prod.badge}</span>
-                    </div>
+                <div class="relative w-full h-[500px] overflow-hidden rounded-2xl bg-[#F5F5F5] mb-6">
+                    <img src="${prod.image}" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
                 </div>
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="font-mono text-xs text-primary/50 mb-1">${prod.id}</p>
-                        <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
-                        <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
-                    </div>
-                </div>
+                <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
+                <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
             </div>
         `).join('');
 
@@ -415,22 +315,18 @@ html.lenis { height: auto; }
         const images = [];
         let loadedImages = 0;
 
-        const getPath = i => `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
-
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             img.onload = () => {
                 loadedImages++;
-                const percent = Math.floor((loadedImages / frameCount) * 100);
-                document.getElementById('progress-bar').style.width = `${percent}%`;
+                document.getElementById('progress-bar').style.width = `${(loadedImages / frameCount) * 100}%`;
                 if (loadedImages === frameCount) {
-                    const loader = document.getElementById('loader');
-                    loader.style.opacity = '0';
-                    setTimeout(() => loader.style.visibility = 'hidden', 500);
+                    document.getElementById('loader').style.opacity = '0';
+                    setTimeout(() => document.getElementById('loader').style.visibility = 'hidden', 500);
                     render();
                 }
             };
-            img.src = getPath(i);
+            img.src = `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
             images.push(img);
         }
 
@@ -441,7 +337,6 @@ html.lenis { height: auto; }
             const heroHeight = document.getElementById('scroll-hero').offsetHeight;
             const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
             const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
-
             const img = images[frameIndex];
             if (img && img.complete) {
                 const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
@@ -449,47 +344,11 @@ html.lenis { height: auto; }
                 const y = (canvas.height - img.height * ratio) / 2;
                 context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
             }
-
             const heroText = document.getElementById('hero-text-container');
-            const textOpacity = Math.max(0, 1 - (fraction * 12)); 
-            heroText.style.opacity = textOpacity;
-            heroText.style.transform = `translateY(${fraction * -50}px)`;
-
-            const l1 = document.getElementById('label-1');
-            const l2 = document.getElementById('label-2');
-            const l3 = document.getElementById('label-3');
-
-            const toggleLabel = (el, show) => {
-                if (show) {
-                    el.classList.remove('opacity-0', 'translate-y-4');
-                    el.classList.add('opacity-100', 'translate-y-0');
-                } else {
-                    el.classList.add('opacity-0', 'translate-y-4');
-                    el.classList.remove('opacity-100', 'translate-y-0');
-                }
-            };
-
-            toggleLabel(l1, frameIndex >= 5 && frameIndex <= 18);
-            toggleLabel(l2, frameIndex >= 22 && frameIndex <= 35);
-            toggleLabel(l3, frameIndex >= 38 && frameIndex <= 50);
+            heroText.style.opacity = Math.max(0, 1 - (fraction * 12));
         }
         
         window.addEventListener('scroll', render);
         window.addEventListener('resize', render);
-
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
-            const isClosed = menu.classList.contains('translate-x-full');
-            
-            if (isClosed) {
-                menu.classList.remove('translate-x-full');
-                icon.innerHTML = '<path d="M18 6L6 18M6 6l12 12"></path>';
-            } else {
-                menu.classList.add('translate-x-full');
-                icon.innerHTML = '<path d="M4 5h16M4 12h16M4 19h16"></path>';
-            }
-        }
     </script>
-</body></html>
 </body></html>

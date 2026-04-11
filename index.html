@@ -123,6 +123,29 @@ html.lenis { height: auto; }
 #hero-text-container {
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
+
+/* --- EFEITO CONDICIONAL DOS PRODUTOS --- */
+.product-image {
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
+}
+
+/* MOBILE: Sempre Colorido */
+@media (max-width: 768px) {
+    .product-image {
+        filter: grayscale(0%) !important;
+    }
+}
+
+/* DESKTOP: Preto e Branco que colore no Hover */
+@media (min-width: 769px) {
+    .product-image {
+        filter: grayscale(100%);
+    }
+    .group:hover .product-image {
+        filter: grayscale(0%);
+        transform: scale(1.05);
+    }
+}
 </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
@@ -246,7 +269,7 @@ html.lenis { height: auto; }
         gridContainer.innerHTML = products.map(prod => `
             <div class="group cursor-pointer">
                 <div class="relative w-full h-[500px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
-                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="${prod.image}" alt="${prod.name}" class="product-image absolute top-0 left-0 w-full h-full object-cover transition-all duration-700">
                     <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
                         <span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold">${prod.badge}</span>
                     </div>
@@ -306,13 +329,11 @@ html.lenis { height: auto; }
                 context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
             }
 
-            // --- SUMIÇO DO TÍTULO CENTRAL ---
             const heroText = document.getElementById('hero-text-container');
             const textOpacity = Math.max(0, 1 - (fraction * 12)); 
             heroText.style.opacity = textOpacity;
             heroText.style.transform = `translateY(${fraction * -50}px)`;
 
-            // Controle das Etiquetas Flutuantes
             const l1 = document.getElementById('label-1');
             const l2 = document.getElementById('label-2');
             const l3 = document.getElementById('label-3');

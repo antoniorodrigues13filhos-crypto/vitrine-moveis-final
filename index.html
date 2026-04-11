@@ -119,32 +119,36 @@ html.lenis { height: auto; }
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Transição suave para o sumiço do título */
 #hero-text-container {
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-/* --- EFEITO CONDICIONAL DOS PRODUTOS --- */
 .product-image {
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
 }
 
-/* MOBILE: Sempre Colorido */
 @media (max-width: 768px) {
-    .product-image {
-        filter: grayscale(0%) !important;
-    }
+    .product-image { filter: grayscale(0%) !important; }
 }
 
-/* DESKTOP: Preto e Branco que colore no Hover */
 @media (min-width: 769px) {
-    .product-image {
-        filter: grayscale(100%);
-    }
+    .product-image { filter: grayscale(100%); }
     .group:hover .product-image {
         filter: grayscale(0%);
         transform: scale(1.05);
     }
+}
+
+.glass-input {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+.glass-input:focus {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: #111;
+    transform: translateY(-2px);
 }
 </style>
 </head>
@@ -247,6 +251,31 @@ html.lenis { height: auto; }
                 </div>
             </div>
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16"></div>
+        </section>
+
+        <section id="contato" class="py-32 px-6 bg-[#F9F9F9]">
+            <div class="max-w-4xl mx-auto text-center">
+                <span class="font-mono text-xs uppercase tracking-[0.2em] text-primary/40 mb-4 block">Atendimento Personalizado</span>
+                <h2 class="font-serif text-4xl md:text-5xl mb-12 tracking-tight">Solicite um Orçamento</h2>
+                
+                <form id="lead-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    <div class="flex flex-col gap-2">
+                        <label class="font-mono text-[10px] uppercase text-primary/60 ml-2">Nome Completo</label>
+                        <input type="text" name="nome" required placeholder="Ex: João Silva" class="glass-input p-4 rounded-xl outline-none">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="font-mono text-[10px] uppercase text-primary/60 ml-2">E-mail Corporativo</label>
+                        <input type="email" name="email" required placeholder="joao@empresa.com" class="glass-input p-4 rounded-xl outline-none">
+                    </div>
+                    <div class="flex flex-col gap-2 md:col-span-2">
+                        <label class="font-mono text-[10px] uppercase text-primary/60 ml-2">Mensagem (Opcional)</label>
+                        <textarea name="mensagem" rows="4" placeholder="Como podemos ajudar seu espaço?" class="glass-input p-4 rounded-xl outline-none resize-none"></textarea>
+                    </div>
+                    <button type="submit" id="submit-btn" class="md:col-span-2 bg-primary text-white font-bold py-5 rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-black/10">
+                        ENVIAR SOLICITAÇÃO
+                    </button>
+                </form>
+            </div>
         </section>
     </main>
 
@@ -360,7 +389,6 @@ html.lenis { height: auto; }
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
             const isClosed = menu.classList.contains('translate-x-full');
-            
             if (isClosed) {
                 menu.classList.remove('translate-x-full');
                 icon.innerHTML = '<path d="M18 6L6 18M6 6l12 12"></path>';
@@ -369,5 +397,52 @@ html.lenis { height: auto; }
                 icon.innerHTML = '<path d="M4 5h16M4 12h16M4 19h16"></path>';
             }
         }
+
+        // --- INTEGRAÇÃO COM MAKE.COM (Webhook Atualizada) ---
+        document.getElementById('lead-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "ENVIANDO...";
+            btn.disabled = true;
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            data.timestamp = new Date().toLocaleString();
+            data.origem = "Landing Page Vitrine Móvel";
+
+            // URL DA SUA WEBHOOK DO MAKE
+            const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/nodnz5uzkjsu6wnha8phgh8eo1ccpfdj';
+
+            try {
+                const response = await fetch(MAKE_WEBHOOK_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                if (response.ok) {
+                    btn.innerText = "SOLICITAÇÃO ENVIADA!";
+                    btn.style.background = "#22c55e"; 
+                    e.target.reset();
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.background = "#111";
+                        btn.disabled = false;
+                    }, 4000);
+                } else {
+                    throw new Error();
+                }
+            } catch (err) {
+                btn.innerText = "ERRO AO ENVIAR. TENTE NOVAMENTE.";
+                btn.style.background = "#ef4444"; 
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = "#111";
+                    btn.disabled = false;
+                }, 3000);
+            }
+        });
     </script>
 </body></html>

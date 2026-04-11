@@ -70,8 +70,8 @@
             to { opacity: 1; transform: translateY(0); } 
         }
 
-        .bot-bubble { background: rgba(255, 255, 255, 0.3); align-self: flex-start; border-radius: 15px; border-bottom-left-radius: 2px; padding: 10px 14px; max-width: 85%; }
-        .user-bubble { background: #111; color: #fff; align-self: flex-end; border-radius: 15px; border-bottom-right-radius: 2px; padding: 10px 14px; max-width: 85%; }
+        .bot-bubble { background: rgba(255, 255, 255, 0.3); align-self: flex-start; border-radius: 15px; border-bottom-left-radius: 2px; padding: 10px 14px; max-width: 85%; margin-bottom: 10px; }
+        .user-bubble { background: #111; color: #fff; align-self: flex-end; border-radius: 15px; border-bottom-right-radius: 2px; padding: 10px 14px; max-width: 85%; margin-bottom: 10px; }
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased relative">
@@ -106,14 +106,14 @@
             <button onclick="toggleChat()" style="cursor: pointer; font-size: 20px; line-height: 1; color: #111;">&times;</button>
         </div>
         
-        <div id="chat-messages" style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
+        <div id="chat-messages" style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; font-size: 13px;">
             <div class="bot-bubble">
                 Olá, Rodrigo! Sou o Marco. Como posso ajudar com seu ambiente hoje?
             </div>
         </div>
 
         <div style="padding: 15px; display: flex; gap: 8px; background: rgba(255,255,255,0.1);">
-            <input type="text" id="chat-in" placeholder="Digite sua dúvida..." style="flex: 1; background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.05); padding: 10px; border-radius: 12px; outline: none; font-size: 13px;">
+            <input type="text" id="chat-in" placeholder="Digite sua dúvida..." style="flex: 1; background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.05); padding: 10px; border-radius: 12px; outline: none; font-size: 13px; color: #000;">
             <button onclick="enviarChat()" style="background: #111; color: #fff; border: none; padding: 0 15px; border-radius: 12px; font-weight: bold; cursor: pointer;">></button>
         </div>
     </div>

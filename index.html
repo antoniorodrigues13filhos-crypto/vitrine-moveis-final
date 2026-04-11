@@ -122,6 +122,19 @@ html.lenis { height: auto; }
 #hero-text-container {
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
+
+/* EFEITO DE COR E TOQUE */
+.product-image-container img {
+    filter: grayscale(100%);
+    transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ativa no Mouse Hover (Desktop) ou via classe .active (Mobile) */
+.product-card:hover img, 
+.product-card.active img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
 </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
@@ -243,9 +256,9 @@ html.lenis { height: auto; }
 
         const gridContainer = document.getElementById('product-grid');
         gridContainer.innerHTML = products.map(prod => `
-            <div class="group cursor-pointer">
-                <div class="relative w-full h-[500px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
-                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+            <div class="product-card group cursor-pointer">
+                <div class="product-image-container relative w-full h-[500px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
+                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover">
                     <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
                         <span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold">${prod.badge}</span>
                     </div>
@@ -259,6 +272,15 @@ html.lenis { height: auto; }
                 </div>
             </div>
         `).join('');
+
+        // LOGICA DE TOQUE PARA MOBILE
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => {
+            card.addEventListener('touchstart', () => {
+                cards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+            }, {passive: true});
+        });
 
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
@@ -305,10 +327,8 @@ html.lenis { height: auto; }
                 context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
             }
 
-            // CONTROLE DO TÍTULO CENTRAL (SOMA E DESCE)
             const heroText = document.getElementById('hero-text-container');
             if (frameIndex > 2) {
-                // Diminui a opacidade conforme rola e aplica um leve efeito de descida
                 const textOpacity = Math.max(0, 1 - (frameIndex / 8)); 
                 heroText.style.opacity = textOpacity;
                 heroText.style.transform = `translateY(${frameIndex * 2}px)`;
@@ -317,7 +337,6 @@ html.lenis { height: auto; }
                 heroText.style.transform = `translateY(0)`;
             }
 
-            // Controle das Etiquetas Flutuantes
             const l1 = document.getElementById('label-1');
             const l2 = document.getElementById('label-2');
             const l3 = document.getElementById('label-3');
@@ -332,7 +351,6 @@ html.lenis { height: auto; }
                 }
             };
 
-            // Ajustei os intervalos para aparecerem apenas DEPOIS que o título sumir
             toggleLabel(l1, frameIndex >= 10 && frameIndex <= 20);
             toggleLabel(l2, frameIndex >= 24 && frameIndex <= 36);
             toggleLabel(l3, frameIndex >= 40 && frameIndex <= 52);

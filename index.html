@@ -1,32 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="lenis lenis-smooth"><head><script data-buildix-nav-interceptor="">
-(function() {
-  document.addEventListener('click', function(e) {
-    var target = e.target;
-    while (target && target.tagName !== 'A' && target !== document.body) {
-      target = target.parentElement;
-    }
-    if (target && target.tagName === 'A') {
-      var href = target.getAttribute('href') || '';
-      if (href.charAt(0) === '#') {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        if (href.length > 1) {
-          var targetEl = document.getElementById(href.substring(1));
-          if (targetEl) {
-            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }
-        return false;
-      }
-    }
-  }, true);
-  window.addEventListener('hashchange', function(e) {
-    e.preventDefault();
-  }, true);
-})();
-</script>
+<html lang="pt-BR" class="lenis lenis-smooth"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vitrine Móvel | Office Solutions</title>
@@ -39,70 +12,61 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <style type="text/tailwindcss">
-@theme {
+        @theme {
             --color-primary: #111111;
             --color-secondary: #2A2A2A;
             --color-border-light: #E5E5E5;
             --font-serif: 'Playfair Display', serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
-</style>
-<style>
-html.lenis { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-body { overflow-x: hidden; background: #fff; }
+    </style>
+    <style>
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .extreme-glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            transform: translate3d(-50%, 0, 0); 
+            transition: background 0.4s ease;
+        }
+        .nav-link { position: relative; color: #111; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0;
+            background-color: #111; transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        
+        /* WIDGET DE CHAT */
+        #chat-widget {
+            position: fixed; bottom: 100px; right: 30px; width: 320px;
+            background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            display: none; flex-direction: column; overflow: hidden; z-index: 1000;
+        }
+        .glass-fab {
+            background: #25D366 !important;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            z-index: 1001 !important;
+        }
+        
+        /* Hero Effects */
+        .floating-label { transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        #hero-text-container { transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+        .product-image { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease; }
 
-.extreme-glass {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-    transform: translate3d(-50%, 0, 0); 
-    backface-visibility: hidden;
-    transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-fab {
-    background: #ffffff !important;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    display: flex !important;
-    z-index: 100 !important;
-}
-
-.nav-link { position: relative; color: #111; }
-.nav-link::after {
-    content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0;
-    background-color: #111; transition: width 0.3s ease;
-}
-.nav-link:hover::after { width: 100%; }
-
-#hero-text-container { transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
-.product-image { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease; }
-
-@media (max-width: 768px) {
-    .product-image { filter: grayscale(0%) !important; }
-}
-@media (min-width: 769px) {
-    .product-image { filter: grayscale(100%); }
-    .group:hover .product-image { filter: grayscale(0%); transform: scale(1.05); }
-}
-
-.glass-input {
-    background: rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-.glass-input:focus { border-color: #111; transform: translateY(-2px); }
-</style>
+        @media (max-width: 768px) { .product-image { filter: grayscale(0%) !important; } }
+        @media (min-width: 769px) {
+            .product-image { filter: grayscale(100%); }
+            .group:hover .product-image { filter: grayscale(0%); transform: scale(1.05); }
+        }
+    </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased relative">
 
     <div id="loader" style="position: fixed; inset: 0px; background: #111; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s;">
-        <h2 class="text-3xl font-serif text-white mb-4 uppercase">VITRINE MÓVEL</h2>
+        <h2 class="text-3xl font-serif text-white mb-2 uppercase">VITRINE MÓVEL</h2>
         <div style="width:16rem;height:0.5rem;background:rgba(255,255,255,0.3);border-radius:9999px;overflow:hidden;">
             <div id="progress-bar" style="height: 100%; background: white; width: 0%;"></div>
         </div>
@@ -117,42 +81,45 @@ body { overflow-x: hidden; background: #fff; }
         </a>
         <nav class="hidden md:flex items-center gap-8">
             <a href="#solucoes" class="nav-link text-sm font-medium tracking-wide">Soluções</a>
-            <a href="#contato" class="nav-link text-sm font-medium tracking-wide">Contato</a>
+            <a href="#contato" class="nav-link text-sm font-medium tracking-wide">Fale Conosco</a>
         </nav>
         <button onclick="toggleMenu()" class="md:hidden ml-auto p-1 z-[60] relative">
-            <svg id="menu-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h16M4 19h16"></path></svg>
+            <svg id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h16"></path></svg>
         </button>
     </header>
 
     <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-xl z-[55] translate-x-full flex flex-col items-center justify-center gap-8 transition-transform duration-500">
         <a href="#produtos" onclick="toggleMenu()" class="font-serif text-3xl">Produtos</a>
         <a href="#solucoes" onclick="toggleMenu()" class="font-serif text-3xl">Soluções</a>
-        <a href="#contato" onclick="toggleMenu()" class="font-serif text-3xl">Contato</a>
+        <a href="#contato" onclick="toggleMenu()" class="font-serif text-3xl">Fale Conosco</a>
     </div>
 
     <main>
         <section id="scroll-hero" style="height:400vh;position:relative;">
             <div style="position:sticky;top:0;height:100vh;width:100%;overflow:hidden;">
                 <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></canvas>
+                
+                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none">
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Estrutura</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
+                </div>
+
+                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right">
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Revestimento</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
+                </div>
+
+                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center">
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Mecanismo</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3>
+                </div>
+
                 <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);z-index:1;"></div>
-                <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
-                    <h1 class="font-serif text-5xl md:text-8xl font-bold text-white tracking-tight leading-tight">
+                
+                <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6 text-center">
+                    <h1 class="font-serif text-5xl md:text-8xl font-bold text-white mb-6 tracking-tight leading-tight">
                         A Arte de Equipar<br><span class="italic text-white/90 font-light">Seu Espaço</span>
                     </h1>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-32 px-6 max-w-7xl mx-auto relative bg-white z-20">
-            <div class="flex flex-col md:flex-row gap-16">
-                <div class="w-full md:w-1/3">
-                    <h2 class="font-serif text-3xl md:text-4xl">Redefinindo o Padrão Corporativo.</h2>
-                    <div class="w-12 h-[1px] bg-primary my-6"></div>
-                </div>
-                <div class="w-full md:w-2/3">
-                    <p class="text-lg md:text-xl text-primary/80 font-light leading-relaxed">
-                        Acreditamos que o ambiente de trabalho molda a mente. Nossas peças são instrumentos de foco e criação.
-                    </p>
                 </div>
             </div>
         </section>
@@ -166,25 +133,46 @@ body { overflow-x: hidden; background: #fff; }
             <div class="max-w-4xl mx-auto text-center">
                 <h2 class="font-serif text-4xl md:text-5xl mb-12">Solicite um Orçamento</h2>
                 <form id="lead-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                    <input type="text" name="nome" required placeholder="Nome Completo" class="glass-input p-4 rounded-xl outline-none">
-                    <input type="email" name="email" required placeholder="E-mail Corporativo" class="glass-input p-4 rounded-xl outline-none">
-                    <textarea name="mensagem" rows="4" placeholder="Sua mensagem" class="glass-input p-4 rounded-xl outline-none resize-none md:col-span-2"></textarea>
-                    <button type="submit" id="submit-btn" class="md:col-span-2 bg-primary text-white font-bold py-5 rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl">
-                        ENVIAR SOLICITAÇÃO
-                    </button>
+                    <input type="text" name="nome" required placeholder="Nome Completo" class="p-4 rounded-xl border border-black/10 outline-none focus:border-black transition-all">
+                    <input type="email" name="email" required placeholder="E-mail Corporativo" class="p-4 rounded-xl border border-black/10 outline-none focus:border-black transition-all">
+                    <textarea name="mensagem" rows="4" placeholder="Sua mensagem" class="md:col-span-2 p-4 rounded-xl border border-black/10 outline-none focus:border-black transition-all resize-none"></textarea>
+                    <button type="submit" id="submit-btn" class="md:col-span-2 bg-primary text-white font-bold py-5 rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all">ENVIAR SOLICITAÇÃO</button>
                 </form>
             </div>
         </section>
     </main>
 
-    <a href="https://wa.me/5511999999999" target="_blank" class="glass-fab fixed bottom-8 right-8 w-14 h-14 rounded-full flex items-center justify-center">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-    </a>
+    <div id="chat-widget">
+        <div class="bg-black text-white p-4 flex items-center gap-3">
+            <div class="w-10 h-10 bg-white/20 rounded-full border-2 border-green-500"></div>
+            <div><p class="text-sm font-bold">Vitrine IA</p><p class="text-[10px] text-green-400">Online</p></div>
+            <button onclick="toggleChat()" class="ml-auto opacity-50 hover:opacity-100">✕</button>
+        </div>
+        <div class="p-5 flex flex-col gap-4">
+            <p class="text-xs text-gray-500 italic">Olá! Me diga qual produto você quer consultar o preço e eu verifico agora para você.</p>
+            <form id="ia-chat-form" class="flex flex-col gap-3">
+                <input type="text" name="nome" placeholder="Seu Nome" class="p-3 border rounded-lg text-sm" required>
+                <input type="text" name="produto" placeholder="Nome do Produto" class="p-3 border rounded-lg text-sm" required>
+                <button type="submit" class="bg-green-500 text-white font-bold py-3 rounded-lg text-xs hover:bg-green-600 transition-all">CONSULTAR PREÇO</button>
+            </form>
+        </div>
+    </div>
+
+    <button onclick="toggleChat()" class="glass-fab fixed bottom-8 right-8 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.437 2.503 1.163 3.473L6.439 18l2.673-.865a5.729 5.729 0 0 0 2.919.789h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.587-5.766-5.769-5.766zm3.426 8.313c-.147.414-.73.743-1.025.792-.266.046-.61.082-1.84-.423-1.574-.645-2.584-2.253-2.663-2.358-.078-.106-.639-.85-.639-1.621 0-.771.404-1.149.547-1.293.143-.143.31-.179.414-.179.103 0 .207.001.296.005.093.004.218-.035.341.264.127.307.436 1.063.473 1.141.037.078.062.169.01.272-.052.103-.078.169-.155.259-.078.09-.163.2-.234.269-.082.08-.168.168-.072.332.095.163.425.702.912 1.137.626.559 1.152.733 1.316.816.163.083.259.069.355-.042.095-.11.41-.479.519-.643.11-.164.219-.138.369-.083.151.055.952.45 1.116.531s.273.121.312.189c.039.067.039.39-.108.804z"/></svg>
+    </button>
 
     <script>
+        // 1. CHAT TOGGLE
+        function toggleChat() {
+            const chat = document.getElementById('chat-widget');
+            chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        // 2. PRODUTOS DINÂMICOS
         const products = [
             { id: "OF-01", name: "Cadeira Executiva Aura", material: "Couro Legítimo & Alumínio", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1200", badge: "Ergonomia Premium" },
-            { id: "ST-04", name: "Mesa Diretoria Nexus", material: "Nogueira Maciça & Vidro Temperado", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200", badge: "Maciça" },
+            { id: "ST-04", name: "Mesa Diretoria Nexus", material: "Nogueira Maciça & Vidro", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200", badge: "Maciça" },
             { id: "AC-12", name: "Luminária Horizon", material: "Aço Escovado & LED", image: "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&q=80&w=1200", badge: "Design" },
             { id: "SF-08", name: "Sofá Lounge Apex", material: "Sintético Premium", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200", badge: "Conforto" }
         ];
@@ -192,7 +180,7 @@ body { overflow-x: hidden; background: #fff; }
         document.getElementById('product-grid').innerHTML = products.map(prod => `
             <div class="group cursor-pointer">
                 <div class="relative w-full h-[500px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
-                    <img src="${prod.image}" alt="${prod.name}" class="product-image absolute top-0 left-0 w-full h-full object-cover grayscale">
+                    <img src="${prod.image}" alt="${prod.name}" class="product-image absolute top-0 left-0 w-full h-full object-cover">
                     <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
                         <span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold">${prod.badge}</span>
                     </div>
@@ -202,10 +190,12 @@ body { overflow-x: hidden; background: #fff; }
             </div>
         `).join('');
 
+        // 3. SMOOTH SCROLL LENIS
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
+        // 4. CANVAS HERO MOTOR
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const frameCount = 54; 
@@ -234,8 +224,8 @@ body { overflow-x: hidden; background: #fff; }
             canvas.height = window.innerHeight;
             const fraction = Math.max(0, Math.min(1, window.scrollY / (document.getElementById('scroll-hero').offsetHeight - window.innerHeight)));
             const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
-
             const img = images[frameIndex];
+            
             if (img && img.complete) {
                 const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
                 context.drawImage(img, (canvas.width - img.width * ratio) / 2, (canvas.height - img.height * ratio) / 2, img.width * ratio, img.height * ratio);
@@ -244,39 +234,47 @@ body { overflow-x: hidden; background: #fff; }
             const heroText = document.getElementById('hero-text-container');
             heroText.style.opacity = Math.max(0, 1 - (fraction * 12));
             heroText.style.transform = `translateY(${fraction * -50}px)`;
+
+            const l1 = document.getElementById('label-1');
+            const l2 = document.getElementById('label-2');
+            const l3 = document.getElementById('label-3');
+
+            const toggleLabel = (el, show) => {
+                if (show) { el.classList.remove('opacity-0', 'translate-y-4'); el.classList.add('opacity-100', 'translate-y-0'); }
+                else { el.classList.add('opacity-0', 'translate-y-4'); el.classList.remove('opacity-100', 'translate-y-0'); }
+            };
+
+            toggleLabel(l1, frameIndex >= 5 && frameIndex <= 18);
+            toggleLabel(l2, frameIndex >= 22 && frameIndex <= 35);
+            toggleLabel(l3, frameIndex >= 38 && frameIndex <= 50);
         }
         
         window.addEventListener('scroll', render);
         window.addEventListener('resize', render);
 
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('translate-x-full');
-        }
+        // 5. INTEGRAÇÕES MAKE.COM
+        const MAKE_URL = 'https://hook.us2.make.com/nodnz5uzkjsu6wnha8phgh8eo1ccpfdj';
 
-        // INTEGRAÇÃO MAKE.COM
-        document.getElementById('lead-form').addEventListener('submit', async (e) => {
+        async function sendToMake(e, btn) {
             e.preventDefault();
-            const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerText;
             btn.innerText = "ENVIANDO...";
-            btn.disabled = true;
-
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
-
+            
             try {
-                await fetch('https://hook.us2.make.com/nodnz5uzkjsu6wnha8phgh8eo1ccpfdj', {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                btn.innerText = "ENVIADO COM SUCESSO!";
-                btn.style.background = "#22c55e";
+                await fetch(MAKE_URL, { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' }});
+                btn.innerText = "SUCESSO!";
                 e.target.reset();
-            } catch (err) {
-                btn.innerText = "ERRO. TENTE NOVAMENTE.";
-                btn.disabled = false;
-            }
-        });
+                setTimeout(() => btn.innerText = originalText, 3000);
+            } catch (err) { btn.innerText = "ERRO"; }
+        }
+
+        document.getElementById('ia-chat-form').addEventListener('submit', (e) => sendToMake(e, e.target.querySelector('button')));
+        document.getElementById('lead-form').addEventListener('submit', (e) => sendToMake(e, document.getElementById('submit-btn')));
+
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('translate-x-full');
+        }
     </script>
 </body></html>

@@ -64,36 +64,35 @@ a, button, .product-card {
 
 #mobile-menu { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 .floating-label { transition: all 0.4s ease-out; pointer-events: none; }
-#hero-text-container { will-change: opacity, transform; }
+#hero-text-container { will-change: opacity; }
 
-/* MOTION HERO: Sem zoom, apenas o desenho estático do canvas */
+/* PRODUTOS: Efeito de zoom e cor mantido aqui */
+.product-image-container img {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease, transform 0.5s ease;
+    will-change: filter, transform;
+}
+
+.product-card:active img, 
+.product-card.active img {
+    filter: grayscale(0%) !important;
+    transform: scale(1.05);
+}
+
+@media (min-width: 1024px) {
+    .product-card:hover img {
+        filter: grayscale(0%);
+        transform: scale(1.05);
+    }
+}
+
 #hero-canvas { 
     touch-action: none; 
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-/* PRODUTOS: Efeito de zoom e cor mantido aqui */
-.product-image-container img {
-    filter: grayscale(100%);
-    transition: filter 0.6s ease, transform 0.6s ease;
-    will-change: filter, transform;
-}
-
-/* Aplica o zoom e a cor apenas nos produtos */
-.product-card:active img, 
-.product-card.active img,
-.product-card:hover img {
-    filter: grayscale(0%) !important;
-    transform: scale(1.05); /* Zoom apenas nos produtos */
-}
-
-@media (max-width: 1024px) {
-    .product-card:hover img {
-        transform: scale(1); /* Evita hover indesejado no mobile se não houver toque */
-    }
+    will-change: transform;
 }
 </style>
 </head>
@@ -156,6 +155,7 @@ a, button, .product-card {
     </main>
 
     <script>
+        // 1. PRODUTOS
         const products = [
             { id: "OF-01", name: "Cadeira Aura", material: "Couro Legítimo & Alumínio", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1200" },
             { id: "ST-04", name: "Mesa Nexus", material: "Nogueira Maciça & Vidro", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200" },
@@ -164,7 +164,7 @@ a, button, .product-card {
         ];
 
         document.getElementById('product-grid').innerHTML = products.map(prod => `
-            <div class="product-card group cursor-pointer">
+            <div class="product-card">
                 <div class="product-image-container relative w-full h-[450px] md:h-[600px] overflow-hidden rounded-2xl bg-[#F9F9F9] mb-6">
                     <img src="${prod.image}" class="absolute inset-0 w-full h-full object-cover">
                 </div>
@@ -173,32 +173,56 @@ a, button, .product-card {
             </div>
         `).join('');
 
-        // Toque Instantâneo nos Produtos
+        // TOQUE INSTANTÂNEO
         document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('touchstart', () => {
-                card.classList.add('active');
-            }, {passive: true});
-            card.addEventListener('touchend', () => {
-                setTimeout(() => card.classList.remove('active'), 300);
-            }, {passive: true});
+            card.addEventListener('touchstart', () => card.classList.add('active'), {passive: true});
+            card.addEventListener('touchend', () => setTimeout(() => card.classList.remove('active'), 300), {passive: true});
         });
 
-        // Lenis
+        // 2. LENIS ESTILO INVERSA
         const isMobile = window.innerWidth < 768;
         const lenis = new Lenis({
-            duration: isMobile ? 0.8 : 1.2,
-            lerp: isMobile ? 0.15 : 0.1,
-            smoothWheel: true
+            duration: isMobile ? 1.0 : 1.4,
+            lerp: isMobile ? 0.12 : 0.08,
+            smoothWheel: true,
+            touchMultiplier: 1.5,
         });
 
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
         requestAnimationFrame(raf);
 
+        // 3. MOTOR DE CANVAS ULTRA-FLUIDO
         const canvas = document.getElementById("hero-canvas");
-        const context = canvas.getContext("2d", { alpha: false });
+        const context = canvas.getContext("2d", { 
+            alpha: false, 
+            desynchronized: true 
+        });
+        
         const frameCount = 54; 
         const images = [];
         let loadedImages = 0;
+        let lastFrameIndex = -1;
+
+        let cw = window.innerWidth;
+        let ch = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio, 2); 
+
+        function resizeCanvas() {
+            cw = window.innerWidth;
+            ch = window.innerHeight;
+            canvas.width = cw * dpr;
+            canvas.height = ch * dpr;
+            canvas.style.width = `${cw}px`;
+            canvas.style.height = `${ch}px`;
+            context.scale(dpr, dpr);
+            render(true);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
         const getPath = i => `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
 
@@ -210,33 +234,28 @@ a, button, .product-card {
                 if (loadedImages === frameCount) {
                     document.getElementById('loader').style.opacity = '0';
                     setTimeout(() => document.getElementById('loader').style.display = 'none', 400);
-                    render();
+                    render(true);
                 }
             };
             img.src = getPath(i);
             images.push(img);
         }
 
-        function render() {
-            // Desenho limpo do canvas sem manipulação de scale via CSS no Hero
-            const dpr = window.devicePixelRatio || 1;
-            canvas.width = window.innerWidth * dpr;
-            canvas.height = window.innerHeight * dpr;
-            context.setTransform(dpr, 0, 0, dpr, 0, 0);
-
+        function render(force = false) {
             const scrollTop = window.scrollY;
             const heroHeight = document.getElementById('scroll-hero').offsetHeight;
             const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
             const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
 
-            const img = images[frameIndex];
-            if (img) {
-                const cw = window.innerWidth;
-                const ch = window.innerHeight;
-                const ratio = Math.max(cw / img.width, ch / img.height);
-                const x = (cw - img.width * ratio) / 2;
-                const y = (ch - img.height * ratio) / 2;
-                context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
+            if (frameIndex !== lastFrameIndex || force) {
+                const img = images[frameIndex];
+                if (img && img.complete) {
+                    const ratio = Math.max(cw / img.width, ch / img.height);
+                    const x = (cw - img.width * ratio) / 2;
+                    const y = (ch - img.height * ratio) / 2;
+                    context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
+                    lastFrameIndex = frameIndex;
+                }
             }
 
             document.getElementById('hero-text-container').style.opacity = Math.max(0, 1 - (fraction * 5));
@@ -246,7 +265,7 @@ a, button, .product-card {
             const l3 = document.getElementById('label-3');
             const toggle = (el, show) => {
                 el.style.opacity = show ? "1" : "0";
-                el.style.transform = show ? "translateY(0)" : "translateY(15px)";
+                el.style.transform = show ? "translateY(0)" : "translateY(10px)";
             };
 
             toggle(l1, fraction > 0.15 && fraction < 0.35);
@@ -254,14 +273,15 @@ a, button, .product-card {
             toggle(l3, fraction > 0.75 && fraction < 0.90);
         }
         
-        lenis.on('scroll', render);
-        window.addEventListener('resize', render);
+        lenis.on('scroll', () => render());
 
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const isClosed = menu.classList.contains('translate-x-full');
             menu.classList.toggle('translate-x-full');
-            document.getElementById('menu-icon').innerHTML = isClosed ? '<path d="M18 6L6 18M6 6l12 12"></path>' : '<path d="M4 5h16M4 12h16M4 19h16"></path>';
+            document.getElementById('menu-icon').innerHTML = isClosed ? 
+                '<path d="M18 6L6 18M6 6l12 12"></path>' : 
+                '<path d="M4 5h16M4 12h16M4 19h16"></path>';
         }
     </script>
 </body></html>

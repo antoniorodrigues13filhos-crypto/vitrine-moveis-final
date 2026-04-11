@@ -21,20 +21,21 @@
         }
 </style>
 <style>
-/* Reset essencial */
+/* Reset Essencial */
 html.lenis { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 body { overflow-x: hidden; background: #fff; margin: 0; }
 
-/* Canvas fixo no fundo da seção Hero */
+/* Canvas - O Coração do Site */
 #hero-canvas { 
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
-    display: block;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .extreme-glass {
@@ -46,7 +47,7 @@ body { overflow-x: hidden; background: #fff; margin: 0; }
     transform: translateX(-50%);
 }
 
-/* Produtos */
+/* Galeria de Produtos */
 .product-image-container img {
     filter: grayscale(100%);
     transition: filter 0.5s ease, transform 0.5s ease;
@@ -62,8 +63,11 @@ body { overflow-x: hidden; background: #fff; margin: 0; }
 <body class="bg-white text-primary font-sans">
 
     <div id="loader" style="position: fixed; inset: 0px; background: #111; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.4s;">
+        <h2 class="text-white font-serif text-2xl mb-4 tracking-widest">VITRINE MÓVEL</h2>
         <div style="width:12rem;height:2px;background:rgba(255,255,255,0.2);"><div id="progress-bar" style="height:100%;background:white;width:0%;"></div></div>
     </div>
+
+    <canvas id="hero-canvas"></canvas>
 
     <header class="extreme-glass fixed top-6 w-[90%] max-w-7xl rounded-full z-50 flex items-center justify-between px-8 py-4">
         <nav class="hidden md:flex gap-8">
@@ -82,27 +86,27 @@ body { overflow-x: hidden; background: #fff; margin: 0; }
         <a href="#contato" onclick="toggleMenu()" class="font-serif text-4xl">Contato</a>
     </div>
 
-    <main>
-        <section id="scroll-hero" style="height:400vh; position:relative;">
-            <div style="position:sticky; top:0; height:100vh; width:100%; overflow:hidden;">
-                <canvas id="hero-canvas"></canvas>
+    <main class="relative z-10">
+        <section id="scroll-hero" style="height:400vh;">
+            <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center text-center px-6 overflow-hidden">
                 
-                <div id="label-1" class="absolute top-[30%] left-[10%] opacity-0 transition-all duration-500 z-20">
-                    <h3 class="text-white text-xl font-serif italic border-l border-white/30 pl-4">Alumínio</h3>
+                <div id="label-1" class="absolute top-[30%] left-[10%] opacity-0 transition-all duration-500">
+                    <h3 class="text-white text-xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
                 </div>
-                <div id="label-2" class="absolute top-[55%] right-[10%] opacity-0 transition-all duration-500 z-20">
-                    <h3 class="text-white text-xl font-serif italic border-r border-white/30 pr-4 text-right">Couro</h3>
+                <div id="label-2" class="absolute top-[55%] right-[10%] opacity-0 transition-all duration-500 text-right">
+                    <h3 class="text-white text-xl font-serif italic border-r border-white/30 pr-4">Couro Legítimo</h3>
                 </div>
 
-                <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6), transparent 80%); z-index:1;"></div>
-                
-                <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6">
-                    <h1 class="font-serif text-5xl md:text-8xl font-bold text-white">A Arte de Equipar<br><span class="italic text-white/80 font-light">Seu Espaço</span></h1>
+                <div id="hero-text-container" class="transition-opacity duration-500">
+                    <span class="font-mono text-xs text-white/60 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm inline-block">Nova Coleção</span>
+                    <h1 class="font-serif text-5xl md:text-8xl font-bold text-white tracking-tight">A Arte de Equipar<br><span class="italic text-white/80 font-light">Seu Espaço</span></h1>
                 </div>
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none -z-10"></div>
             </div>
         </section>
 
-        <section id="produtos" class="py-24 px-6 max-w-7xl mx-auto">
+        <section id="produtos" class="py-32 px-6 max-w-7xl mx-auto bg-white">
             <h2 class="font-serif text-4xl mb-16">Coleção Executiva</h2>
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 gap-12"></div>
         </section>
@@ -124,30 +128,22 @@ body { overflow-x: hidden; background: #fff; margin: 0; }
             </div>
         `).join('');
 
-        // Toque Mobile
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('touchstart', () => card.classList.add('active'), {passive: true});
-            card.addEventListener('touchend', () => card.classList.remove('active'), {passive: true});
-        });
-
         // 2. Lenis (Scroll Suave)
-        const lenis = new Lenis({ lerp: 0.1, touchMultiplier: 1.5 });
+        const lenis = new Lenis({ lerp: 0.1 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // 3. Canvas Motor
+        // 3. Canvas Motor de Alta Performance
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const frameCount = 54;
         const images = [];
         let loadedImages = 0;
-        let lastFrame = -1;
 
-        function initCanvas() {
+        function updateCanvasSize() {
             canvas.width = window.innerWidth * window.devicePixelRatio;
             canvas.height = window.innerHeight * window.devicePixelRatio;
             context.scale(window.devicePixelRatio, window.devicePixelRatio);
-            render(true);
         }
 
         const getPath = i => `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
@@ -159,40 +155,45 @@ body { overflow-x: hidden; background: #fff; margin: 0; }
                 document.getElementById('progress-bar').style.width = `${(loadedImages/frameCount)*100}%`;
                 if (loadedImages === frameCount) {
                     document.getElementById('loader').style.opacity = '0';
-                    setTimeout(() => document.getElementById('loader').style.display = 'none', 400);
-                    initCanvas();
+                    setTimeout(() => {
+                        document.getElementById('loader').style.display = 'none';
+                        updateCanvasSize();
+                        render();
+                    }, 500);
                 }
             };
             img.src = getPath(i);
             images.push(img);
         }
 
-        function render(force = false) {
+        function render() {
             const scrollTop = window.scrollY;
-            const heroHeight = document.getElementById('scroll-hero').offsetHeight;
-            const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
+            const heroSection = document.getElementById('scroll-hero');
+            const maxScroll = heroSection.offsetHeight - window.innerHeight;
+            const fraction = Math.max(0, Math.min(1, scrollTop / maxScroll));
             const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
 
-            if (frameIndex !== lastFrame || force) {
-                const img = images[frameIndex];
-                if (img && img.complete) {
-                    const ratio = Math.max(window.innerWidth / img.width, window.innerHeight / img.height);
-                    const x = (window.innerWidth - img.width * ratio) / 2;
-                    const y = (window.innerHeight - img.height * ratio) / 2;
-                    context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-                    context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
-                    lastFrame = frameIndex;
-                }
+            // Desenhar Imagem
+            const img = images[frameIndex];
+            if (img && img.complete) {
+                const ratio = Math.max(window.innerWidth / img.width, window.innerHeight / img.height);
+                const x = (window.innerWidth - img.width * ratio) / 2;
+                const y = (window.innerHeight - img.height * ratio) / 2;
+                context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
             }
 
-            // UI Updates
+            // UI Dinâmica
             document.getElementById('hero-text-container').style.opacity = 1 - (fraction * 4);
-            document.getElementById('label-1').style.opacity = (fraction > 0.2 && fraction < 0.4) ? 1 : 0;
-            document.getElementById('label-2').style.opacity = (fraction > 0.5 && fraction < 0.7) ? 1 : 0;
+            document.getElementById('label-1').style.opacity = (fraction > 0.15 && fraction < 0.4) ? 1 : 0;
+            document.getElementById('label-2').style.opacity = (fraction > 0.45 && fraction < 0.7) ? 1 : 0;
+            
+            // Esconde o canvas quando passar do hero para economizar GPU
+            canvas.style.display = fraction >= 1 ? 'none' : 'block';
         }
 
-        window.addEventListener('scroll', () => render());
-        window.addEventListener('resize', initCanvas);
+        window.addEventListener('scroll', render);
+        window.addEventListener('resize', updateCanvasSize);
 
         function toggleMenu() {
             document.getElementById('mobile-menu').classList.toggle('translate-x-full');

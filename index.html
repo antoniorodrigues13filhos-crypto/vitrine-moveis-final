@@ -111,9 +111,12 @@ html.lenis { height: auto; }
 ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #CCCCCC; }
 
-/* Menu Mobile Animation */
 #mobile-menu {
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-label {
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 </style>
 </head>
@@ -159,16 +162,30 @@ html.lenis { height: auto; }
         <section id="scroll-hero" style="height:400vh;position:relative;">
             <div style="position:sticky;top:0;height:100vh;width:100%;overflow:hidden;">
                 <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></canvas>
+                
+                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none">
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Estrutura</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
+                </div>
+
+                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right">
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Revestimento</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
+                </div>
+
+                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center">
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Mecanismo</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3>
+                </div>
+
                 <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),rgba(0,0,0,0.2) 50%,transparent);z-index:1;"></div>
+                
                 <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6 text-center" style="padding-top: 10vh;">
                     <span id="hero-badge" class="font-mono text-xs md:text-sm text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
                     <h1 id="hero-title" class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-tight max-w-5xl">
                         A Arte de Equipar<br>
                         <span class="italic text-white/90 font-light">Seu Espaço</span>
                     </h1>
-                    <p id="hero-subtitle" class="font-sans text-base md:text-lg text-white/70 max-w-xl mx-auto font-light">
-                        Mobiliário corporativo que une ergonomia premium, materiais nobres e design atemporal para elevar a produtividade.
-                    </p>
                 </div>
             </div>
         </section>
@@ -181,7 +198,7 @@ html.lenis { height: auto; }
                     <p class="text-sm font-mono text-primary/60 uppercase tracking-widest">Manifesto VM</p>
                 </div>
                 <div class="w-full md:w-2/3">
-                    <p class="text-lg md:text-xl text-primary/80 leading-relaxed font-light mb-8">
+                    <p class="text-lg md:text-xl text-primary/80 leading-[1.8] font-light mb-8">
                         Acreditamos que o ambiente de trabalho molda a mente. Nossas peças não são apenas móveis; são instrumentos de foco e criação. Construídos com tolerâncias extremas e materiais que envelhecem com dignidade, cada linha é pensada para suportar a rotina sem perder a elegância.
                     </p>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border-light pt-8">
@@ -201,8 +218,7 @@ html.lenis { height: auto; }
                     <p class="font-mono text-sm text-primary/50 uppercase tracking-wider">Catálogo 2024</p>
                 </div>
             </div>
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-                </div>
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16"></div>
         </section>
     </main>
 
@@ -211,11 +227,9 @@ html.lenis { height: auto; }
     </a>
 
     <script>
-        // 1. Initialize Icons
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
 
-        // 2. Products Data
         const products = [
             { id: "OF-01", name: "Cadeira Executiva Aura", material: "Couro Legítimo & Alumínio", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1200", badge: "Ergonomia Premium" },
             { id: "ST-04", name: "Mesa Diretoria Nexus", material: "Nogueira Maciça & Vidro Temperado", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200", badge: "Ergonomia Premium" },
@@ -227,7 +241,7 @@ html.lenis { height: auto; }
         gridContainer.innerHTML = products.map(prod => `
             <div class="group cursor-pointer">
                 <div class="relative w-full h-[500px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
-                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover">
+                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
                     <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
                         <span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold">${prod.badge}</span>
                     </div>
@@ -242,12 +256,10 @@ html.lenis { height: auto; }
             </div>
         `).join('');
 
-        // 3. Lenis
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // 4. MOTOR ATUALIZADO PARA 54 FRAMES
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const frameCount = 54; 
@@ -281,6 +293,7 @@ html.lenis { height: auto; }
             const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
             const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
 
+            // Desenhar Canvas
             const img = images[frameIndex];
             if (img && img.complete) {
                 const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
@@ -288,12 +301,30 @@ html.lenis { height: auto; }
                 const y = (canvas.height - img.height * ratio) / 2;
                 context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
             }
+
+            // Controle das Etiquetas Flutuantes
+            const l1 = document.getElementById('label-1');
+            const l2 = document.getElementById('label-2');
+            const l3 = document.getElementById('label-3');
+
+            const toggleLabel = (el, show) => {
+                if (show) {
+                    el.classList.remove('opacity-0', 'translate-y-4');
+                    el.classList.add('opacity-100', 'translate-y-0');
+                } else {
+                    el.classList.add('opacity-0', 'translate-y-4');
+                    el.classList.remove('opacity-100', 'translate-y-0');
+                }
+            };
+
+            toggleLabel(l1, frameIndex >= 5 && frameIndex <= 18);
+            toggleLabel(l2, frameIndex >= 22 && frameIndex <= 35);
+            toggleLabel(l3, frameIndex >= 38 && frameIndex <= 50);
         }
         
         window.addEventListener('scroll', render);
         window.addEventListener('resize', render);
 
-        // 5. FUNÇÃO TOGGLE MENU MOBILE
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
@@ -301,16 +332,11 @@ html.lenis { height: auto; }
             
             if (isClosed) {
                 menu.classList.remove('translate-x-full');
-                icon.innerHTML = '<path d="M18 6L6 18M6 6l12 12"></path>'; // Ícone de fechar (X)
+                icon.innerHTML = '<path d="M18 6L6 18M6 6l12 12"></path>';
             } else {
                 menu.classList.add('translate-x-full');
-                icon.innerHTML = '<path d="M4 5h16M4 12h16M4 19h16"></path>'; // Ícone de hambúrguer
+                icon.innerHTML = '<path d="M4 5h16M4 12h16M4 19h16"></path>';
             }
         }
-    </script>
-</body></html>
-
-        window.addEventListener('scroll', render);
-        window.addEventListener('resize', render);
     </script>
 </body></html>

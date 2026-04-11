@@ -1,287 +1,134 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="lenis lenis-smooth"><head><script data-buildix-nav-interceptor="">
-(function() {
-  document.addEventListener('click', function(e) {
-    var target = e.target;
-    while (target && target.tagName !== 'A' && target !== document.body) {
-      target = target.parentElement;
-    }
-    if (target && target.tagName === 'A') {
-      var href = target.getAttribute('href') || '';
-      if (href.charAt(0) === '#') {
-        e.preventDefault();
-        e.stopPropagation();
-        if (href.length > 1) {
-          var targetEl = document.getElementById(href.substring(1));
-          if (targetEl) {
-            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }
-        return false;
-      }
-      return false;
-    }
-  }, true);
-})();
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Vitrine Móvel | Office Solutions</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+    // 1. INICIALIZAÇÃO DE PRODUTOS (IGUAL)
+    const products = [
+        { id: "OF-01", name: "Cadeira Aura", material: "Couro Legítimo & Alumínio", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1200" },
+        { id: "ST-04", name: "Mesa Nexus", material: "Nogueira Maciça & Vidro", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200" },
+        { id: "AC-12", name: "Luminária Horizon", material: "Aço Escovado & LED", image: "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&q=80&w=1200" },
+        { id: "SF-08", name: "Sofá Apex", material: "Sintético Premium", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200" }
+    ];
 
-    <style type="text/tailwindcss">
-@theme {
-            --color-primary: #111111;
-            --color-secondary: #2A2A2A;
-            --color-border-light: #E5E5E5;
-            --font-serif: 'Playfair Display', serif;
-            --font-mono: 'JetBrains Mono', monospace;
-        }
-</style>
-<style>
-html.lenis { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-stopped { overflow: hidden; }
-
-a, button, .product-card {
-    touch-action: manipulation;
-}
-
-.extreme-glass {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            transform: translate3d(-50%, 0, 0); 
-            transition: background 0.2s ease;
-        }
-
-#mobile-menu { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-.floating-label { transition: all 0.4s ease-out; pointer-events: none; }
-#hero-text-container { will-change: opacity; }
-
-/* PRODUTOS: Efeito de zoom e cor mantido aqui */
-.product-image-container img {
-    filter: grayscale(100%);
-    transition: filter 0.5s ease, transform 0.5s ease;
-    will-change: filter, transform;
-}
-
-.product-card:active img, 
-.product-card.active img {
-    filter: grayscale(0%) !important;
-    transform: scale(1.05);
-}
-
-@media (min-width: 1024px) {
-    .product-card:hover img {
-        filter: grayscale(0%);
-        transform: scale(1.05);
-    }
-}
-
-#hero-canvas { 
-    touch-action: none; 
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    will-change: transform;
-}
-</style>
-</head>
-<body class="bg-white text-primary font-sans antialiased relative">
-
-    <div id="loader" style="position: fixed; inset: 0px; background: #111; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.4s ease-out;">
-        <h2 class="text-3xl font-serif text-white mb-4 tracking-tight uppercase">VITRINE MÓVEL</h2>
-        <div style="width:12rem;height:2px;background:rgba(255,255,255,0.2);"><div id="progress-bar" style="height: 100%; background: white; width: 0%;"></div></div>
-    </div>
-
-    <header class="extreme-glass fixed top-6 left-1/2 w-[90%] max-w-7xl rounded-full z-50 flex items-center justify-between px-10 py-4">
-        <nav class="hidden md:flex items-center gap-8">
-            <a href="#produtos" class="text-sm font-medium tracking-wide">Produtos</a>
-        </nav>
-        <a href="#" class="absolute left-1/2 -translate-x-1/2 select-none z-20">
-            <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/user-images/207d01fe-9154-44a2-a035-5a4810effc12.webp" alt="logo" class="h-8 md:h-10 w-auto brightness-0">
-        </a>
-        <nav class="hidden md:flex items-center gap-8">
-            <a href="#solucoes" class="text-sm font-medium tracking-wide">Soluções</a>
-            <a href="#contato" class="text-sm font-medium tracking-wide">Fale Conosco</a>
-        </nav>
-        <button onclick="toggleMenu()" class="md:hidden ml-auto p-1 z-[60] relative">
-            <svg id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h16"></path></svg>
-        </button>
-    </header>
-
-    <div id="mobile-menu" class="fixed inset-0 bg-white/98 backdrop-blur-2xl z-[55] translate-x-full flex flex-col items-center justify-center gap-8">
-        <a href="#produtos" onclick="toggleMenu()" class="font-serif text-3xl">Produtos</a>
-        <a href="#solucoes" onclick="toggleMenu()" class="font-serif text-3xl">Soluções</a>
-        <a href="#contato" onclick="toggleMenu()" class="font-serif text-3xl">Fale Conosco</a>
-    </div>
-
-    <main>
-        <section id="scroll-hero" style="height:400vh;position:relative;">
-            <div style="position:sticky;top:0;height:100vh;width:100%;overflow:hidden;">
-                <canvas id="hero-canvas"></canvas>
-                
-                <div id="label-1" class="floating-label absolute top-[30%] left-[10%] opacity-0 translate-y-4 z-20">
-                    <h3 class="text-white text-xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
-                </div>
-                <div id="label-2" class="floating-label absolute top-[55%] right-[10%] opacity-0 translate-y-4 z-20 text-right">
-                    <h3 class="text-white text-xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
-                </div>
-                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 text-center">
-                    <h3 class="text-white text-xl font-serif italic">Sincronizado 4D</h3>
-                </div>
-
-                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent 70%);z-index:1;"></div>
-                
-                <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
-                    <h1 class="font-serif text-5xl md:text-8xl font-bold text-white tracking-tight leading-tight">A Arte de Equipar<br><span class="italic text-white/90 font-light">Seu Espaço</span></h1>
-                </div>
+    document.getElementById('product-grid').innerHTML = products.map(prod => `
+        <div class="product-card group cursor-pointer">
+            <div class="product-image-container relative w-full h-[450px] md:h-[600px] overflow-hidden rounded-2xl bg-[#F9F9F9] mb-6">
+                <img src="${prod.image}" class="absolute inset-0 w-full h-full object-cover">
             </div>
-        </section>
+            <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
+            <p class="font-sans text-xs text-primary/50 font-light">${prod.material}</p>
+        </div>
+    `).join('');
 
-        <section id="produtos" class="py-24 px-6 max-w-[90rem] mx-auto border-t border-border-light">
-            <h2 class="font-serif text-4xl mb-16">Coleção Executiva</h2>
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24"></div>
-        </section>
-    </main>
+    // Toque Instantâneo
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('touchstart', () => card.classList.add('active'), {passive: true});
+        card.addEventListener('touchend', () => setTimeout(() => card.classList.remove('active'), 300), {passive: true});
+    });
 
-    <script>
-        // 1. PRODUTOS
-        const products = [
-            { id: "OF-01", name: "Cadeira Aura", material: "Couro Legítimo & Alumínio", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1200" },
-            { id: "ST-04", name: "Mesa Nexus", material: "Nogueira Maciça & Vidro", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200" },
-            { id: "AC-12", name: "Luminária Horizon", material: "Aço Escovado & LED", image: "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&q=80&w=1200" },
-            { id: "SF-08", name: "Sofá Apex", material: "Sintético Premium", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200" }
-        ];
+    // 2. LENIS CALIBRADO (ESTILO INVERSA)
+    const isMobile = window.innerWidth < 768;
+    const lenis = new Lenis({
+        duration: isMobile ? 1.0 : 1.4,
+        lerp: isMobile ? 0.12 : 0.08, // Lerp mais alto no mobile = resposta imediata
+        smoothWheel: true,
+        touchMultiplier: 1.5,
+    });
 
-        document.getElementById('product-grid').innerHTML = products.map(prod => `
-            <div class="product-card">
-                <div class="product-image-container relative w-full h-[450px] md:h-[600px] overflow-hidden rounded-2xl bg-[#F9F9F9] mb-6">
-                    <img src="${prod.image}" class="absolute inset-0 w-full h-full object-cover">
-                </div>
-                <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
-                <p class="font-sans text-xs text-primary/50 font-light">${prod.material}</p>
-            </div>
-        `).join('');
-
-        // TOQUE INSTANTÂNEO
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('touchstart', () => card.classList.add('active'), {passive: true});
-            card.addEventListener('touchend', () => setTimeout(() => card.classList.remove('active'), 300), {passive: true});
-        });
-
-        // 2. LENIS ESTILO INVERSA
-        const isMobile = window.innerWidth < 768;
-        const lenis = new Lenis({
-            duration: isMobile ? 1.0 : 1.4,
-            lerp: isMobile ? 0.12 : 0.08,
-            smoothWheel: true,
-            touchMultiplier: 1.5,
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
+    function raf(time) {
+        lenis.raf(time);
         requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
-        // 3. MOTOR DE CANVAS ULTRA-FLUIDO
-        const canvas = document.getElementById("hero-canvas");
-        const context = canvas.getContext("2d", { 
-            alpha: false, 
-            desynchronized: true 
-        });
-        
-        const frameCount = 54; 
-        const images = [];
-        let loadedImages = 0;
-        let lastFrameIndex = -1;
+    // 3. MOTOR DE CANVAS ULTRA-FLUIDO
+    const canvas = document.getElementById("hero-canvas");
+    const context = canvas.getContext("2d", { 
+        alpha: false, 
+        desynchronized: true // Truque de performance para reduzir latência
+    });
+    
+    const frameCount = 54; 
+    const images = [];
+    let loadedImages = 0;
+    let lastFrameIndex = -1;
 
-        let cw = window.innerWidth;
-        let ch = window.innerHeight;
-        const dpr = Math.min(window.devicePixelRatio, 2); 
+    // Cache de dimensões para evitar cálculos repetitivos
+    let cw = window.innerWidth;
+    let ch = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio, 2); // Capar em 2x para não pesar em telas 4K mobile
 
-        function resizeCanvas() {
-            cw = window.innerWidth;
-            ch = window.innerHeight;
-            canvas.width = cw * dpr;
-            canvas.height = ch * dpr;
-            canvas.style.width = `${cw}px`;
-            canvas.style.height = `${ch}px`;
-            context.scale(dpr, dpr);
-            render(true);
-        }
+    function resizeCanvas() {
+        cw = window.innerWidth;
+        ch = window.innerHeight;
+        canvas.width = cw * dpr;
+        canvas.height = ch * dpr;
+        canvas.style.width = `${cw}px`;
+        canvas.style.height = `${ch}px`;
+        context.scale(dpr, dpr);
+        render(true); // Força render no resize
+    }
 
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-        const getPath = i => `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
+    const getPath = i => `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
 
-        for (let i = 1; i <= frameCount; i++) {
-            const img = new Image();
-            img.onload = () => {
-                loadedImages++;
-                document.getElementById('progress-bar').style.width = `${(loadedImages / frameCount) * 100}%`;
-                if (loadedImages === frameCount) {
-                    document.getElementById('loader').style.opacity = '0';
-                    setTimeout(() => document.getElementById('loader').style.display = 'none', 400);
-                    render(true);
-                }
-            };
-            img.src = getPath(i);
-            images.push(img);
-        }
-
-        function render(force = false) {
-            const scrollTop = window.scrollY;
-            const heroHeight = document.getElementById('scroll-hero').offsetHeight;
-            const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
-            const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
-
-            if (frameIndex !== lastFrameIndex || force) {
-                const img = images[frameIndex];
-                if (img && img.complete) {
-                    const ratio = Math.max(cw / img.width, ch / img.height);
-                    const x = (cw - img.width * ratio) / 2;
-                    const y = (ch - img.height * ratio) / 2;
-                    context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
-                    lastFrameIndex = frameIndex;
-                }
+    for (let i = 1; i <= frameCount; i++) {
+        const img = new Image();
+        img.onload = () => {
+            loadedImages++;
+            document.getElementById('progress-bar').style.width = `${(loadedImages / frameCount) * 100}%`;
+            if (loadedImages === frameCount) {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => document.getElementById('loader').style.display = 'none', 400);
+                render(true);
             }
+        };
+        img.src = getPath(i);
+        images.push(img);
+    }
 
-            document.getElementById('hero-text-container').style.opacity = Math.max(0, 1 - (fraction * 5));
-            
-            const l1 = document.getElementById('label-1');
-            const l2 = document.getElementById('label-2');
-            const l3 = document.getElementById('label-3');
-            const toggle = (el, show) => {
-                el.style.opacity = show ? "1" : "0";
-                el.style.transform = show ? "translateY(0)" : "translateY(10px)";
-            };
+    function render(force = false) {
+        const scrollTop = window.scrollY;
+        const heroHeight = document.getElementById('scroll-hero').offsetHeight;
+        const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
+        const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
 
-            toggle(l1, fraction > 0.15 && fraction < 0.35);
-            toggle(l2, fraction > 0.45 && fraction < 0.65);
-            toggle(l3, fraction > 0.75 && fraction < 0.90);
+        // SÓ DESENHA SE O FRAME MUDOU (Economia de processamento vital no Mobile)
+        if (frameIndex !== lastFrameIndex || force) {
+            const img = images[frameIndex];
+            if (img && img.complete) {
+                const ratio = Math.max(cw / img.width, ch / img.height);
+                const x = (cw - img.width * ratio) / 2;
+                const y = (ch - img.height * ratio) / 2;
+                context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
+                lastFrameIndex = frameIndex;
+            }
         }
+
+        // UI Updates suaves
+        const heroText = document.getElementById('hero-text-container');
+        heroText.style.opacity = Math.max(0, 1 - (fraction * 5));
         
-        lenis.on('scroll', () => render());
+        const l1 = document.getElementById('label-1');
+        const l2 = document.getElementById('label-2');
+        const l3 = document.getElementById('label-3');
+        const toggle = (el, show) => {
+            el.style.opacity = show ? "1" : "0";
+            el.style.transform = show ? "translateY(0)" : "translateY(10px)";
+        };
 
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const isClosed = menu.classList.contains('translate-x-full');
-            menu.classList.toggle('translate-x-full');
-            document.getElementById('menu-icon').innerHTML = isClosed ? 
-                '<path d="M18 6L6 18M6 6l12 12"></path>' : 
-                '<path d="M4 5h16M4 12h16M4 19h16"></path>';
-        }
-    </script>
-</body></html>
+        toggle(l1, fraction > 0.15 && fraction < 0.35);
+        toggle(l2, fraction > 0.45 && fraction < 0.65);
+        toggle(l3, fraction > 0.75 && fraction < 0.90);
+    }
+    
+    lenis.on('scroll', () => render());
+
+    function toggleMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const isClosed = menu.classList.contains('translate-x-full');
+        menu.classList.toggle('translate-x-full');
+        document.getElementById('menu-icon').innerHTML = isClosed ? 
+            '<path d="M18 6L6 18M6 6l12 12"></path>' : 
+            '<path d="M4 5h16M4 12h16M4 19h16"></path>';
+    }
+</script>

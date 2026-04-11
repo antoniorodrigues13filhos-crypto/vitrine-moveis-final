@@ -110,14 +110,13 @@ html.lenis { height: auto; }
 ::-webkit-scrollbar-track { background: #FFFFFF; }
 ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #CCCCCC; }
+
+/* Menu Mobile Animation */
+#mobile-menu {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
 </style>
-<style id="buildix-injected-style-1775679636152">.extreme-glass-pill {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(35px);
-    -webkit-backdrop-filter: blur(35px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
-  }</style></head>
+</head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
 
     <div id="loader" style="position: fixed; inset: 0px; background: linear-gradient(135deg, rgb(17, 17, 17), rgb(42, 42, 42)); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s; opacity: 1; visibility: visible;">
@@ -145,10 +144,16 @@ html.lenis { height: auto; }
             <a href="#contato" class="nav-link text-sm font-medium tracking-wide">Fale Conosco</a>
         </nav>
 
-        <button class="md:hidden ml-auto p-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+        <button onclick="toggleMenu()" class="md:hidden ml-auto p-1 z-[60] relative">
+            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
         </button>
     </header>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-xl z-[55] translate-x-full flex flex-col items-center justify-center gap-8">
+        <a href="#produtos" onclick="toggleMenu()" class="font-serif text-3xl">Produtos</a>
+        <a href="#solucoes" onclick="toggleMenu()" class="font-serif text-3xl">Soluções</a>
+        <a href="#contato" onclick="toggleMenu()" class="font-serif text-3xl">Fale Conosco</a>
+    </div>
 
     <main>
         <section id="scroll-hero" style="height:400vh;position:relative;">
@@ -287,6 +292,21 @@ html.lenis { height: auto; }
         
         window.addEventListener('scroll', render);
         window.addEventListener('resize', render);
+
+        // 5. FUNÇÃO TOGGLE MENU MOBILE
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            const isClosed = menu.classList.contains('translate-x-full');
+            
+            if (isClosed) {
+                menu.classList.remove('translate-x-full');
+                icon.innerHTML = '<path d="M18 6L6 18M6 6l12 12"></path>'; // Ícone de fechar (X)
+            } else {
+                menu.classList.add('translate-x-full');
+                icon.innerHTML = '<path d="M4 5h16M4 12h16M4 19h16"></path>'; // Ícone de hambúrguer
+            }
+        }
     </script>
 </body></html>
 

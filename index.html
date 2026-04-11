@@ -12,69 +12,69 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <style type="text/tailwindcss">
-@theme {
+        @theme {
             --color-primary: #111111;
             --color-secondary: #2A2A2A;
             --color-border-light: #E5E5E5;
             --font-serif: 'Playfair Display', serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
-</style>
-<style>
-/* Reset radical para evitar pulos no Mobile */
-html, body { 
-    overflow-x: hidden; 
-    overscroll-behavior-y: none;
-    -webkit-font-smoothing: antialiased;
-}
+    </style>
+    <style>
+        /* Estabilização para Mobile */
+        html, body { 
+            overflow-x: hidden; 
+            overscroll-behavior-y: none; /* Evita o "puxar para atualizar" que trava o scroll */
+            background-color: #fff;
+        }
 
-html.lenis { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
+        /* Trava o Canvas para evitar o Zoom da barra do navegador */
+        #hero-canvas { 
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh; /* Usa a unidade dinâmica de viewport do mobile moderno */
+            touch-action: none; 
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            will-change: transform;
+        }
 
-/* Trava o Canvas para não dar zoom */
-#hero-canvas { 
-    display: block;
-    width: 100vw !important;
-    height: 100vh !important;
-    touch-action: none; 
-    object-fit: cover;
-    contain: strict; /* Performance extrema */
-    will-change: transform;
-}
+        .extreme-glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transform: translate3d(-50%, 0, 0); 
+        }
 
-.extreme-glass {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    transform: translate3d(-50%, 0, 0); 
-}
+        /* Efeito nos Produtos - Apenas aqui tem Zoom */
+        .product-image-container img {
+            filter: grayscale(100%);
+            transition: filter 0.4s ease, transform 0.4s ease;
+        }
 
-/* Produtos: Zoom controlado e instantâneo */
-.product-image-container img {
-    filter: grayscale(100%);
-    transition: filter 0.3s ease, transform 0.3s ease;
-}
+        .product-card:active img, .product-card.active img {
+            filter: grayscale(0%) !important;
+            transform: scale(1.04);
+        }
 
-.product-card.active img, .product-card:hover img {
-    filter: grayscale(0%) !important;
-    transform: scale(1.05);
-}
+        @media (min-width: 1024px) {
+            .product-card:hover img {
+                filter: grayscale(0%);
+                transform: scale(1.04);
+            }
+        }
 
-#hero-text-container {
-    pointer-events: none;
-    will-change: opacity;
-}
-
-.floating-label {
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-</style>
+        #hero-text-container { pointer-events: none; }
+        .floating-label { pointer-events: none; transition: opacity 0.3s ease; }
+    </style>
 </head>
 <body class="bg-white text-primary font-sans">
 
-    <div id="loader" style="position: fixed; inset: 0px; background: #111; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.4s;">
+    <div id="loader" style="position: fixed; inset: 0px; background: #111; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s;">
         <h2 class="text-2xl font-serif text-white mb-4 uppercase tracking-widest">VITRINE</h2>
         <div style="width:10rem;height:1px;background:rgba(255,255,255,0.2);"><div id="progress-bar" style="height:100%;background:white;width:0%;"></div></div>
     </div>
@@ -83,7 +83,7 @@ html.lenis { height: auto; }
         <nav class="hidden md:flex gap-8">
             <a href="#produtos" class="text-sm font-medium">Produtos</a>
         </nav>
-        <a href="#" class="absolute left-1/2 -translate-x-1/2 select-none z-20">
+        <a href="#" class="absolute left-1/2 -translate-x-1/2 z-20">
             <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/user-images/207d01fe-9154-44a2-a035-5a4810effc12.webp" class="h-8 md:h-9 brightness-0">
         </a>
         <nav class="hidden md:flex gap-8">
@@ -108,7 +108,7 @@ html.lenis { height: auto; }
                     <h3 class="text-white text-xl font-serif italic border-l border-white/30 pl-4">Alumínio</h3>
                 </div>
                 <div id="label-2" class="floating-label absolute top-[55%] right-[10%] opacity-0 z-20 text-right">
-                    <h3 class="text-white text-xl font-serif italic border-r border-white/30 pr-4">Couro</h3>
+                    <h3 class="text-white text-xl font-serif italic border-r border-white/30 pr-4 text-right">Couro</h3>
                 </div>
 
                 <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.7), transparent 70%); z-index:1;"></div>
@@ -133,13 +133,11 @@ html.lenis { height: auto; }
         ];
 
         document.getElementById('product-grid').innerHTML = products.map(p => `
-            <div class="product-card group cursor-pointer overflow-hidden rounded-xl">
-                <div class="product-image-container relative h-[450px] bg-gray-50 overflow-hidden">
+            <div class="product-card">
+                <div class="product-image-container relative h-[450px] bg-gray-50 overflow-hidden rounded-xl">
                     <img src="${p.image}" class="w-full h-full object-cover">
                 </div>
-                <div class="py-4">
-                    <h3 class="font-serif text-2xl">${p.name}</h3>
-                </div>
+                <div class="py-4"><h3 class="font-serif text-2xl">${p.name}</h3></div>
             </div>
         `).join('');
 
@@ -149,16 +147,18 @@ html.lenis { height: auto; }
             card.addEventListener('touchend', () => card.classList.remove('active'), {passive: true});
         });
 
-        // 2. Lenis Calibrado para Mobile
+        // 2. Lenis Calibrado
         const lenis = new Lenis({
-            duration: 0.8,
-            lerp: 0.15,
-            touchMultiplier: 1.2
+            duration: 1.0,
+            lerp: 0.1,
+            touchMultiplier: 1.2,
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
         });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // 3. Motor do Canvas Estabilizado
+        // 3. Motor do Canvas Ultra-Estável
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d", { alpha: false, desynchronized: true });
         const frameCount = 54;
@@ -166,11 +166,10 @@ html.lenis { height: auto; }
         let loadedImages = 0;
         let lastFrame = -1;
 
-        // Trava as dimensões iniciais para evitar zoom no resize do mobile
+        // Trava as dimensões uma única vez
         const dpr = Math.min(window.devicePixelRatio, 2);
-        let cw = window.innerWidth;
-        let ch = window.innerHeight;
-        
+        const cw = window.innerWidth;
+        const ch = window.innerHeight;
         canvas.width = cw * dpr;
         canvas.height = ch * dpr;
         context.scale(dpr, dpr);
@@ -184,7 +183,7 @@ html.lenis { height: auto; }
                 document.getElementById('progress-bar').style.width = `${(loadedImages/frameCount)*100}%`;
                 if (loadedImages === frameCount) {
                     document.getElementById('loader').style.opacity = '0';
-                    setTimeout(() => document.getElementById('loader').style.display = 'none', 400);
+                    setTimeout(() => document.getElementById('loader').style.display = 'none', 500);
                     render(true);
                 }
             };
@@ -205,12 +204,15 @@ html.lenis { height: auto; }
                 }
             }
 
-            document.getElementById('hero-text-container').style.opacity = 1 - (fraction * 5);
+            document.getElementById('hero-text-container').style.opacity = 1 - (fraction * 4);
             document.getElementById('label-1').style.opacity = (fraction > 0.15 && fraction < 0.35) ? 1 : 0;
             document.getElementById('label-2').style.opacity = (fraction > 0.45 && fraction < 0.65) ? 1 : 0;
         }
 
-        lenis.on('scroll', () => render());
+        // Evento de scroll otimizado
+        lenis.on('scroll', () => {
+            window.requestAnimationFrame(() => render());
+        });
 
         function toggleMenu() {
             document.getElementById('mobile-menu').classList.toggle('translate-x-full');

@@ -133,15 +133,18 @@ html.lenis { height: auto; }
 
     <header class="extreme-glass fixed top-6 left-1/2 w-[90%] max-w-7xl rounded-full z-50 flex items-center justify-between px-10 py-4">
         <nav class="hidden md:flex items-center gap-8">
- <a href="#produtos" class="nav-link text-sm font-medium tracking-wide">Produtos</a>
- <a href="#" class="absolute left-1/2 -translate-x-1/2 select-none hover:scale-105 transition-transform duration-300 z-20">
-  <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/user-images/207d01fe-9154-44a2-a035-5a4810effc12.webp" alt="logo" class="logo h-8 md:h-10 lg:h-11 w-auto object-contain brightness-0">
- </a>
- <a href="#solucoes" class="nav-link text-sm font-medium tracking-wide">Soluções</a>
-</nav>
+            <a href="#produtos" class="nav-link text-sm font-medium tracking-wide">Produtos</a>
+        </nav>
+
+        <a href="#" class="absolute left-1/2 -translate-x-1/2 select-none hover:scale-105 transition-transform duration-300 z-20">
+            <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/user-images/207d01fe-9154-44a2-a035-5a4810effc12.webp" alt="logo" class="logo h-8 md:h-10 lg:h-11 w-auto object-contain brightness-0">
+        </a>
+
         <nav class="hidden md:flex items-center gap-8">
+            <a href="#solucoes" class="nav-link text-sm font-medium tracking-wide">Soluções</a>
             <a href="#contato" class="nav-link text-sm font-medium tracking-wide">Fale Conosco</a>
         </nav>
+
         <button class="md:hidden ml-auto p-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
         </button>
@@ -239,10 +242,10 @@ html.lenis { height: auto; }
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // 4. MOTOR CORRIGIDO PARA PASTA LOCAL /frames/
+        // 4. MOTOR ATUALIZADO PARA 54 FRAMES
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
-        const frameCount = 52; 
+        const frameCount = 54; 
         const images = [];
         let loadedImages = 0;
 
@@ -281,6 +284,11 @@ html.lenis { height: auto; }
                 context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
             }
         }
+        
+        window.addEventListener('scroll', render);
+        window.addEventListener('resize', render);
+    </script>
+</body></html>
 
         window.addEventListener('scroll', render);
         window.addEventListener('resize', render);

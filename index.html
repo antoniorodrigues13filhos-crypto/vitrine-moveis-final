@@ -37,7 +37,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
@@ -123,7 +123,7 @@ html.lenis { height: auto; }
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-/* DESIGN MELHORADO: ATENDENTE UNIFICADO GLASS */
+/* --- ATENDENTE VIRTUAL: VIDRO TRANSPARENTE E TEXTO PRETO --- */
 #atendente-container {
     position: fixed;
     bottom: 30px;
@@ -139,11 +139,11 @@ html.lenis { height: auto; }
     flex-direction: column;
     border-radius: 28px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(35px);
-    -webkit-backdrop-filter: blur(35px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.7); /* Vidro mais transparente */
+    backdrop-filter: blur(10px); /* Fosco reduzido para transparência */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
     animation: chatSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -170,43 +170,41 @@ html.lenis { height: auto; }
     font-size: 14px;
     line-height: 1.5;
     max-width: 85%;
-    letter-spacing: -0.01em;
+    color: #000 !important; /* TEXTO PRETO OBRIGATÓRIO */
+    font-weight: 500;
 }
-.bot-msg { background: rgba(255,255,255,0.25); color: #fff; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-.user-msg { background: #fff; color: #111; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
+.bot-msg { background: rgba(255,255,255,0.5); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.user-msg { background: rgba(0, 0, 0, 0.05); align-self: flex-end; border-bottom-right-radius: 4px; border: 1px solid rgba(0,0,0,0.1); }
 
 .atendente-input-area {
     padding: 18px;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.4);
     display: flex;
     gap: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 .atendente-input-area input {
     flex: 1;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 10px 16px;
     border-radius: 14px;
-    color: #fff;
+    color: #000;
     outline: none;
     font-size: 14px;
 }
 .atendente-input-area button {
-    background: #fff;
-    color: #111;
+    background: #111;
+    color: #fff;
     border: none;
     width: 40px;
     height: 40px;
     border-radius: 12px;
     cursor: pointer;
-    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.2s;
 }
-.atendente-input-area button:hover { transform: scale(1.05); background: #f0f0f0; }
 </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
@@ -249,12 +247,12 @@ html.lenis { height: auto; }
 
     <div id="atendente-container">
         <div id="atendente-window">
-            <div style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.1);">
+            <div style="padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.2);">
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <div style="width:8px; height:8px; background:#fff; border-radius:50%; box-shadow: 0 0 10px #fff;"></div>
-                    <span style="color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Atendente Virtual</span>
+                    <div style="width:8px; height:8px; background:#000; border-radius:50%;"></div>
+                    <span style="color: #000; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Atendente Virtual</span>
                 </div>
-                <button onclick="toggleAtendente()" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 20px; line-height: 1;">&times;</button>
+                <button onclick="toggleAtendente()" style="background: none; border: none; color: #000; cursor: pointer; font-size: 20px; line-height: 1;">&times;</button>
             </div>
             <div id="atendente-messages">
                 <div class="msg-bubble bot-msg">Olá! Sou o consultor virtual da Vitrine Móvel. Como posso ajudar você hoje?</div>
@@ -493,4 +491,5 @@ html.lenis { height: auto; }
             }
         }
     </script>
+</body></html>
 </body></html>

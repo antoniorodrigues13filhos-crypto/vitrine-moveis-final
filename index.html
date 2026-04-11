@@ -118,6 +118,10 @@ html.lenis { height: auto; }
 .floating-label {
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+#hero-text-container {
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
 </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
@@ -293,13 +297,24 @@ html.lenis { height: auto; }
             const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
             const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
 
-            // Desenhar Canvas
             const img = images[frameIndex];
             if (img && img.complete) {
                 const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
                 const x = (canvas.width - img.width * ratio) / 2;
                 const y = (canvas.height - img.height * ratio) / 2;
                 context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
+            }
+
+            // CONTROLE DO TÍTULO CENTRAL (SOMA E DESCE)
+            const heroText = document.getElementById('hero-text-container');
+            if (frameIndex > 2) {
+                // Diminui a opacidade conforme rola e aplica um leve efeito de descida
+                const textOpacity = Math.max(0, 1 - (frameIndex / 8)); 
+                heroText.style.opacity = textOpacity;
+                heroText.style.transform = `translateY(${frameIndex * 2}px)`;
+            } else {
+                heroText.style.opacity = '1';
+                heroText.style.transform = `translateY(0)`;
             }
 
             // Controle das Etiquetas Flutuantes
@@ -317,9 +332,10 @@ html.lenis { height: auto; }
                 }
             };
 
-            toggleLabel(l1, frameIndex >= 5 && frameIndex <= 18);
-            toggleLabel(l2, frameIndex >= 22 && frameIndex <= 35);
-            toggleLabel(l3, frameIndex >= 38 && frameIndex <= 50);
+            // Ajustei os intervalos para aparecerem apenas DEPOIS que o título sumir
+            toggleLabel(l1, frameIndex >= 10 && frameIndex <= 20);
+            toggleLabel(l2, frameIndex >= 24 && frameIndex <= 36);
+            toggleLabel(l3, frameIndex >= 40 && frameIndex <= 52);
         }
         
         window.addEventListener('scroll', render);

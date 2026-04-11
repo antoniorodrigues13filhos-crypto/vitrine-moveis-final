@@ -35,7 +35,7 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
         }
 
-        /* CHAT WRAPPER - OCULTO POR PADRÃO */
+        /* CHAT WRAPPER */
         #chat-wrapper {
             position: fixed;
             bottom: 100px;
@@ -60,18 +60,15 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: transform 0.3s ease, background 0.3s ease;
+            transition: transform 0.3s ease;
             cursor: pointer;
         }
         .glass-fab:hover { transform: scale(1.1); background: rgba(255, 255, 255, 0.6); }
 
-        @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(20px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .bot-bubble { background: rgba(255, 255, 255, 0.3); align-self: flex-start; border-radius: 15px; border-bottom-left-radius: 2px; padding: 10px 14px; max-width: 85%; margin-bottom: 10px; }
-        .user-bubble { background: #111; color: #fff; align-self: flex-end; border-radius: 15px; border-bottom-right-radius: 2px; padding: 10px 14px; max-width: 85%; margin-bottom: 10px; }
+        .bot-bubble { background: rgba(255, 255, 255, 0.3); align-self: flex-start; border-radius: 15px; border-bottom-left-radius: 2px; padding: 10px 14px; max-width: 85%; margin-bottom: 8px; }
+        .user-bubble { background: #111; color: #fff; align-self: flex-end; border-radius: 15px; border-bottom-right-radius: 2px; padding: 10px 14px; max-width: 85%; margin-bottom: 8px; }
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased relative">
@@ -113,7 +110,7 @@
         </div>
 
         <div style="padding: 15px; display: flex; gap: 8px; background: rgba(255,255,255,0.1);">
-            <input type="text" id="chat-in" placeholder="Digite sua dúvida..." style="flex: 1; background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.05); padding: 10px; border-radius: 12px; outline: none; font-size: 13px; color: #000;">
+            <input type="text" id="chat-in" placeholder="Sua dúvida..." style="flex: 1; background: rgba(255,255,255,0.5); border: none; padding: 10px; border-radius: 12px; outline: none; font-size: 13px; color: #000;">
             <button onclick="enviarChat()" style="background: #111; color: #fff; border: none; padding: 0 15px; border-radius: 12px; font-weight: bold; cursor: pointer;">></button>
         </div>
     </div>
@@ -129,7 +126,7 @@
         </section>
 
         <section id="produtos" class="py-24 px-6 max-w-7xl mx-auto">
-            <h2 class="font-serif text-4xl mb-12">Coleção Executiva</h2>
+            <h2 class="font-serif text-4xl mb-12 text-primary">Coleção Executiva</h2>
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 gap-12"></div>
         </section>
     </main>
@@ -145,7 +142,7 @@
             chat.style.display = isHidden ? 'flex' : 'none';
         }
 
-        const WEBHOOK_MAKE = 'https://hook.us1.make.com/SUA_URL_AQUI'; // <--- COLOQUE SUA URL AQUI
+        const WEBHOOK_MAKE = 'SUA_URL_DO_MAKE_AQUI'; 
 
         async function enviarChat() {
             const input = document.getElementById('chat-in');
@@ -164,7 +161,7 @@
                 const data = await res.json();
                 if(data.resposta) addMsg(data.resposta, 'bot');
             } catch(e) {
-                addMsg("Erro ao conectar com o Marco. Tente novamente.", 'bot');
+                addMsg("Erro ao conectar com o Marco.", 'bot');
             }
         }
 
@@ -177,6 +174,7 @@
             area.scrollTop = area.scrollHeight;
         }
 
+        // ORIGINAL LOGIC
         const products = [
             { id: "OF-01", name: "Cadeira Executiva Aura", material: "Couro Legítimo & Alumínio", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1200" },
             { id: "ST-04", name: "Mesa Diretoria Nexus", material: "Nogueira Maciça & Vidro Temperado", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200" }

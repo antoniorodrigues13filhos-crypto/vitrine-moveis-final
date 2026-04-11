@@ -1,239 +1,383 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" class="lenis lenis-smooth">
 <head>
+    <script data-buildix-nav-interceptor="">
+    (function() {
+      document.addEventListener('click', function(e) {
+        var target = e.target;
+        while (target && target.tagName !== 'A' && target !== document.body) {
+          target = target.parentElement;
+        }
+        if (target && target.tagName === 'A') {
+          var href = target.getAttribute('href') || '';
+          if (href.charAt(0) === '#') {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            if (href.length > 1) {
+              var targetEl = document.getElementById(href.substring(1));
+              if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }
+            return false;
+          }
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          return false;
+        }
+      }, true);
+      window.addEventListener('hashchange', function(e) {
+        e.preventDefault();
+      }, true);
+    })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vitrine Móvel | Consultoria de Luxo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* RESET E BASE */
-        * { margin: 0; padding: 0; box-box-sizing: border-box; }
-        body { 
-            background: #050505; 
-            font-family: 'Inter', sans-serif; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh;
-            color: white;
-        }
+    <title>Vitrine Móvel | Office Solutions</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <script>
+      window.lucide = {
+        createIcons: function() {}
+      };
+    </script>
+    
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
-        /* CONTAINER DO CHAT */
-        #chat-container {
-            width: 100%;
-            max-width: 450px;
-            height: 600px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
-
-        /* CABEÇALHO */
-        .chat-header {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .chat-header h2 { font-weight: 600; font-size: 1.1rem; letter-spacing: 1px; color: #d4af37; }
-
-        /* ÁREA DE MENSAGENS */
-        #messages-area {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            scrollbar-width: none;
-        }
-        #messages-area::-webkit-scrollbar { display: none; }
-
-        /* ESTILO DAS BOLHAS */
-        .wrapper { display: flex; align-items: flex-end; gap: 10px; animation: slideUp 0.4s ease-out; }
-        .user-wrapper { flex-direction: row-reverse; }
-
-        .avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            background: url('https://i.pravatar.cc/150?u=marco_vitrine') center/cover;
-        }
-
-        .bubble {
-            max-width: 75%;
-            padding: 12px 16px;
-            font-size: 14px;
-            line-height: 1.5;
-            border-radius: 18px;
-        }
-
-        .bot-bubble {
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #efefef;
-            border-bottom-left-radius: 4px;
-        }
-
-        .user-bubble {
-            background: #d4af37;
-            color: #000;
-            border-bottom-right-radius: 4px;
-            font-weight: 500;
-        }
-
-        /* CAMPO DE ENTRADA */
-        .input-area {
-            padding: 20px;
-            display: flex;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.2);
-        }
-        input {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 15px;
-            border-radius: 15px;
-            color: white;
-            outline: none;
-        }
-        button {
-            background: #d4af37;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover { opacity: 0.8; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+    <style type="text/tailwindcss">
+    @theme {
+            --color-primary: #111111;
+            --color-secondary: #2A2A2A;
+            --color-border-light: #E5E5E5;
+            --font-serif: 'Playfair Display', serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-sans: 'Inter', sans-serif;
         }
     </style>
-</head>
-<body>
-
-<div id="chat-container">
-    <div class="chat-header">
-        <h2>VITRINE MÓVEL</h2>
-    </div>
+    <style>
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+    .lenis.lenis-scrolling iframe { pointer-events: none; }
     
-    <div id="messages-area">
-        <div class="wrapper">
-            <div class="avatar"></div>
-            <div class="bubble bot-bubble">Olá! Sou o Marco, seu consultor. Como posso transformar seu ambiente hoje?</div>
+    .extreme-glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            transform: translate3d(-50%, 0, 0); 
+            backface-visibility: hidden;
+            transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    .extreme-glass:hover { background: rgba(255, 255, 255, 0.25); }
+
+    /* ESTILO DO CHAT INTELIGENTE */
+    #chat-wrapper {
+        position: fixed;
+        bottom: 100px;
+        right: 32px;
+        width: 350px;
+        height: 450px;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        overflow: hidden;
+        animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        scrollbar-width: none;
+    }
+    #chat-messages::-webkit-scrollbar { display: none; }
+
+    .msg-wrap { display: flex; align-items: flex-end; gap: 8px; animation: msgFade 0.3s ease; }
+    .msg-user { flex-direction: row-reverse; }
+
+    .chat-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: url('https://i.pravatar.cc/150?u=consultor_vm') center/cover;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .msg-bubble {
+        max-width: 80%;
+        padding: 10px 14px;
+        font-size: 13px;
+        border-radius: 15px;
+        line-height: 1.4;
+    }
+
+    .bot-bubble { background: rgba(255,255,255,0.4); color: #111; border-bottom-left-radius: 4px; }
+    .user-bubble { background: #111; color: #fff; border-bottom-right-radius: 4px; }
+
+    .chat-input-area {
+        padding: 15px;
+        background: rgba(255,255,255,0.25);
+        display: flex;
+        gap: 8px;
+    }
+
+    .chat-input-area input {
+        flex: 1;
+        background: rgba(255,255,255,0.6);
+        border: 1px solid rgba(0,0,0,0.05);
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-size: 13px;
+        outline: none;
+        color: #000;
+    }
+
+    @keyframes msgFade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    .glass-fab {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+    .glass-fab:hover { transform: scale(1.05); background: rgba(255, 255, 255, 0.6); }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #FFFFFF; }
+    ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
+
+    <div id="loader" style="position: fixed; inset: 0px; background: linear-gradient(135deg, rgb(17, 17, 17), rgb(42, 42, 42)); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s; opacity: 1; visibility: visible;">
+        <div class="mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white w-16 h-16"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path><path d="M5 18v2"></path><path d="M19 18v2"></path></svg>
+        </div>
+        <h2 class="text-3xl font-serif text-white mb-2 tracking-tight uppercase">VITRINE MÓVEL</h2>
+        <div style="width:16rem;height:0.5rem;background:rgba(255,255,255,0.3);border-radius:9999px;overflow:hidden;margin-top:0.5rem;">
+            <div id="progress-bar" style="height: 100%; background: white; transition: 100ms ease-out; width: 0%;"></div>
         </div>
     </div>
 
-    <div class="input-area">
-        <input type="text" id="user-input" placeholder="Pergunte sobre um móvel...">
-        <button onclick="enviarMensagem()">Enviar</button>
+    <header class="extreme-glass fixed top-6 left-1/2 w-[90%] max-w-7xl rounded-full z-50 flex items-center justify-between px-10 py-4">
+        <nav class="hidden md:flex items-center gap-8">
+            <a href="#produtos" class="nav-link text-sm font-medium tracking-wide">Produtos</a>
+        </nav>
+        <a href="#" class="absolute left-1/2 -translate-x-1/2 select-none hover:scale-105 transition-transform duration-300 z-20">
+            <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/user-images/207d01fe-9154-44a2-a035-5a4810effc12.webp" alt="logo" class="logo h-8 md:h-10 lg:h-11 w-auto object-contain brightness-0">
+        </a>
+        <nav class="hidden md:flex items-center gap-8">
+            <a href="#solucoes" class="nav-link text-sm font-medium tracking-wide">Soluções</a>
+            <a href="#contato" class="nav-link text-sm font-medium tracking-wide">Fale Conosco</a>
+        </nav>
+    </header>
+
+    <div id="chat-wrapper">
+        <div id="chat-messages">
+            <div class="msg-wrap">
+                <div class="chat-avatar"></div>
+                <div class="msg-bubble bot-bubble">Olá! Sou o Marco, consultor da Vitrine. Como posso ajudar você hoje?</div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-in" placeholder="Dúvidas sobre preços ou materiais?">
+            <button onclick="enviarChat()" style="cursor:pointer; font-weight: bold; font-size: 11px; padding: 0 5px;">ENVIAR</button>
+        </div>
     </div>
-</div>
 
-<script>
-    const messagesArea = document.getElementById('messages-area');
-    const userInput = document.getElementById('user-input');
+    <main>
+        <section id="scroll-hero" style="height:400vh;position:relative;">
+            <div style="position:sticky;top:0;height:100vh;width:100%;overflow:hidden;">
+                <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></canvas>
+                <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6 text-center" style="padding-top: 10vh;">
+                    <span class="font-mono text-xs md:text-sm text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
+                    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-tight max-w-5xl">
+                        A Arte de Equipar<br>
+                        <span class="italic text-white/90 font-light">Seu Espaço</span>
+                    </h1>
+                </div>
+            </div>
+        </section>
 
-    // URL do seu Webhook do Make (COLE A SUA AQUI)
-    const WEBHOOK_URL = 'SUA_URL_DO_MAKE_AQUI';
+        <section id="produtos" class="py-24 px-6 max-w-[90rem] mx-auto border-t border-border-light bg-white">
+            <div class="flex items-end justify-between mb-16">
+                <div>
+                    <h2 class="font-serif text-4xl mb-2">Coleção Executiva</h2>
+                    <p class="font-mono text-sm text-primary/50 uppercase tracking-wider">Catálogo 2024</p>
+                </div>
+            </div>
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16"></div>
+        </section>
+    </main>
 
-    async function enviarMensagem() {
-        const texto = userInput.value.trim();
-        if (!texto) return;
+    <a href="https://wa.me/5511999999999" class="glass-fab fixed bottom-8 right-8 w-14 h-14 rounded-full flex items-center justify-center z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary w-6 h-6"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"></path></svg>
+    </a>
 
-        // 1. Mostrar mensagem do usuário
-        adicionarMensagem(texto, 'user');
-        userInput.value = '';
+    <script>
+        // CONFIGURAÇÕES DO CHAT
+        const WEBHOOK_MAKE = 'https://hook.us1.make.com/SUA_URL_AQUI'; // <--- COLOQUE SEU LINK AQUI
 
-        // 2. Criar bolha de "digitando"
-        const typingId = mostrarDigitando();
+        async function enviarChat() {
+            const input = document.getElementById('chat-in');
+            const msg = input.value.trim();
+            if(!msg) return;
 
-        try {
-            const response = await fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mensagem: texto, nome: "Rodrigo" }) // Enviando contexto
-            });
+            addMsg(msg, 'user');
+            input.value = '';
 
-            const data = await response.json();
-            
-            // Remover bolha de digitando e exibir resposta real
-            document.getElementById(typingId).remove();
-            
-            if (data.resposta) {
-                exibirRespostaSuave(data.resposta);
+            const tId = 'typing-' + Date.now();
+            const area = document.getElementById('chat-messages');
+            const tWrap = document.createElement('div');
+            tWrap.className = 'msg-wrap';
+            tWrap.id = tId;
+            tWrap.innerHTML = `<div class="chat-avatar"></div><div class="msg-bubble bot-bubble">...</div>`;
+            area.appendChild(tWrap);
+            area.scrollTop = area.scrollHeight;
+
+            try {
+                const res = await fetch(WEBHOOK_MAKE, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ mensagem: msg, nome: "Rodrigo" })
+                });
+                const data = await res.json();
+                document.getElementById(tId).remove();
+                if(data.resposta) typeWrite(data.resposta);
+            } catch(e) {
+                document.getElementById(tId).remove();
+                typeWrite("Desculpe, Rodrigo. Tive um problema de conexão. Poderia repetir?");
             }
-        } catch (error) {
-            document.getElementById(typingId).remove();
-            exibirRespostaSuave("Desculpe, tive um problema na conexão. Pode repetir?");
         }
-    }
 
-    function adicionarMensagem(texto, remetente) {
-        const wrapper = document.createElement('div');
-        wrapper.className = `wrapper ${remetente}-wrapper`;
-        wrapper.innerHTML = `<div class="bubble ${remetente}-bubble">${texto}</div>`;
-        messagesArea.appendChild(wrapper);
-        scrollToBottom();
-    }
+        function addMsg(txt, type) {
+            const area = document.getElementById('chat-messages');
+            const w = document.createElement('div');
+            w.className = `msg-wrap ${type === 'user' ? 'msg-user' : ''}`;
+            w.innerHTML = `<div class="msg-bubble ${type}-bubble">${txt}</div>`;
+            area.appendChild(w);
+            area.scrollTop = area.scrollHeight;
+        }
 
-    function mostrarDigitando() {
-        const id = 'typing-' + Date.now();
-        const wrapper = document.createElement('div');
-        wrapper.className = 'wrapper';
-        wrapper.id = id;
-        wrapper.innerHTML = `
-            <div class="avatar"></div>
-            <div class="bubble bot-bubble">...</div>
-        `;
-        messagesArea.appendChild(wrapper);
-        scrollToBottom();
-        return id;
-    }
+        function typeWrite(txt) {
+            const area = document.getElementById('chat-messages');
+            const w = document.createElement('div');
+            w.className = 'msg-wrap';
+            w.innerHTML = `<div class="chat-avatar"></div><div class="msg-bubble bot-bubble" id="tw"></div>`;
+            area.appendChild(w);
+            const el = w.querySelector('#tw');
+            let i = 0;
+            function go() {
+                if(i < txt.length) {
+                    el.innerHTML += txt.charAt(i);
+                    i++;
+                    area.scrollTop = area.scrollHeight;
+                    setTimeout(go, 25);
+                }
+            }
+            go();
+        }
 
-    function exibirRespostaSuave(texto) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'wrapper';
-        wrapper.innerHTML = `
-            <div class="avatar"></div>
-            <div class="bubble bot-bubble" id="typing-text"></div>
-        `;
-        messagesArea.appendChild(wrapper);
+        document.getElementById('chat-in').addEventListener('keypress', (e) => { if(e.key === 'Enter') enviarChat(); });
+
+        // INICIALIZAÇÃO DO SITE ORIGINAL
+        const products = [
+            { id: "OF-01", name: "Cadeira Executiva Aura", material: "Couro Legítimo & Alumínio", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1200", badge: "Ergonomia Premium" },
+            { id: "ST-04", name: "Mesa Diretoria Nexus", material: "Nogueira Maciça & Vidro Temperado", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200", badge: "Ergonomia Premium" }
+        ];
+
+        const gridContainer = document.getElementById('product-grid');
+        gridContainer.innerHTML = products.map(prod => `
+            <div class="group cursor-pointer">
+                <div class="relative w-full h-[500px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
+                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                    <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold">${prod.badge}</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="font-mono text-xs text-primary/50 mb-1">${prod.id}</p>
+                        <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
+                        <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        const lenis = new Lenis({ lerp: 0.05 });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // LÓGICA DO CANVAS E LOADER
+        const canvas = document.getElementById("hero-canvas");
+        const context = canvas.getContext("2d");
+        const frameCount = 54; 
+        const images = [];
+        let loadedImages = 0;
+
+        const getPath = i => `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
+
+        for (let i = 1; i <= frameCount; i++) {
+            const img = new Image();
+            img.onload = () => {
+                loadedImages++;
+                document.getElementById('progress-bar').style.width = `${Math.floor((loadedImages / frameCount) * 100)}%`;
+                if (loadedImages === frameCount) {
+                    const loader = document.getElementById('loader');
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.visibility = 'hidden', 500);
+                    renderCanvas();
+                }
+            };
+            img.src = getPath(i);
+            images.push(img);
+        }
+
+        function renderCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const scrollTop = window.scrollY;
+            const heroHeight = document.getElementById('scroll-hero').offsetHeight;
+            const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
+            const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
+
+            const img = images[frameIndex];
+            if (img && img.complete) {
+                const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
+                const x = (canvas.width - img.width * ratio) / 2;
+                const y = (canvas.height - img.height * ratio) / 2;
+                context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
+            }
+            
+            const heroText = document.getElementById('hero-text-container');
+            heroText.style.opacity = Math.max(0, 1 - (fraction * 12));
+        }
         
-        const elemento = wrapper.querySelector('#typing-text');
-        let i = 0;
-
-        function digitar() {
-            if (i < texto.length) {
-                elemento.innerHTML += texto.charAt(i);
-                i++;
-                scrollToBottom();
-                setTimeout(digitar, 25);
-            }
-        }
-        digitar();
-    }
-
-    function scrollToBottom() {
-        messagesArea.scrollTop = messagesArea.scrollHeight;
-    }
-
-    // Enviar com a tecla Enter
-    userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') enviarMensagem();
-    });
-</script>
-
+        window.addEventListener('scroll', renderCanvas);
+        window.addEventListener('resize', renderCanvas);
+    </script>
 </body>
 </html>

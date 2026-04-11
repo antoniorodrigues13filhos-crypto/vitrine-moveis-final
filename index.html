@@ -121,7 +121,7 @@ html.lenis { height: auto; }
 
 /* Transição suave para o sumiço do título */
 #hero-text-container {
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 </style>
 </head>
@@ -246,7 +246,7 @@ html.lenis { height: auto; }
         gridContainer.innerHTML = products.map(prod => `
             <div class="group cursor-pointer">
                 <div class="relative w-full h-[500px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
-                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover">
+                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-covergrayscale hover:grayscale-0 transition-all duration-700">
                     <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
                         <span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold">${prod.badge}</span>
                     </div>
@@ -267,7 +267,7 @@ html.lenis { height: auto; }
 
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
-        const frameCount = 54; 
+        const frameCount = 54; 
         const images = [];
         let loadedImages = 0;
 
@@ -298,6 +298,7 @@ html.lenis { height: auto; }
             const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
             const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
 
+            // Desenhar Canvas
             const img = images[frameIndex];
             if (img && img.complete) {
                 const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
@@ -306,20 +307,19 @@ html.lenis { height: auto; }
                 context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
             }
 
-            // --- LÓGICA DE SUMIÇO DO TÍTULO CENTRAL ---
+            // --- LÓGICA CORRIGIDA DE SUMIÇO DO TÍTULO CENTRAL ---
             const heroText = document.getElementById('hero-text-container');
-            // Começa a sumir logo após o início do scroll e some totalmente por volta do frame 8-10
-            if (frameIndex > 1) {
-                const textOpacity = Math.max(0, 1 - (frameIndex / 8)); 
-                heroText.style.opacity = textOpacity;
-                // Aplica um leve movimento de subida (parallax reverso) para suavizar o sumiço
-                heroText.style.transform = `translateY(${frameIndex * -2}px)`;
-            } else {
-                heroText.style.opacity = '1';
-                heroText.style.transform = `translateY(0)`;
-            }
+            // O título começa a sumir logo após o início do scroll e some totalmente por volta do frame 8
+            const textOpacity = Math.max(0, 1 - (fraction * 12)); 
+            heroText.style.opacity = textOpacity;
+            
+            // Aplica um leve movimento de subida (parallax reverso) para suavizar o sumiço
+            heroText.style.transform = `translateY(${fraction * -50}px)`;
 
-            // Controle das Etiquetas Flutuantes (Ajustadas para aparecerem DEPOIS do título sumir)
+            // --- FIM DA LÓGICA DE SUMIÇO DO TÍTULO ---
+
+
+            // Controle das Etiquetas Flutuantes (Inalterado)
             const l1 = document.getElementById('label-1');
             const l2 = document.getElementById('label-2');
             const l3 = document.getElementById('label-3');
@@ -334,10 +334,9 @@ html.lenis { height: auto; }
                 }
             };
 
-            // Intervalos ajustados para fluidez
-            toggleLabel(l1, frameIndex >= 12 && frameIndex <= 22);
-            toggleLabel(l2, frameIndex >= 26 && frameIndex <= 38);
-            toggleLabel(l3, frameIndex >= 42 && frameIndex <= 52);
+            toggleLabel(l1, frameIndex >= 5 && frameIndex <= 18);
+            toggleLabel(l2, frameIndex >= 22 && frameIndex <= 35);
+            toggleLabel(l3, frameIndex >= 38 && frameIndex <= 50);
         }
         
         window.addEventListener('scroll', render);

@@ -117,18 +117,46 @@
             #product-grid img { filter: none !important; grayscale: 0 !important; }
         }
 
+        /* ÍCONE MAIS VISÍVEL E ANIMADO */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 65px;
-            height: 65px;
+            width: 80px; /* Aumentado */
+            height: 80px; /* Aumentado */
             z-index: 100;
             transition: transform 0.3s ease;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+            animation: pulse-green 2s infinite;
+            cursor: pointer;
         }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
+        @keyframes pulse-green {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
         }
+
+        /* JANELA DA AGENTE */
+        #atendente-window {
+            display: none;
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            width: 320px;
+            height: 480px;
+            z-index: 10000;
+            flex-direction: column;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+        .msg-bubble { padding: 12px 16px; border-radius: 18px; max-width: 85%; font-size: 14px; line-height: 1.4; margin-bottom: 10px; }
+        .bot-msg { background: #f0f0f0; color: #111; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .user-msg { background: #111; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
@@ -169,9 +197,26 @@
         <a href="#contato" onclick="toggleMenu()" class="font-serif text-3xl">Fale Conosco</a>
     </div>
 
-    <a href="https://wa.me/5511999999999" target="_blank" class="whatsapp-float">
-        <img src="3d-whatsapp-icon.png" alt="WhatsApp" class="w-full h-full object-contain">
-    </a>
+    <div id="atendente-window">
+        <div style="padding: 20px; background: #111; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <span style="display: block; font-size: 10px; opacity: 0.6; letter-spacing: 1px; font-weight: bold;">AGENTE DE ATENDIMENTO</span>
+                <span style="font-size: 14px; font-weight: 600;">Suporte Vitrine Móvel</span>
+            </div>
+            <button onclick="toggleAtendente()" style="background:none; border:none; color:#fff; cursor:pointer; font-size:24px;">&times;</button>
+        </div>
+        <div id="atendente-messages" style="flex:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; background: #fdfdfd;">
+            <div class="msg-bubble bot-msg">Olá! Sou sua assistente virtual. Em que posso ajudar com seu projeto hoje?</div>
+        </div>
+        <div style="padding:15px; display:flex; gap:10px; border-top:1px solid #eee; background: #fff;">
+            <input type="text" id="atendente-input" placeholder="Digite sua mensagem..." style="flex:1; padding:12px; border-radius:12px; border:1px solid #eee; outline:none; font-size: 14px;">
+            <button onclick="enviarAtendente()" style="background:#111; color:#fff; border:none; width: 45px; height: 45px; border-radius:12px; cursor:pointer; font-weight: bold;">></button>
+        </div>
+    </div>
+
+    <div onclick="toggleAtendente()" class="whatsapp-float">
+        <img src="3d-whatsapp-icon.png" alt="Atendimento" class="w-full h-full object-contain">
+    </div>
 
     <main>
         <section id="scroll-hero" style="height:400vh;position:relative;">
@@ -214,7 +259,7 @@
                 </div>
                 <div class="w-full md:w-2/3">
                     <p class="text-lg md:text-xl text-primary/80 leading-[1.8] font-light mb-8">
-                        Acreditamos que o ambiente de trabalho molda a mente. Nossas peças não são apenas móveis; são instrumentos de foco e criação. Construídos com tolerâncias extremas e materiais que envelhecem com dignidade, cada linha é pensada para suportar a rotina sem perder a elegância.
+                        Acreditamos que o ambiente de trabalho molda a mente. Nossas peças não são apenas móveis; são instrumentos de foco e criação. Construídos com tolerâncias extremas e materiais que envelhegem com dignidade, cada linha é pensada para suportar a rotina sem perder a elegância.
                     </p>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border-light pt-8">
                         <div><span class="block font-mono text-2xl mb-1">01</span><span class="text-xs uppercase text-primary/60 font-medium">Design Autoral</span></div>
@@ -238,6 +283,46 @@
     </main>
 
     <script>
+        // LÓGICA DA AGENTE DE ATENDIMENTO
+        function toggleAtendente() {
+            const win = document.getElementById('atendente-window');
+            const isVisible = win.style.display === 'flex';
+            win.style.display = isVisible ? 'none' : 'flex';
+        }
+
+        async function enviarAtendente() {
+            const input = document.getElementById('atendente-input');
+            const text = input.value.trim();
+            if(!text) return;
+
+            addMsgUI(text, 'user');
+            input.value = '';
+
+            try {
+                const res = await fetch('https://hook.us2.make.com/nodnz5uzkjsu6wnha8phgh8eo1ccpfdj', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ mensagem: text, contexto: "Primeiro Atendimento" })
+                });
+                const data = await res.json();
+                if(data.resposta) addMsgUI(data.resposta, 'bot');
+            } catch(e) { 
+                addMsgUI("Olá! Tivemos um pequeno problema técnico. Gostaria de falar diretamente pelo WhatsApp?", 'bot'); 
+            }
+        }
+
+        function addMsgUI(txt, type) {
+            const area = document.getElementById('atendente-messages');
+            const div = document.createElement('div');
+            div.className = `msg-bubble ${type === 'user' ? 'user-msg' : 'bot-msg'}`;
+            div.innerText = txt;
+            area.appendChild(div);
+            area.scrollTop = area.scrollHeight;
+        }
+
+        document.getElementById('atendente-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') enviarAtendente(); });
+
+        // RESTANTE DOS SCRIPTS ORIGINAIS
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
 

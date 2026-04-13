@@ -88,13 +88,14 @@
         
         #mobile-menu { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         
-        /* ESTILO DAS LABELS NO HERO */
+        /* CORREÇÃO DAS LABELS */
         .floating-label {
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 30;
+            z-index: 50; /* Garante que fique acima do canvas */
+            pointer-events: none;
         }
 
-        #hero-text-container { transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+        #hero-text-container { transition: opacity 0.5s ease-out, transform 0.5s ease-out; z-index: 40; }
 
         .whatsapp-float {
             position: fixed; bottom: 30px; right: 30px; width: 90px; height: 90px; z-index: 100;
@@ -112,7 +113,6 @@
             overflow: hidden; font-family: system-ui, -apple-system, sans-serif;
         }
 
-        /* REVEAL SYSTEM */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         
@@ -128,7 +128,7 @@
             border-color: rgba(0,0,0,0.1);
         }
 
-        /* MOTION FLUIDO ENTREGA GARANTIDA */
+        /* MOTION ENTREGA */
         @keyframes iconPulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.1); opacity: 0.8; }
@@ -209,22 +209,22 @@
             <div style="position:sticky; top:0; height:100vh; width:100%; overflow:hidden;">
                 <canvas id="hero-canvas" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></canvas>
                 
-                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 pointer-events-none">
+                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Estrutura</p>
                     <h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
                 </div>
 
-                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 pointer-events-none text-right">
+                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 text-right">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Revestimento</p>
                     <h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
                 </div>
 
-                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 pointer-events-none text-center">
+                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 text-center">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Mecanismo</p>
                     <h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3>
                 </div>
 
-                <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6 text-center">
+                <div id="hero-text-container" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 text-center">
                     <span class="font-mono text-xs text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
                     <h1 class="font-serif text-5xl md:text-8xl font-bold text-white mb-6 tracking-tight">A Arte de Equipar<br><span class="italic text-white/90 font-light">Seu Espaço</span></h1>
                 </div>
@@ -282,7 +282,7 @@
                         </div>
                     </div>
 
-                    <div class="md:col-span-4 flex flex-col items-center justify-center text-center reveal" style="transition-delay: 400ms;">
+                    <div class="md:col-span-4 flex flex-col items-center justify-center text-center reveal">
                         <div class="grid grid-cols-2 gap-4 mb-8">
                             <div class="icon-box bg-blue-900 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
                             <div class="icon-box bg-yellow-500 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
@@ -385,13 +385,10 @@
         function render() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            
-            // Cálculo do progresso baseado no tamanho da seção Hero (400vh)
             const scrollHero = document.getElementById('scroll-hero');
             const scrollTop = window.scrollY;
             const scrollMax = scrollHero.offsetHeight - window.innerHeight;
             const scrollFraction = Math.max(0, Math.min(1, scrollTop / scrollMax));
-            
             const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
             
             if(images[frameIndex]) {
@@ -399,12 +396,12 @@
                 ctx.drawImage(images[frameIndex], (canvas.width - images[frameIndex].width * ratio) / 2, (canvas.height - images[frameIndex].height * ratio) / 2, images[frameIndex].width * ratio, images[frameIndex].height * ratio);
             }
             
-            // MOTION DOS TEXTOS (TIMING AJUSTADO)
             const heroText = document.getElementById('hero-text-container');
             heroText.style.opacity = Math.max(0, 1 - (scrollFraction * 8)); 
             heroText.style.transform = `translateY(${scrollFraction * -50}px)`;
 
-            const toggleLabel = (el, show) => {
+            const toggleLabel = (elId, show) => {
+                const el = document.getElementById(elId);
                 if (show) { 
                     el.style.opacity = "1";
                     el.style.transform = "translateY(0)";
@@ -414,10 +411,10 @@
                 }
             };
             
-            // RITMO DAS QUALIDADES (Labels aparecendo em frames específicos)
-            toggleLabel(document.getElementById('label-1'), frameIndex >= 8 && frameIndex <= 18);
-            toggleLabel(document.getElementById('label-2'), frameIndex >= 23 && frameIndex <= 33);
-            toggleLabel(document.getElementById('label-3'), frameIndex >= 38 && frameIndex <= 48);
+            // TIMING DOS TEXTOS - Ampliado para garantir visibilidade
+            toggleLabel('label-1', frameIndex >= 5 && frameIndex <= 18);
+            toggleLabel('label-2', frameIndex >= 20 && frameIndex <= 35);
+            toggleLabel('label-3', frameIndex >= 37 && frameIndex <= 52);
         }
         window.addEventListener('scroll', render);
     </script>

@@ -117,7 +117,6 @@
             #product-grid img { filter: none !important; grayscale: 0 !important; }
         }
 
-        /* ÍCONE WHATSAPP */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -136,7 +135,6 @@
             100% { transform: scale(1); }
         }
 
-        /* JANELA DA AGENTE - GLASSMORPHISM */
         #atendente-window {
             display: none;
             position: fixed;
@@ -384,17 +382,86 @@
     </main>
 
     <script>
-        // LÓGICA DO CONTADOR ANIMADO
-        const counters = document.querySelectorAll('.counter');
-        const speed = 100;
+        // BANCO DE DADOS DINÂMICO DOS PRODUTOS
+        const products = [
+            {
+                id: "CH-001",
+                name: "Cadeira Addit Presidente Frisokar",
+                material: "Tecido Mesh & Base Nylon",
+                image: "products 2.0/cadeira-addit-presidente-frisokar.jpg",
+                badge: "Ergonomia Premium"
+            },
+            {
+                id: "CH-002",
+                name: "Cadeira Diretor Ergonômica NR17",
+                material: "Espuma Injetada & Regulagem Total",
+                image: "products 2.0/cadeira-diretor-ergonomica-nr17.jpg",
+                badge: "Norma NR17"
+            },
+            {
+                id: "CH-003",
+                name: "Cadeira Executiva Back System Costurada",
+                material: "Couro Ecológico & Braços Reguláveis",
+                image: "products 2.0/cadeira-executiva-back-system-costurada-c-bracos-regulaveis.jpg",
+                badge: "Conforto Diário"
+            },
+            {
+                id: "ST-001",
+                name: "Estante de Aço Dupla Flex Preta",
+                material: "Aço Carbono Pintura Epóxi",
+                image: "products 2.0/estante-de-aco-dupla-flex-preta.jpg",
+                badge: "Organização"
+            },
+            {
+                id: "TB-001",
+                name: "Mesa de Reunião Gebb Work",
+                material: "Madeira MDP & Pé Metálico Quadrado",
+                image: "products 2.0/mesa-de-reuniao-gebb-work-pe-metalico-quadrado.jpg",
+                badge: "Linha Gebb Work"
+            },
+            {
+                id: "LK-001",
+                name: "Roupeiro 12 Portas Médias Lisas",
+                material: "Aço Galvanizado com Chave",
+                image: "products 2.0/roupeiro-12-portas-medias-lisas.jpg",
+                badge: "Vestiário"
+            }
+        ];
 
+        // MOTOR DE RENDERIZAÇÃO DO GRID
+        const gridContainer = document.getElementById('product-grid');
+        function renderProducts() {
+            gridContainer.innerHTML = products.map(prod => `
+                <a href="produto.html?id=${prod.id}" class="group cursor-pointer block">
+                    <div class="relative w-full h-[500px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
+                        <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                        <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
+                            <span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold">${prod.badge}</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-mono text-xs text-primary/50 mb-1">${prod.id}</p>
+                            <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
+                            <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
+                        </div>
+                        <div class="mt-2 text-primary/30 group-hover:text-primary transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+        renderProducts();
+
+        // CONTADOR ANIMADO
+        const counters = document.querySelectorAll('.counter');
         const startCounters = () => {
             counters.forEach(counter => {
                 const updateCount = () => {
                     const target = +counter.getAttribute('data-target');
                     const count = +counter.innerText;
-                    const inc = target / speed;
-
+                    const inc = target / 100;
                     if (count < target) {
                         counter.innerText = Math.ceil(count + inc);
                         setTimeout(updateCount, 20);
@@ -405,26 +472,18 @@
                 updateCount();
             });
         };
-
-        const observerOptions = { threshold: 0.5 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    startCounters();
-                    observer.unobserve(entry.target);
-                }
+                if(entry.isIntersecting) { startCounters(); observer.unobserve(entry.target); }
             });
-        }, observerOptions);
-
+        }, { threshold: 0.5 });
         observer.observe(document.getElementById('stats-container'));
 
         // ATENDENTE
         function toggleAtendente() {
             const win = document.getElementById('atendente-window');
-            const isVisible = win.style.display === 'flex';
-            win.style.display = isVisible ? 'none' : 'flex';
+            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
         }
-
         async function enviarAtendente() {
             const input = document.getElementById('atendente-input');
             const text = input.value.trim();
@@ -439,11 +498,8 @@
                 });
                 const data = await res.json();
                 if(data.resposta) addMsgUI(data.resposta, 'bot');
-            } catch(e) { 
-                addMsgUI("Olá! Gostaria de falar diretamente pelo WhatsApp?", 'bot'); 
-            }
+            } catch(e) { addMsgUI("Olá! Posso te ajudar com um orçamento?", 'bot'); }
         }
-
         function addMsgUI(txt, type) {
             const area = document.getElementById('atendente-messages');
             const div = document.createElement('div');
@@ -452,75 +508,42 @@
             area.appendChild(div);
             area.scrollTo({ top: area.scrollHeight, behavior: 'smooth' });
         }
-
         document.getElementById('atendente-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') enviarAtendente(); });
 
-        // OUTROS SCRIPTS
-        function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
-        initLucide();
-
-        const products = [
-            { id: "OF-01", name: "Cadeira Executiva Aura", material: "Couro Legítimo & Alumínio", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1200", badge: "Ergonomia Premium" },
-            { id: "ST-04", name: "Mesa Diretoria Nexus", material: "Nogueira Maciça & Vidro Temperado", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1200", badge: "Ergonomia Premium" },
-            { id: "AC-12", name: "Luminária Horizon", material: "Aço Escovado & LED Matrix", image: "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&q=80&w=1200", badge: "Design Autoral" },
-            { id: "SF-08", name: "Sofá Lounge Apex", material: "Sintético Premium & Espuma D33", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200", badge: "Conforto Máximo" }
-        ];
-
-        const gridContainer = document.getElementById('product-grid');
-        gridContainer.innerHTML = products.map(prod => `
-            <div class="group cursor-pointer">
-                <div class="relative w-full h-[500px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
-                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
-                    <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
-                        <span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold">${prod.badge}</span>
-                    </div>
-                </div>
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="font-mono text-xs text-primary/50 mb-1">${prod.id}</p>
-                        <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
-                        <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-
+        // LENIS SMOOTH SCROLL
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
+        // HERO VIDEO SCRUBBING
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const frameCount = 54; 
         const images = [];
         let loadedImages = 0;
-        const getPath = i => `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
-
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             img.onload = () => {
                 loadedImages++;
-                const percent = Math.floor((loadedImages / frameCount) * 100);
-                document.getElementById('progress-bar').style.width = `${percent}%`;
+                document.getElementById('progress-bar').style.width = `${Math.floor((loadedImages/frameCount)*100)}%`;
                 if (loadedImages === frameCount) {
                     const loader = document.getElementById('loader');
                     loader.style.opacity = '0';
                     setTimeout(() => loader.style.visibility = 'hidden', 500);
-                    render();
+                    renderCanvas();
                 }
             };
-            img.src = getPath(i);
+            img.src = `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
             images.push(img);
         }
 
-        function render() {
+        function renderCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             const scrollTop = window.scrollY;
             const heroHeight = document.getElementById('scroll-hero').offsetHeight;
             const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
             const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
-
             const img = images[frameIndex];
             if (img && img.complete) {
                 const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
@@ -528,44 +551,25 @@
                 const y = (canvas.height - img.height * ratio) / 2;
                 context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
             }
-
             const heroText = document.getElementById('hero-text-container');
-            const textOpacity = Math.max(0, 1 - (fraction * 12)); 
-            heroText.style.opacity = textOpacity;
+            heroText.style.opacity = Math.max(0, 1 - (fraction * 12));
             heroText.style.transform = `translateY(${fraction * -50}px)`;
 
-            const l1 = document.getElementById('label-1');
-            const l2 = document.getElementById('label-2');
-            const l3 = document.getElementById('label-3');
-
             const toggleLabel = (el, show) => {
-                if (show) {
-                    el.classList.remove('opacity-0', 'translate-y-4');
-                    el.classList.add('opacity-100', 'translate-y-0');
-                } else {
-                    el.classList.add('opacity-0', 'translate-y-4');
-                    el.classList.remove('opacity-100', 'translate-y-0');
-                }
+                if (show) { el.classList.remove('opacity-0', 'translate-y-4'); el.classList.add('opacity-100', 'translate-y-0'); }
+                else { el.classList.add('opacity-0', 'translate-y-4'); el.classList.remove('opacity-100', 'translate-y-0'); }
             };
-
-            toggleLabel(l1, frameIndex >= 5 && frameIndex <= 18);
-            toggleLabel(l2, frameIndex >= 22 && frameIndex <= 35);
-            toggleLabel(l3, frameIndex >= 38 && frameIndex <= 50);
+            toggleLabel(document.getElementById('label-1'), frameIndex >= 5 && frameIndex <= 18);
+            toggleLabel(document.getElementById('label-2'), frameIndex >= 22 && frameIndex <= 35);
+            toggleLabel(document.getElementById('label-3'), frameIndex >= 38 && frameIndex <= 50);
         }
-        window.addEventListener('scroll', render);
-        window.addEventListener('resize', render);
+        window.addEventListener('scroll', renderCanvas);
+        window.addEventListener('resize', renderCanvas);
 
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
             const isClosed = menu.classList.contains('translate-x-full');
-            if (isClosed) {
-                menu.classList.remove('translate-x-full');
-                icon.innerHTML = '<path d="M18 6L6 18M6 6l12 12"></path>';
-            } else {
-                menu.classList.add('translate-x-full');
-                icon.innerHTML = '<path d="M4 5h16M4 12h16M4 19h16"></path>';
-            }
+            menu.classList.toggle('translate-x-full', !isClosed);
         }
     </script>
 </body>

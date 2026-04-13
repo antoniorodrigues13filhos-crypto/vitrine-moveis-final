@@ -122,8 +122,8 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 80px; /* Aumentado */
-            height: 80px; /* Aumentado */
+            width: 80px; 
+            height: 80px; 
             z-index: 100;
             transition: transform 0.3s ease;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
@@ -136,27 +136,144 @@
             100% { transform: scale(1); }
         }
 
-        /* JANELA DA AGENTE */
+        /* JANELA DA AGENTE - MELHORADA COM EFEITO GLASS */
         #atendente-window {
             display: none;
             position: fixed;
             bottom: 120px;
             right: 30px;
-            width: 320px;
-            height: 480px;
+            width: 350px; /* Levemente mais larga */
+            height: 520px; /* Levemente mais alta */
             z-index: 10000;
             flex-direction: column;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-radius: 28px;
+            /* Efeito Glassmorfismo Premium */
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            font-family: sans-serif;
+            font-family: system-ui, -apple-system, sans-serif; /* Fonte nativa legível */
         }
-        .msg-bubble { padding: 12px 16px; border-radius: 18px; max-width: 85%; font-size: 14px; line-height: 1.4; margin-bottom: 10px; }
-        .bot-msg { background: #f0f0f0; color: #111; align-self: flex-start; border-bottom-left-radius: 4px; }
-        .user-msg { background: #111; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+
+        /* Área de Mensagens */
+        #atendente-messages {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.3); /* Fundo glass interno suave */
+        }
+
+        /* Bolhas de Mensagem - FOCO NA LEGIBILIDADE */
+        .msg-bubble {
+            padding: 14px 18px;
+            border-radius: 20px;
+            max-width: 85%;
+            font-size: 15px; /* Fonte ligeiramente maior */
+            line-height: 1.5;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+            word-wrap: break-word;
+        }
+
+        /* Bot: Letras Pretas em Fundo Sólido Claro (Máxima Legibilidade) */
+        .bot-msg {
+            background: #f5f5f7; /* Off-white sólido para contraste puro */
+            color: #1d1d1f; /* Preto quase puro */
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        /* Usuário: Letras Brancas em Fundo Preto */
+        .user-msg {
+            background: #111111; /* Preto da marca */
+            color: #ffffff;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Área de Input - Efeito Glass */
+        .chat-input-area {
+            padding: 18px;
+            display: flex;
+            gap: 12px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        #atendente-input {
+            flex: 1;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255, 255, 255, 0.8);
+            outline: none;
+            font-size: 15px;
+            color: #1d1d1f;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        #atendente-input:focus {
+            border-color: rgba(0,0,0,0.2);
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.03);
+        }
+
+        .chat-send-btn {
+            background: #111111;
+            color: #ffffff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background-color 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-send-btn:hover {
+            background-color: #2a2a2a;
+        }
+
+        .chat-send-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Avatar da Atendente */
+        .atendente-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #2a2a2a; /* Fundo placeholder caso não tenha foto */
+            border: 2px solid rgba(255,255,255,0.2);
+            overflow: hidden;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .atendente-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Placeholder Ícone caso não tenha imagem */
+        .avatar-placeholder-icon {
+            color: rgba(255,255,255,0.5);
+            font-size: 20px;
+        }
+
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
@@ -198,19 +315,29 @@
     </div>
 
     <div id="atendente-window">
-        <div style="padding: 20px; background: #111; color: #fff; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <span style="display: block; font-size: 10px; opacity: 0.6; letter-spacing: 1px; font-weight: bold;">AGENTE DE ATENDIMENTO</span>
-                <span style="font-size: 14px; font-weight: 600;">Suporte Vitrine Móvel</span>
+        <div style="padding: 18px 25px; background: rgba(17, 17, 17, 0.9); color: #fff; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            
+            <div class="atendente-avatar">
+                <img src="URL_DA_FOTO_DA_ATENDENTE.jpg" alt="Atendente" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="avatar-placeholder-icon" style="display:none;">👤</div>
             </div>
-            <button onclick="toggleAtendente()" style="background:none; border:none; color:#fff; cursor:pointer; font-size:24px;">&times;</button>
+
+            <div style="flex: 1;">
+                <span style="display: block; font-size: 11px; opacity: 0.6; letter-spacing: 1.5px; font-weight: 700; text-transform: uppercase; margin-bottom: 2px;">Atendimento</span>
+                <span style="font-size: 16px; font-weight: 600; letter-spacing: -0.02em;">Suporte Vitrine Móvel</span>
+            </div>
+            <button onclick="toggleAtendente()" style="background:none; border:none; color:#fff; cursor:pointer; font-size:28px; opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">&times;</button>
         </div>
-        <div id="atendente-messages" style="flex:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; background: #fdfdfd;">
+        
+        <div id="atendente-messages">
             <div class="msg-bubble bot-msg">Olá! Sou sua assistente virtual. Em que posso ajudar com seu projeto hoje?</div>
         </div>
-        <div style="padding:15px; display:flex; gap:10px; border-top:1px solid #eee; background: #fff;">
-            <input type="text" id="atendente-input" placeholder="Digite sua mensagem..." style="flex:1; padding:12px; border-radius:12px; border:1px solid #eee; outline:none; font-size: 14px;">
-            <button onclick="enviarAtendente()" style="background:#111; color:#fff; border:none; width: 45px; height: 45px; border-radius:12px; cursor:pointer; font-weight: bold;">></button>
+        
+        <div class="chat-input-area">
+            <input type="text" id="atendente-input" placeholder="Digite sua dúvida...">
+            <button onclick="enviarAtendente()" class="chat-send-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            </button>
         </div>
     </div>
 
@@ -283,11 +410,14 @@
     </main>
 
     <script>
-        // LÓGICA DA AGENTE DE ATENDIMENTO
+        // LÓGICA DA AGENTE DE ATENDIMENTO - MANTIDA ORIGINAL
         function toggleAtendente() {
             const win = document.getElementById('atendente-window');
             const isVisible = win.style.display === 'flex';
             win.style.display = isVisible ? 'none' : 'flex';
+            if(!isVisible) {
+                setTimeout(() => { document.getElementById('atendente-input').focus(); }, 300);
+            }
         }
 
         async function enviarAtendente() {
@@ -299,6 +429,7 @@
             input.value = '';
 
             try {
+                // Endpoint original mantido
                 const res = await fetch('https://hook.us2.make.com/nodnz5uzkjsu6wnha8phgh8eo1ccpfdj', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -317,12 +448,13 @@
             div.className = `msg-bubble ${type === 'user' ? 'user-msg' : 'bot-msg'}`;
             div.innerText = txt;
             area.appendChild(div);
-            area.scrollTop = area.scrollHeight;
+            // Scroll suave mantido
+            area.scrollTo({ top: area.scrollHeight, behavior: 'smooth' });
         }
 
         document.getElementById('atendente-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') enviarAtendente(); });
 
-        // RESTANTE DOS SCRIPTS ORIGINAIS
+        // RESTANTE DOS SCRIPTS ORIGINAIS MANTIDOS
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
 

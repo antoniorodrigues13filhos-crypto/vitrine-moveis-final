@@ -88,14 +88,12 @@
         
         #mobile-menu { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         
-        /* CORREÇÃO DAS LABELS */
+        /* LABELS DO HERO */
         .floating-label {
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 50; /* Garante que fique acima do canvas */
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            z-index: 50 !important;
             pointer-events: none;
         }
-
-        #hero-text-container { transition: opacity 0.5s ease-out, transform 0.5s ease-out; z-index: 40; }
 
         .whatsapp-float {
             position: fixed; bottom: 30px; right: 30px; width: 90px; height: 90px; z-index: 100;
@@ -121,14 +119,8 @@
             background: rgba(255, 255, 255, 0.5);
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
-        .testimonial-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            border-color: rgba(0,0,0,0.1);
-        }
+        .testimonial-card:hover { transform: translateY(-5px) scale(1.02); background: rgba(255, 255, 255, 0.8); }
 
-        /* MOTION ENTREGA */
         @keyframes iconPulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.1); opacity: 0.8; }
@@ -140,10 +132,7 @@
         .reveal.active .icon-box:nth-child(3) { animation-delay: 0.5s; opacity: 1; }
         .reveal.active .icon-box:nth-child(4) { animation-delay: 0.7s; opacity: 1; }
 
-        @keyframes textFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
+        @keyframes textFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
         .floating-text-group { animation: textFloat 3.5s ease-in-out infinite; }
     </style>
 </head>
@@ -154,7 +143,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white w-16 h-16"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path></svg>
         </div>
         <h2 class="text-3xl font-serif text-white mb-2 tracking-tight uppercase">VITRINE MÓVEL</h2>
-        <div style="width:16rem;height:0.5rem;background:rgba(255,255,255,0.3);border-radius:9999px;overflow:hidden;"><div id="progress-bar" style="height: 100%; background: white; transition: 100ms ease-out; width: 0%;"></div></div>
+        <div style="width:16rem;height:0.5rem;background:rgba(255,255,255,0.3);border-radius:9999px;overflow:hidden;"><div id="progress-bar" style="height: 100%; background: white; width: 0%;"></div></div>
     </div>
 
     <header class="extreme-glass fixed top-6 left-1/2 w-[90%] max-w-7xl rounded-full z-50 flex items-center justify-between px-10 py-4">
@@ -210,21 +199,19 @@
                 <canvas id="hero-canvas" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></canvas>
                 
                 <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4">
-                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Estrutura</p>
-                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Ergonomia</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Suporte Lombar Inteligente</h3>
                 </div>
-
                 <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 text-right">
-                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Revestimento</p>
-                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Durabilidade</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Materiais de Alta Resistência</h3>
                 </div>
-
                 <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 text-center">
-                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Mecanismo</p>
-                    <h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3>
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Performance</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic">Mecanismos Sincronizados</h3>
                 </div>
 
-                <div id="hero-text-container" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 text-center">
+                <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6 text-center">
                     <span class="font-mono text-xs text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
                     <h1 class="font-serif text-5xl md:text-8xl font-bold text-white mb-6 tracking-tight">A Arte de Equipar<br><span class="italic text-white/90 font-light">Seu Espaço</span></h1>
                 </div>
@@ -256,38 +243,32 @@
 
         <section class="py-32 px-6 bg-white overflow-hidden border-t border-border-light">
             <div class="max-w-7xl mx-auto">
-                <div class="reveal text-center mb-20">
-                    <h2 class="font-serif text-4xl md:text-5xl mb-4">Projetos complexos precisam de parceiros confiáveis.</h2>
-                    <div class="w-20 h-1 bg-black mx-auto"></div>
-                </div>
-
+                <div class="reveal text-center mb-20"><h2 class="font-serif text-4xl md:text-5xl mb-4">Projetos complexos precisam de parceiros confiáveis.</h2><div class="w-20 h-1 bg-black mx-auto"></div></div>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
                     <div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="testimonial-card reveal p-8 rounded-3xl relative">
                             <img src="catalogtestimonials/vinicios.jpg.png" class="w-16 h-16 rounded-full absolute -top-8 left-8 object-cover border-4 border-white shadow-lg" alt="Vinicios">
                             <div class="mt-4 mb-6">
                                 <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-6 grayscale opacity-70 mb-4" alt="Unimed">
-                                <p class="italic text-primary/80 leading-relaxed">"O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim, me passou segurança e garantiu que tudo saísse conforme o combinado."</p>
+                                <p class="italic text-primary/80 leading-relaxed">"O atendimento da Vitrine Móveis fez toda a diferença..."</p>
                             </div>
                             <div><p class="font-bold text-sm uppercase tracking-wider">Vinicios</p><p class="text-xs text-primary/50">Unimed - Araguaia</p><div class="flex gap-1 mt-2 text-yellow-500 text-xs">★★★★★</div></div>
                         </div>
-
                         <div class="testimonial-card reveal p-8 rounded-3xl relative" style="transition-delay: 200ms;">
                             <img src="catalogtestimonials/fabiana.jpg.png" class="w-16 h-16 rounded-full absolute -top-8 left-8 object-cover border-4 border-white shadow-lg" alt="Fabiana">
                             <div class="mt-4 mb-6">
                                 <span class="font-bold text-xl tracking-tighter grayscale opacity-70 mb-4 block">CASTRO CONSTRUTORA</span>
-                                <p class="italic text-primary/80 leading-relaxed">"Precisávamos mobiliar uma escola inteira em pouquíssimo tempo. A Vitrine Móveis entregou tudo no Pará em apenas 3 dias, com organização impecável."</p>
+                                <p class="italic text-primary/80 leading-relaxed">"Precisávamos mobiliar uma escola inteira em pouquíssimo tempo..."</p>
                             </div>
                             <div><p class="font-bold text-sm uppercase tracking-wider">Fabiana</p><p class="text-xs text-primary/50">Ipixuna - PA</p><div class="flex gap-1 mt-2 text-yellow-500 text-xs">★★★★★</div></div>
                         </div>
                     </div>
-
                     <div class="md:col-span-4 flex flex-col items-center justify-center text-center reveal">
                         <div class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="icon-box bg-blue-900 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
-                            <div class="icon-box bg-yellow-500 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
-                            <div class="icon-box bg-yellow-500 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg></div>
-                            <div class="icon-box bg-blue-900 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                            <div class="icon-box bg-blue-900 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
+                            <div class="icon-box bg-yellow-500 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+                            <div class="icon-box bg-yellow-500 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg></div>
+                            <div class="icon-box bg-blue-900 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
                         </div>
                         <div class="floating-text-group"><h3 class="text-3xl font-bold text-blue-900 tracking-tighter mb-2">ENTREGA GARANTIDA</h3><p class="font-mono text-xs uppercase tracking-widest text-primary/60 border-t border-blue-900/20 pt-2">No prazo combinado</p></div>
                     </div>
@@ -311,22 +292,15 @@
             <a href="produto.html?id=${prod.id}" class="group block reveal">
                 <div class="relative w-full h-[400px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
                     <img src="${prod.image}" alt="${prod.name}" class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
-                    <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
-                        <span class="font-mono text-[10px] uppercase font-bold">${prod.badge}</span>
-                    </div>
+                    <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light"><span class="font-mono text-[10px] uppercase font-bold">${prod.badge}</span></div>
                 </div>
-                <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
-                <p class="text-sm text-primary/50">${prod.material}</p>
+                <h3 class="font-serif text-2xl mb-1">${prod.name}</h3><p class="text-sm text-primary/50">${prod.material}</p>
             </a>
         `).join('');
 
         const reveal = () => {
             const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(el => {
-                const windowHeight = window.innerHeight;
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) el.classList.add('active');
-            });
+            reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active'); });
         };
         window.addEventListener('scroll', reveal);
         reveal();
@@ -335,28 +309,16 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = +el.getAttribute('data-target');
-                    let count = 0;
-                    const timer = setInterval(() => {
-                        count += target / 50;
-                        if(count >= target) { el.innerText = target.toString().padStart(2, '0'); clearInterval(timer); }
-                        else el.innerText = Math.ceil(count).toString().padStart(2, '0');
-                    }, 30);
+                    const el = entry.target; const target = +el.getAttribute('data-target'); let count = 0;
+                    const timer = setInterval(() => { count += target / 50; if(count >= target) { el.innerText = target.toString().padStart(2, '0'); clearInterval(timer); } else el.innerText = Math.ceil(count).toString().padStart(2, '0'); }, 30);
                     observer.unobserve(el);
                 }
             });
         }, { threshold: 0.5 });
         counters.forEach(c => observer.observe(c));
 
-        function toggleAtendente() {
-            const win = document.getElementById('atendente-window');
-            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
-        }
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('translate-x-full');
-        }
+        function toggleAtendente() { const win = document.getElementById('atendente-window'); win.style.display = (win.style.display === 'flex') ? 'none' : 'flex'; }
+        function toggleMenu() { const menu = document.getElementById('mobile-menu'); menu.classList.toggle('translate-x-full'); }
 
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
@@ -370,51 +332,32 @@
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             img.onload = () => {
-                loaded++;
-                document.getElementById('progress-bar').style.width = `${Math.floor((loaded/frameCount)*100)}%`;
-                if(loaded === frameCount) {
-                    document.getElementById('loader').style.opacity = '0';
-                    setTimeout(() => document.getElementById('loader').style.visibility = 'hidden', 500);
-                    render();
-                }
+                loaded++; document.getElementById('progress-bar').style.width = `${Math.floor((loaded/frameCount)*100)}%`;
+                if(loaded === frameCount) { document.getElementById('loader').style.opacity = '0'; setTimeout(() => document.getElementById('loader').style.visibility = 'hidden', 500); render(); }
             };
             img.src = `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
             images.push(img);
         }
 
         function render() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
             const scrollHero = document.getElementById('scroll-hero');
-            const scrollTop = window.scrollY;
-            const scrollMax = scrollHero.offsetHeight - window.innerHeight;
-            const scrollFraction = Math.max(0, Math.min(1, scrollTop / scrollMax));
+            const scrollFraction = Math.max(0, Math.min(1, window.scrollY / (scrollHero.offsetHeight - window.innerHeight)));
             const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
-            
             if(images[frameIndex]) {
                 const ratio = Math.max(canvas.width / images[frameIndex].width, canvas.height / images[frameIndex].height);
                 ctx.drawImage(images[frameIndex], (canvas.width - images[frameIndex].width * ratio) / 2, (canvas.height - images[frameIndex].height * ratio) / 2, images[frameIndex].width * ratio, images[frameIndex].height * ratio);
             }
+            document.getElementById('hero-text-container').style.opacity = Math.max(0, 1 - (scrollFraction * 8));
             
-            const heroText = document.getElementById('hero-text-container');
-            heroText.style.opacity = Math.max(0, 1 - (scrollFraction * 8)); 
-            heroText.style.transform = `translateY(${scrollFraction * -50}px)`;
-
-            const toggleLabel = (elId, show) => {
-                const el = document.getElementById(elId);
-                if (show) { 
-                    el.style.opacity = "1";
-                    el.style.transform = "translateY(0)";
-                } else { 
-                    el.style.opacity = "0";
-                    el.style.transform = "translateY(20px)";
-                }
+            const toggle = (id, show) => {
+                const el = document.getElementById(id);
+                if (show) { el.style.opacity = "1"; el.style.transform = "translateY(0)"; }
+                else { el.style.opacity = "0"; el.style.transform = "translateY(20px)"; }
             };
-            
-            // TIMING DOS TEXTOS - Ampliado para garantir visibilidade
-            toggleLabel('label-1', frameIndex >= 5 && frameIndex <= 18);
-            toggleLabel('label-2', frameIndex >= 20 && frameIndex <= 35);
-            toggleLabel('label-3', frameIndex >= 37 && frameIndex <= 52);
+            toggle('label-1', frameIndex >= 8 && frameIndex <= 18);
+            toggle('label-2', frameIndex >= 23 && frameIndex <= 33);
+            toggle('label-3', frameIndex >= 38 && frameIndex <= 48);
         }
         window.addEventListener('scroll', render);
     </script>

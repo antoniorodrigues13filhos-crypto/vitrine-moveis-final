@@ -262,11 +262,7 @@
                                 <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-6 grayscale opacity-70 mb-4" alt="Unimed">
                                 <p class="italic text-primary/80 leading-relaxed">"O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim, me passou segurança e garantiu que tudo saísse conforme o combinado."</p>
                             </div>
-                            <div>
-                                <p class="font-bold text-sm uppercase tracking-wider">Vinicios</p>
-                                <p class="text-xs text-primary/50">Unimed - Araguaia</p>
-                                <div class="flex gap-1 mt-2 text-yellow-500 text-xs">★★★★★</div>
-                            </div>
+                            <div><p class="font-bold text-sm uppercase tracking-wider">Vinicios</p><p class="text-xs text-primary/50">Unimed - Araguaia</p><div class="flex gap-1 mt-2 text-yellow-500 text-xs">★★★★★</div></div>
                         </div>
 
                         <div class="testimonial-card reveal p-8 rounded-3xl relative" style="transition-delay: 200ms;">
@@ -275,11 +271,7 @@
                                 <span class="font-bold text-xl tracking-tighter grayscale opacity-70 mb-4 block">CASTRO CONSTRUTORA</span>
                                 <p class="italic text-primary/80 leading-relaxed">"Precisávamos mobiliar uma escola inteira em pouquíssimo tempo. A Vitrine Móveis entregou tudo no Pará em apenas 3 dias, com organização impecável."</p>
                             </div>
-                            <div>
-                                <p class="font-bold text-sm uppercase tracking-wider">Fabiana</p>
-                                <p class="text-xs text-primary/50">Ipixuna - PA</p>
-                                <div class="flex gap-1 mt-2 text-yellow-500 text-xs">★★★★★</div>
-                            </div>
+                            <div><p class="font-bold text-sm uppercase tracking-wider">Fabiana</p><p class="text-xs text-primary/50">Ipixuna - PA</p><div class="flex gap-1 mt-2 text-yellow-500 text-xs">★★★★★</div></div>
                         </div>
                     </div>
 
@@ -290,10 +282,7 @@
                             <div class="icon-box bg-yellow-500 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg></div>
                             <div class="icon-box bg-blue-900 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
                         </div>
-                        <div class="floating-text-group">
-                            <h3 class="text-3xl font-bold text-blue-900 tracking-tighter mb-2">ENTREGA GARANTIDA</h3>
-                            <p class="font-mono text-xs uppercase tracking-widest text-primary/60 border-t border-blue-900/20 pt-2">No prazo combinado</p>
-                        </div>
+                        <div class="floating-text-group"><h3 class="text-3xl font-bold text-blue-900 tracking-tighter mb-2">ENTREGA GARANTIDA</h3><p class="font-mono text-xs uppercase tracking-widest text-primary/60 border-t border-blue-900/20 pt-2">No prazo combinado</p></div>
                     </div>
                 </div>
             </div>
@@ -391,23 +380,30 @@
             canvas.height = window.innerHeight;
             const scrollFraction = window.scrollY / (document.getElementById('scroll-hero').offsetHeight - window.innerHeight);
             const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
+            
             if(images[frameIndex]) {
                 const ratio = Math.max(canvas.width / images[frameIndex].width, canvas.height / images[frameIndex].height);
                 ctx.drawImage(images[frameIndex], (canvas.width - images[frameIndex].width * ratio) / 2, (canvas.height - images[frameIndex].height * ratio) / 2, images[frameIndex].width * ratio, images[frameIndex].height * ratio);
             }
             
-            // LOGICA DE EXIBIÇÃO DO TEXTO E LABELS
+            // SINCRONISMO DOS TEXTOS DO HERO
             const heroText = document.getElementById('hero-text-container');
-            heroText.style.opacity = Math.max(0, 1 - (scrollFraction * 8)); // Mantém visível por mais tempo
-            heroText.style.transform = `translateY(${scrollFraction * -50}px)`;
-
+            heroText.style.opacity = Math.max(0, 1 - (scrollFraction * 6)); // some suavemente no início do scroll
+            
             const toggleLabel = (el, show) => {
-                if (show) { el.classList.remove('opacity-0', 'translate-y-4'); el.classList.add('opacity-100', 'translate-y-0'); }
-                else { el.classList.add('opacity-0', 'translate-y-4'); el.classList.remove('opacity-100', 'translate-y-0'); }
+                if (show) { 
+                    el.classList.remove('opacity-0', 'translate-y-4'); 
+                    el.classList.add('opacity-100', 'translate-y-0'); 
+                } else { 
+                    el.classList.add('opacity-0', 'translate-y-4'); 
+                    el.classList.remove('opacity-100', 'translate-y-0'); 
+                }
             };
-            toggleLabel(document.getElementById('label-1'), frameIndex >= 5 && frameIndex <= 18);
-            toggleLabel(document.getElementById('label-2'), frameIndex >= 22 && frameIndex <= 35);
-            toggleLabel(document.getElementById('label-3'), frameIndex >= 38 && frameIndex <= 50);
+            
+            // RITMO DAS ETIQUETAS (Baseado no movimento do vídeo)
+            toggleLabel(document.getElementById('label-1'), frameIndex >= 8 && frameIndex <= 18);
+            toggleLabel(document.getElementById('label-2'), frameIndex >= 23 && frameIndex <= 33);
+            toggleLabel(document.getElementById('label-3'), frameIndex >= 38 && frameIndex <= 48);
         }
         window.addEventListener('scroll', render);
     </script>

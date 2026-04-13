@@ -87,7 +87,13 @@
         ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 4px; }
         
         #mobile-menu { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .floating-label { transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        
+        /* ESTILO DAS LABELS NO HERO */
+        .floating-label {
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 30;
+        }
+
         #hero-text-container { transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
 
         .whatsapp-float {
@@ -106,6 +112,7 @@
             overflow: hidden; font-family: system-ui, -apple-system, sans-serif;
         }
 
+        /* REVEAL SYSTEM */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         
@@ -202,17 +209,17 @@
             <div style="position:sticky; top:0; height:100vh; width:100%; overflow:hidden;">
                 <canvas id="hero-canvas" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></canvas>
                 
-                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none">
+                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 pointer-events-none">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Estrutura</p>
                     <h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
                 </div>
 
-                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right">
+                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 pointer-events-none text-right">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Revestimento</p>
                     <h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
                 </div>
 
-                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center">
+                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 pointer-events-none text-center">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Mecanismo</p>
                     <h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3>
                 </div>
@@ -378,7 +385,13 @@
         function render() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            const scrollFraction = window.scrollY / (document.getElementById('scroll-hero').offsetHeight - window.innerHeight);
+            
+            // Cálculo do progresso baseado no tamanho da seção Hero (400vh)
+            const scrollHero = document.getElementById('scroll-hero');
+            const scrollTop = window.scrollY;
+            const scrollMax = scrollHero.offsetHeight - window.innerHeight;
+            const scrollFraction = Math.max(0, Math.min(1, scrollTop / scrollMax));
+            
             const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
             
             if(images[frameIndex]) {
@@ -386,21 +399,22 @@
                 ctx.drawImage(images[frameIndex], (canvas.width - images[frameIndex].width * ratio) / 2, (canvas.height - images[frameIndex].height * ratio) / 2, images[frameIndex].width * ratio, images[frameIndex].height * ratio);
             }
             
-            // SINCRONISMO DOS TEXTOS DO HERO
+            // MOTION DOS TEXTOS (TIMING AJUSTADO)
             const heroText = document.getElementById('hero-text-container');
-            heroText.style.opacity = Math.max(0, 1 - (scrollFraction * 6)); // some suavemente no início do scroll
-            
+            heroText.style.opacity = Math.max(0, 1 - (scrollFraction * 8)); 
+            heroText.style.transform = `translateY(${scrollFraction * -50}px)`;
+
             const toggleLabel = (el, show) => {
                 if (show) { 
-                    el.classList.remove('opacity-0', 'translate-y-4'); 
-                    el.classList.add('opacity-100', 'translate-y-0'); 
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
                 } else { 
-                    el.classList.add('opacity-0', 'translate-y-4'); 
-                    el.classList.remove('opacity-100', 'translate-y-0'); 
+                    el.style.opacity = "0";
+                    el.style.transform = "translateY(20px)";
                 }
             };
             
-            // RITMO DAS ETIQUETAS (Baseado no movimento do vídeo)
+            // RITMO DAS QUALIDADES (Labels aparecendo em frames específicos)
             toggleLabel(document.getElementById('label-1'), frameIndex >= 8 && frameIndex <= 18);
             toggleLabel(document.getElementById('label-2'), frameIndex >= 23 && frameIndex <= 33);
             toggleLabel(document.getElementById('label-3'), frameIndex >= 38 && frameIndex <= 48);

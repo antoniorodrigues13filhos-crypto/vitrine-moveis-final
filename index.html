@@ -90,7 +90,6 @@
         .floating-label { transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
         #hero-text-container { transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
 
-        /* WHATSAPP ICON */
         .whatsapp-float {
             position: fixed; bottom: 30px; right: 30px; width: 90px; height: 90px; z-index: 100;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -99,7 +98,6 @@
         }
         @keyframes float-motion { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
-        /* CHAT WINDOW */
         #atendente-window {
             display: none; position: fixed; bottom: 130px; right: 30px; width: 350px; height: 520px;
             z-index: 10000; flex-direction: column; border-radius: 28px;
@@ -108,7 +106,6 @@
             overflow: hidden; font-family: system-ui, -apple-system, sans-serif;
         }
 
-        /* MOTION TESTIMONIALS */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         
@@ -124,8 +121,23 @@
             border-color: rgba(0,0,0,0.1);
         }
 
-        .icon-box { animation: pulse-soft 3s infinite; }
-        @keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        /* MOTION FLUIDO ENTREGA GARANTIDA */
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .icon-box { opacity: 0; }
+        .reveal.active .icon-box { animation: iconPulse 2.5s ease-in-out infinite; }
+        .reveal.active .icon-box:nth-child(1) { animation-delay: 0.1s; opacity: 1; }
+        .reveal.active .icon-box:nth-child(2) { animation-delay: 0.3s; opacity: 1; }
+        .reveal.active .icon-box:nth-child(3) { animation-delay: 0.5s; opacity: 1; }
+        .reveal.active .icon-box:nth-child(4) { animation-delay: 0.7s; opacity: 1; }
+
+        @keyframes textFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .floating-text-group { animation: textFloat 3.5s ease-in-out infinite; }
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative">
@@ -189,6 +201,22 @@
         <section id="scroll-hero" style="height:400vh; position:relative;">
             <div style="position:sticky; top:0; height:100vh; width:100%; overflow:hidden;">
                 <canvas id="hero-canvas" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></canvas>
+                
+                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none">
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Estrutura</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
+                </div>
+
+                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right">
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Revestimento</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
+                </div>
+
+                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center">
+                    <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Mecanismo</p>
+                    <h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3>
+                </div>
+
                 <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6 text-center">
                     <span class="font-mono text-xs text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
                     <h1 class="font-serif text-5xl md:text-8xl font-bold text-white mb-6 tracking-tight">A Arte de Equipar<br><span class="italic text-white/90 font-light">Seu Espaço</span></h1>
@@ -229,7 +257,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
                     <div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="testimonial-card reveal p-8 rounded-3xl relative">
-                            <img src="catalogtestimonials/vinicios.jpg" class="w-16 h-16 rounded-full absolute -top-8 left-8 object-cover border-4 border-white shadow-lg" alt="Vinicios">
+                            <img src="catalogtestimonials/vinicios.jpg.png" class="w-16 h-16 rounded-full absolute -top-8 left-8 object-cover border-4 border-white shadow-lg" alt="Vinicios">
                             <div class="mt-4 mb-6">
                                 <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-6 grayscale opacity-70 mb-4" alt="Unimed">
                                 <p class="italic text-primary/80 leading-relaxed">"O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim, me passou segurança e garantiu que tudo saísse conforme o combinado."</p>
@@ -242,7 +270,7 @@
                         </div>
 
                         <div class="testimonial-card reveal p-8 rounded-3xl relative" style="transition-delay: 200ms;">
-                            <img src="catalogtestimonials/fabiana.jpg" class="w-16 h-16 rounded-full absolute -top-8 left-8 object-cover border-4 border-white shadow-lg" alt="Fabiana">
+                            <img src="catalogtestimonials/fabiana.jpg.png" class="w-16 h-16 rounded-full absolute -top-8 left-8 object-cover border-4 border-white shadow-lg" alt="Fabiana">
                             <div class="mt-4 mb-6">
                                 <span class="font-bold text-xl tracking-tighter grayscale opacity-70 mb-4 block">CASTRO CONSTRUTORA</span>
                                 <p class="italic text-primary/80 leading-relaxed">"Precisávamos mobiliar uma escola inteira em pouquíssimo tempo. A Vitrine Móveis entregou tudo no Pará em apenas 3 dias, com organização impecável."</p>
@@ -257,13 +285,15 @@
 
                     <div class="md:col-span-4 flex flex-col items-center justify-center text-center reveal" style="transition-delay: 400ms;">
                         <div class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="icon-box bg-blue-900 p-4 rounded-xl"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
-                            <div class="icon-box bg-yellow-500 p-4 rounded-xl" style="animation-delay: 0.5s;"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
-                            <div class="icon-box bg-yellow-500 p-4 rounded-xl" style="animation-delay: 1s;"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg></div>
-                            <div class="icon-box bg-blue-900 p-4 rounded-xl" style="animation-delay: 1.5s;"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                            <div class="icon-box bg-blue-900 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
+                            <div class="icon-box bg-yellow-500 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+                            <div class="icon-box bg-yellow-500 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg></div>
+                            <div class="icon-box bg-blue-900 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
                         </div>
-                        <h3 class="text-3xl font-bold text-blue-900 tracking-tighter mb-2">ENTREGA GARANTIDA</h3>
-                        <p class="font-mono text-xs uppercase tracking-widest text-primary/60 border-t border-blue-900/20 pt-2">No prazo combinado</p>
+                        <div class="floating-text-group">
+                            <h3 class="text-3xl font-bold text-blue-900 tracking-tighter mb-2">ENTREGA GARANTIDA</h3>
+                            <p class="font-mono text-xs uppercase tracking-widest text-primary/60 border-t border-blue-900/20 pt-2">No prazo combinado</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -271,10 +301,12 @@
     </main>
 
     <script>
-        // MOTOR DE RENDERIZAÇÃO
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente Frisokar", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
+            { id: "CH-003", name: "Cadeira Executiva Back System", material: "Couro Ecológico", image: "catalog/cadeira-executiva-back-system-costurada-c-bracos-regulaveis.png", badge: "Conforto" },
+            { id: "ST-001", name: "Estante de Aço Dupla Flex", material: "Aço Carbono", image: "catalog/estante-de-aco-dupla-flex-preta.png", badge: "Organização" },
+            { id: "TB-001", name: "Mesa de Reunião Gebb Work", material: "MDP & Metal", image: "catalog/mesa-de-reuniao-gebb-work-pe-metalico-quadrado.png", badge: "Premium" },
             { id: "LK-001", name: "Roupeiro 12 Portas", material: "Aço Galvanizado", image: "catalog/roupeiro-12-portas-medias-lisas.png", badge: "Vestiário" }
         ];
 
@@ -292,7 +324,6 @@
             </a>
         `).join('');
 
-        // MOTION: REVEAL AO SCROLL
         const reveal = () => {
             const reveals = document.querySelectorAll('.reveal');
             reveals.forEach(el => {
@@ -302,9 +333,8 @@
             });
         };
         window.addEventListener('scroll', reveal);
-        reveal(); // Executa inicial
+        reveal();
 
-        // CONTADORES
         const counters = document.querySelectorAll('.counter');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -323,7 +353,6 @@
         }, { threshold: 0.5 });
         counters.forEach(c => observer.observe(c));
 
-        // ATENDENTE E MENU
         function toggleAtendente() {
             const win = document.getElementById('atendente-window');
             win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
@@ -333,7 +362,6 @@
             menu.classList.toggle('translate-x-full');
         }
 
-        // LENIS & CANVAS
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
@@ -367,6 +395,15 @@
                 const ratio = Math.max(canvas.width / images[frameIndex].width, canvas.height / images[frameIndex].height);
                 ctx.drawImage(images[frameIndex], (canvas.width - images[frameIndex].width * ratio) / 2, (canvas.height - images[frameIndex].height * ratio) / 2, images[frameIndex].width * ratio, images[frameIndex].height * ratio);
             }
+            
+            // LOGICA DE EXIBIÇÃO DAS LABELS CONFORME O FRAME
+            const toggleLabel = (el, show) => {
+                if (show) { el.classList.remove('opacity-0', 'translate-y-4'); el.classList.add('opacity-100', 'translate-y-0'); }
+                else { el.classList.add('opacity-0', 'translate-y-4'); el.classList.remove('opacity-100', 'translate-y-0'); }
+            };
+            toggleLabel(document.getElementById('label-1'), frameIndex >= 5 && frameIndex <= 18);
+            toggleLabel(document.getElementById('label-2'), frameIndex >= 22 && frameIndex <= 35);
+            toggleLabel(document.getElementById('label-3'), frameIndex >= 38 && frameIndex <= 50);
         }
         window.addEventListener('scroll', render);
     </script>

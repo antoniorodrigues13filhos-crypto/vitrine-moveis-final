@@ -90,7 +90,6 @@
         .floating-label { transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
         #hero-text-container { transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
 
-        /* WHATSAPP ICON */
         .whatsapp-float {
             position: fixed; bottom: 30px; right: 30px; width: 90px; height: 90px; z-index: 100;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -99,7 +98,6 @@
         }
         @keyframes float-motion { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
-        /* CHAT WINDOW */
         #atendente-window {
             display: none; position: fixed; bottom: 130px; right: 30px; width: 350px; height: 520px;
             z-index: 10000; flex-direction: column; border-radius: 28px;
@@ -108,7 +106,6 @@
             overflow: hidden; font-family: system-ui, -apple-system, sans-serif;
         }
 
-        /* MOTION TESTIMONIALS */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         
@@ -275,6 +272,9 @@
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente Frisokar", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
+            { id: "CH-003", name: "Cadeira Executiva Back System", material: "Couro Ecológico", image: "catalog/cadeira-executiva-back-system-costurada-c-bracos-regulaveis.png", badge: "Conforto" },
+            { id: "ST-001", name: "Estante de Aço Dupla Flex", material: "Aço Carbono", image: "catalog/estante-de-aco-dupla-flex-preta.png", badge: "Organização" },
+            { id: "TB-001", name: "Mesa de Reunião Gebb Work", material: "MDP & Metal", image: "catalog/mesa-de-reuniao-gebb-work-pe-metalico-quadrado.png", badge: "Premium" },
             { id: "LK-001", name: "Roupeiro 12 Portas", material: "Aço Galvanizado", image: "catalog/roupeiro-12-portas-medias-lisas.png", badge: "Vestiário" }
         ];
 
@@ -292,7 +292,6 @@
             </a>
         `).join('');
 
-        // MOTION: REVEAL AO SCROLL
         const reveal = () => {
             const reveals = document.querySelectorAll('.reveal');
             reveals.forEach(el => {
@@ -302,9 +301,8 @@
             });
         };
         window.addEventListener('scroll', reveal);
-        reveal(); // Executa inicial
+        reveal();
 
-        // CONTADORES
         const counters = document.querySelectorAll('.counter');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -323,7 +321,6 @@
         }, { threshold: 0.5 });
         counters.forEach(c => observer.observe(c));
 
-        // ATENDENTE E MENU
         function toggleAtendente() {
             const win = document.getElementById('atendente-window');
             win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
@@ -333,7 +330,6 @@
             menu.classList.toggle('translate-x-full');
         }
 
-        // LENIS & CANVAS
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);

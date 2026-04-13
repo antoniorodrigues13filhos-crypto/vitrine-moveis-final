@@ -106,6 +106,7 @@
             overflow: hidden; font-family: system-ui, -apple-system, sans-serif;
         }
 
+        /* REVEAL SYSTEM */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         
@@ -121,8 +122,25 @@
             border-color: rgba(0,0,0,0.1);
         }
 
-        .icon-box { animation: pulse-soft 3s infinite; }
-        @keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        /* MOTION FLUIDO ENTREGA GARANTIDA */
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .icon-box { opacity: 0; }
+        .reveal.active .icon-box { animation: iconPulse 2.5s ease-in-out infinite; }
+        .reveal.active .icon-box:nth-child(1) { animation-delay: 0.1s; opacity: 1; }
+        .reveal.active .icon-box:nth-child(2) { animation-delay: 0.3s; opacity: 1; }
+        .reveal.active .icon-box:nth-child(3) { animation-delay: 0.5s; opacity: 1; }
+        .reveal.active .icon-box:nth-child(4) { animation-delay: 0.7s; opacity: 1; }
+
+        @keyframes textFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .floating-text-group { animation: textFloat 3.5s ease-in-out infinite; }
+
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative">
@@ -254,13 +272,15 @@
 
                     <div class="md:col-span-4 flex flex-col items-center justify-center text-center reveal" style="transition-delay: 400ms;">
                         <div class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="icon-box bg-blue-900 p-4 rounded-xl"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
-                            <div class="icon-box bg-yellow-500 p-4 rounded-xl" style="animation-delay: 0.5s;"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
-                            <div class="icon-box bg-yellow-500 p-4 rounded-xl" style="animation-delay: 1s;"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg></div>
-                            <div class="icon-box bg-blue-900 p-4 rounded-xl" style="animation-delay: 1.5s;"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                            <div class="icon-box bg-blue-900 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
+                            <div class="icon-box bg-yellow-500 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+                            <div class="icon-box bg-yellow-500 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg></div>
+                            <div class="icon-box bg-blue-900 p-4 rounded-xl shadow-lg"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
                         </div>
-                        <h3 class="text-3xl font-bold text-blue-900 tracking-tighter mb-2">ENTREGA GARANTIDA</h3>
-                        <p class="font-mono text-xs uppercase tracking-widest text-primary/60 border-t border-blue-900/20 pt-2">No prazo combinado</p>
+                        <div class="floating-text-group">
+                            <h3 class="text-3xl font-bold text-blue-900 tracking-tighter mb-2">ENTREGA GARANTIDA</h3>
+                            <p class="font-mono text-xs uppercase tracking-widest text-primary/60 border-t border-blue-900/20 pt-2">No prazo combinado</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -268,6 +288,7 @@
     </main>
 
     <script>
+        // MOTOR DE RENDERIZAÇÃO
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente Frisokar", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },

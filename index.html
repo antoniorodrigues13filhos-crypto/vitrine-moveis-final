@@ -90,6 +90,7 @@
         .floating-label { transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
         #hero-text-container { transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
 
+        /* WHATSAPP ICON */
         .whatsapp-float {
             position: fixed; bottom: 30px; right: 30px; width: 90px; height: 90px; z-index: 100;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -98,6 +99,7 @@
         }
         @keyframes float-motion { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
+        /* CHAT WINDOW */
         #atendente-window {
             display: none; position: fixed; bottom: 130px; right: 30px; width: 350px; height: 520px;
             z-index: 10000; flex-direction: column; border-radius: 28px;
@@ -106,6 +108,7 @@
             overflow: hidden; font-family: system-ui, -apple-system, sans-serif;
         }
 
+        /* MOTION TESTIMONIALS */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         
@@ -226,7 +229,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
                     <div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="testimonial-card reveal p-8 rounded-3xl relative">
-                            <img src="catalogtestimonials/vinicios.jpg.png" class="w-16 h-16 rounded-full absolute -top-8 left-8 object-cover border-4 border-white shadow-lg" alt="Vinicios">
+                            <img src="catalogtestimonials/vinicios.jpg" class="w-16 h-16 rounded-full absolute -top-8 left-8 object-cover border-4 border-white shadow-lg" alt="Vinicios">
                             <div class="mt-4 mb-6">
                                 <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-6 grayscale opacity-70 mb-4" alt="Unimed">
                                 <p class="italic text-primary/80 leading-relaxed">"O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim, me passou segurança e garantiu que tudo saísse conforme o combinado."</p>
@@ -239,7 +242,7 @@
                         </div>
 
                         <div class="testimonial-card reveal p-8 rounded-3xl relative" style="transition-delay: 200ms;">
-                            <img src="catalogtestimonials/fabiana.jpg.png" class="w-16 h-16 rounded-full absolute -top-8 left-8 object-cover border-4 border-white shadow-lg" alt="Fabiana">
+                            <img src="catalogtestimonials/fabiana.jpg" class="w-16 h-16 rounded-full absolute -top-8 left-8 object-cover border-4 border-white shadow-lg" alt="Fabiana">
                             <div class="mt-4 mb-6">
                                 <span class="font-bold text-xl tracking-tighter grayscale opacity-70 mb-4 block">CASTRO CONSTRUTORA</span>
                                 <p class="italic text-primary/80 leading-relaxed">"Precisávamos mobiliar uma escola inteira em pouquíssimo tempo. A Vitrine Móveis entregou tudo no Pará em apenas 3 dias, com organização impecável."</p>
@@ -268,12 +271,10 @@
     </main>
 
     <script>
+        // MOTOR DE RENDERIZAÇÃO
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente Frisokar", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
-            { id: "CH-003", name: "Cadeira Executiva Back System", material: "Couro Ecológico", image: "catalog/cadeira-executiva-back-system-costurada-c-bracos-regulaveis.png", badge: "Conforto" },
-            { id: "ST-001", name: "Estante de Aço Dupla Flex", material: "Aço Carbono", image: "catalog/estante-de-aco-dupla-flex-preta.png", badge: "Organização" },
-            { id: "TB-001", name: "Mesa de Reunião Gebb Work", material: "MDP & Metal", image: "catalog/mesa-de-reuniao-gebb-work-pe-metalico-quadrado.png", badge: "Premium" },
             { id: "LK-001", name: "Roupeiro 12 Portas", material: "Aço Galvanizado", image: "catalog/roupeiro-12-portas-medias-lisas.png", badge: "Vestiário" }
         ];
 
@@ -291,6 +292,7 @@
             </a>
         `).join('');
 
+        // MOTION: REVEAL AO SCROLL
         const reveal = () => {
             const reveals = document.querySelectorAll('.reveal');
             reveals.forEach(el => {
@@ -300,8 +302,9 @@
             });
         };
         window.addEventListener('scroll', reveal);
-        reveal();
+        reveal(); // Executa inicial
 
+        // CONTADORES
         const counters = document.querySelectorAll('.counter');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -320,6 +323,7 @@
         }, { threshold: 0.5 });
         counters.forEach(c => observer.observe(c));
 
+        // ATENDENTE E MENU
         function toggleAtendente() {
             const win = document.getElementById('atendente-window');
             win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
@@ -329,6 +333,7 @@
             menu.classList.toggle('translate-x-full');
         }
 
+        // LENIS & CANVAS
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);

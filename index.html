@@ -117,7 +117,7 @@
             #product-grid img { filter: none !important; grayscale: 0 !important; }
         }
 
-        /* ÍCONE MAIS VISÍVEL E ANIMADO */
+        /* ÍCONE WHATSAPP */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -136,68 +136,60 @@
             100% { transform: scale(1); }
         }
 
-        /* JANELA DA AGENTE - MELHORADA COM EFEITO GLASS */
+        /* JANELA DA AGENTE - GLASSMORPHISM */
         #atendente-window {
             display: none;
             position: fixed;
             bottom: 120px;
             right: 30px;
-            width: 350px; /* Levemente mais larga */
-            height: 520px; /* Levemente mais alta */
+            width: 350px;
+            height: 520px;
             z-index: 10000;
             flex-direction: column;
             border-radius: 28px;
-            /* Efeito Glassmorfismo Premium */
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(25px) saturate(180%);
             -webkit-backdrop-filter: blur(25px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            font-family: system-ui, -apple-system, sans-serif; /* Fonte nativa legível */
+            font-family: system-ui, -apple-system, sans-serif;
         }
 
-        /* Área de Mensagens */
         #atendente-messages {
             flex: 1;
             padding: 25px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            background: rgba(255, 255, 255, 0.3); /* Fundo glass interno suave */
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Bolhas de Mensagem - FOCO NA LEGIBILIDADE */
         .msg-bubble {
             padding: 14px 18px;
             border-radius: 20px;
             max-width: 85%;
-            font-size: 15px; /* Fonte ligeiramente maior */
+            font-size: 15px;
             line-height: 1.5;
             margin-bottom: 12px;
-            letter-spacing: -0.01em;
             word-wrap: break-word;
         }
 
-        /* Bot: Letras Pretas em Fundo Sólido Claro (Máxima Legibilidade) */
         .bot-msg {
-            background: #f5f5f7; /* Off-white sólido para contraste puro */
-            color: #1d1d1f; /* Preto quase puro */
+            background: #f5f5f7;
+            color: #1d1d1f;
             align-self: flex-start;
             border-bottom-left-radius: 4px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.03);
         }
 
-        /* Usuário: Letras Brancas em Fundo Preto */
         .user-msg {
-            background: #111111; /* Preto da marca */
+            background: #111111;
             color: #ffffff;
             align-self: flex-end;
             border-bottom-right-radius: 4px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        /* Área de Input - Efeito Glass */
         .chat-input-area {
             padding: 18px;
             display: flex;
@@ -215,13 +207,6 @@
             background: rgba(255, 255, 255, 0.8);
             outline: none;
             font-size: 15px;
-            color: #1d1d1f;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        #atendente-input:focus {
-            border-color: rgba(0,0,0,0.2);
-            box-shadow: 0 0 0 3px rgba(0,0,0,0.03);
         }
 
         .chat-send-btn {
@@ -232,28 +217,16 @@
             height: 50px;
             border-radius: 14px;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
-            transition: background-color 0.2s, transform 0.1s;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .chat-send-btn:hover {
-            background-color: #2a2a2a;
-        }
-
-        .chat-send-btn:active {
-            transform: scale(0.96);
-        }
-
-        /* Avatar da Atendente */
         .atendente-avatar {
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            background: #2a2a2a; /* Fundo placeholder caso não tenha foto */
+            background: #2a2a2a;
             border: 2px solid rgba(255,255,255,0.2);
             overflow: hidden;
             margin-right: 15px;
@@ -267,13 +240,6 @@
             height: 100%;
             object-fit: cover;
         }
-
-        /* Placeholder Ícone caso não tenha imagem */
-        .avatar-placeholder-icon {
-            color: rgba(255,255,255,0.5);
-            font-size: 20px;
-        }
-
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
@@ -316,23 +282,19 @@
 
     <div id="atendente-window">
         <div style="padding: 18px 25px; background: rgba(17, 17, 17, 0.9); color: #fff; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
-            
             <div class="atendente-avatar">
-                <img src="URL_DA_FOTO_DA_ATENDENTE.jpg" alt="Atendente" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img src="assetschat/camila.jpg.jpg" alt="Camila" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="avatar-placeholder-icon" style="display:none;">👤</div>
             </div>
-
             <div style="flex: 1;">
-                <span style="display: block; font-size: 11px; opacity: 0.6; letter-spacing: 1.5px; font-weight: 700; text-transform: uppercase; margin-bottom: 2px;">Atendimento</span>
-                <span style="font-size: 16px; font-weight: 600; letter-spacing: -0.02em;">Suporte Vitrine Móvel</span>
+                <span style="display: block; font-size: 11px; opacity: 0.6; letter-spacing: 1.5px; font-weight: 700; text-transform: uppercase;">Atendimento</span>
+                <span style="font-size: 16px; font-weight: 600;">Camila | Suporte VM</span>
             </div>
-            <button onclick="toggleAtendente()" style="background:none; border:none; color:#fff; cursor:pointer; font-size:28px; opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">&times;</button>
+            <button onclick="toggleAtendente()" style="background:none; border:none; color:#fff; cursor:pointer; font-size:28px;">&times;</button>
         </div>
-        
         <div id="atendente-messages">
-            <div class="msg-bubble bot-msg">Olá! Sou sua assistente virtual. Em que posso ajudar com seu projeto hoje?</div>
+            <div class="msg-bubble bot-msg">Olá! Sou a Camila. Como posso ajudar com o seu projeto de mobiliário hoje?</div>
         </div>
-        
         <div class="chat-input-area">
             <input type="text" id="atendente-input" placeholder="Digite sua dúvida...">
             <button onclick="enviarAtendente()" class="chat-send-btn">
@@ -410,14 +372,10 @@
     </main>
 
     <script>
-        // LÓGICA DA AGENTE DE ATENDIMENTO - MANTIDA ORIGINAL
         function toggleAtendente() {
             const win = document.getElementById('atendente-window');
             const isVisible = win.style.display === 'flex';
             win.style.display = isVisible ? 'none' : 'flex';
-            if(!isVisible) {
-                setTimeout(() => { document.getElementById('atendente-input').focus(); }, 300);
-            }
         }
 
         async function enviarAtendente() {
@@ -429,7 +387,6 @@
             input.value = '';
 
             try {
-                // Endpoint original mantido
                 const res = await fetch('https://hook.us2.make.com/nodnz5uzkjsu6wnha8phgh8eo1ccpfdj', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -438,7 +395,7 @@
                 const data = await res.json();
                 if(data.resposta) addMsgUI(data.resposta, 'bot');
             } catch(e) { 
-                addMsgUI("Olá! Tivemos um pequeno problema técnico. Gostaria de falar diretamente pelo WhatsApp?", 'bot'); 
+                addMsgUI("Olá! Gostaria de falar diretamente pelo WhatsApp para um atendimento mais rápido?", 'bot'); 
             }
         }
 
@@ -448,13 +405,11 @@
             div.className = `msg-bubble ${type === 'user' ? 'user-msg' : 'bot-msg'}`;
             div.innerText = txt;
             area.appendChild(div);
-            // Scroll suave mantido
             area.scrollTo({ top: area.scrollHeight, behavior: 'smooth' });
         }
 
         document.getElementById('atendente-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') enviarAtendente(); });
 
-        // RESTANTE DOS SCRIPTS ORIGINAIS MANTIDOS
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
 

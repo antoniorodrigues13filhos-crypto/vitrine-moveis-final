@@ -134,8 +134,8 @@ html.lenis { height: auto; }
             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white w-16 h-16"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path></svg>
         </div>
         <h2 class="text-3xl font-serif text-white mb-2 tracking-tight uppercase">VITRINE MÓVEL</h2>
-        <div style="width:16rem;height:0.5rem;background:rgba(255,255,255,0.3);border-radius:9999px;overflow:hidden;margin-top:0.5rem;">
-            <div id="progress-bar" style="height: 100%; background: white; transition: 100ms ease-out; width: 0%;"></div>
+        <div style="width:16rem;height:0.5rem;background:rgba(255,255,255,0.3);border-radius:9999px;overflow:hidden;">
+            <div id="progress-bar" style="height: 100%; background: white; width: 0%;"></div>
         </div>
     </div>
 
@@ -145,7 +145,7 @@ html.lenis { height: auto; }
         </nav>
 
         <a href="#" class="absolute left-1/2 -translate-x-1/2 select-none hover:scale-105 transition-transform duration-300 z-20">
-            <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/user-images/207d01fe-9154-44a2-a035-5a4810effc12.webp" alt="logo" class="logo h-8 md:h-10 lg:h-11 w-auto object-contain brightness-0">
+            <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/user-images/207d01fe-9154-44a2-a035-5a4810effc12.webp" alt="logo" class="logo h-8 md:h-10 lg:h-11 w-auto brightness-0">
         </a>
 
         <nav class="hidden md:flex items-center gap-8">
@@ -154,7 +154,7 @@ html.lenis { height: auto; }
         </nav>
 
         <button onclick="toggleMenu()" class="md:hidden ml-auto p-1 z-[60] relative">
-            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
         </button>
     </header>
 
@@ -173,12 +173,10 @@ html.lenis { height: auto; }
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Estrutura</p>
                     <h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
                 </div>
-
                 <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Revestimento</p>
                     <h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
                 </div>
-
                 <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Mecanismo</p>
                     <h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3>
@@ -187,16 +185,13 @@ html.lenis { height: auto; }
                 <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),rgba(0,0,0,0.2) 50%,transparent);z-index:1;"></div>
                 
                 <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6 text-center" style="padding-top: 10vh;">
-                    <span id="hero-badge" class="font-mono text-xs md:text-sm text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
-                    <h1 id="hero-title" class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-tight max-w-5xl">
-                        A Arte de Equipar<br>
-                        <span class="italic text-white/90 font-light">Seu Espaço</span>
-                    </h1>
+                    <span class="font-mono text-xs md:text-sm text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
+                    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight max-w-5xl">A Arte de Equipar<br><span class="italic text-white/90 font-light">Seu Espaço</span></h1>
                 </div>
             </div>
         </section>
 
-        <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto relative bg-white">
+        <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto bg-white">
             <div class="flex flex-col md:flex-row gap-16 items-start">
                 <div class="w-full md:w-1/3">
                     <h2 class="font-serif text-3xl md:text-4xl leading-tight mb-6">Redefinindo o Padrão Corporativo.</h2>
@@ -204,9 +199,7 @@ html.lenis { height: auto; }
                     <p class="text-sm font-mono text-primary/60 uppercase tracking-widest">Manifesto VM</p>
                 </div>
                 <div class="w-full md:w-2/3">
-                    <p class="text-lg md:text-xl text-primary/80 leading-[1.8] font-light mb-8">
-                        Acreditamos que o ambiente de trabalho molda a mente. Nossas peças não são apenas móveis; são instrumentos de foco e criação. cada linha é pensada para suportar a rotina sem perder a elegância.
-                    </p>
+                    <p class="text-lg md:text-xl text-primary/80 leading-[1.8] font-light mb-8">Acreditamos que o ambiente de trabalho molda a mente. Nossas peças são instrumentos de foco e criação. cada linha é pensada para suportar a rotina sem perder a elegância.</p>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border-light pt-8">
                         <div><span class="block font-mono text-2xl mb-1">01</span><span class="text-xs uppercase text-primary/60 font-medium">Design Autoral</span></div>
                         <div><span class="block font-mono text-2xl mb-1">02</span><span class="text-xs uppercase text-primary/60 font-medium">Acabamento Manual</span></div>
@@ -217,48 +210,37 @@ html.lenis { height: auto; }
             </div>
         </section>
 
-        <section class="py-32 px-6 bg-[#FAFAFA] border-t border-border-light overflow-hidden">
+        <section class="py-32 px-6 bg-[#FAFAFA] border-t border-border-light">
             <div class="max-w-7xl mx-auto">
-                <div class="reveal text-center mb-20">
+                <div class="reveal text-center mb-24">
                     <h2 class="font-serif text-4xl md:text-5xl mb-4">Confiança de quem constrói o futuro.</h2>
                     <div class="w-20 h-1 bg-black mx-auto"></div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div class="reveal p-10 rounded-[2rem] bg-white border border-black/5 relative shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                    <div class="reveal testimonial-card p-10 rounded-[2.5rem] bg-white border border-black/5 relative shadow-sm">
                         <img src="catalogtestimonials/fabiana.jpg.png" class="w-20 h-20 rounded-full absolute -top-10 left-10 object-cover border-4 border-white shadow-xl" alt="Fabiana">
                         <div class="mt-6 mb-8">
                             <span class="font-bold text-lg tracking-tighter opacity-40 block mb-4 uppercase">Castro Construtora</span>
                             <p class="text-primary/70 leading-relaxed font-light text-xl italic">"Precisávamos mobiliar uma escola inteira no Pará em tempo recorde. A Vitrine entregou tudo em 3 dias com organização impecável."</p>
                         </div>
-                        <div>
-                            <p class="font-bold text-sm tracking-widest uppercase">Fabiana</p>
-                            <p class="text-xs text-primary/40 font-mono">Ipixuna - PA</p>
-                        </div>
+                        <p class="font-bold text-sm tracking-widest uppercase">Fabiana</p>
+                        <p class="text-xs text-primary/40 font-mono uppercase">Ipixuna - PA</p>
                     </div>
-
-                    <div class="reveal p-10 rounded-[2rem] bg-white border border-black/5 relative shadow-sm" style="transition-delay: 200ms;">
+                    <div class="reveal testimonial-card p-10 rounded-[2.5rem] bg-white border border-black/5 relative shadow-sm" style="transition-delay: 200ms;">
                         <img src="catalogtestimonials/vinicios.jpg.png" class="w-20 h-20 rounded-full absolute -top-10 left-10 object-cover border-4 border-white shadow-xl" alt="Vinicios">
                         <div class="mt-6 mb-8">
-                            <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-5 grayscale opacity-40 mb-6" alt="Unimed">
-                            <p class="text-primary/70 leading-relaxed font-light text-xl italic">"O atendimento da Vitrine Móveis superou as expectativas. A equipe garantiu que cada detalhe do projeto fosse executado com perfeição."</p>
+                            <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-5 grayscale opacity-40 mb-6">
+                            <p class="text-primary/70 leading-relaxed font-light text-xl italic">"O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim e garantiu que tudo saísse conforme o combinado."</p>
                         </div>
-                        <div>
-                            <p class="font-bold text-sm tracking-widest uppercase">Vinicios</p>
-                            <p class="text-xs text-primary/40 font-mono">Unimed - Araguaia</p>
-                        </div>
+                        <p class="font-bold text-sm tracking-widest uppercase">Vinicios</p>
+                        <p class="text-xs text-primary/40 font-mono uppercase">Unimed - Araguaia</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="produtos" class="py-24 px-6 max-w-[90rem] mx-auto border-t border-border-light">
-            <div class="flex items-end justify-between mb-16">
-                <div>
-                    <h2 class="font-serif text-4xl mb-2">Coleção Executiva</h2>
-                    <p class="font-mono text-sm text-primary/50 uppercase tracking-wider">Mobiliário de Alta Performance</p>
-                </div>
-            </div>
+            <h2 class="font-serif text-4xl mb-16">Coleção Executiva</h2>
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16"></div>
         </section>
     </main>
@@ -268,9 +250,6 @@ html.lenis { height: auto; }
     </a>
 
     <script>
-        function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
-        initLucide();
-
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
@@ -280,8 +259,7 @@ html.lenis { height: auto; }
             { id: "LK-001", name: "Roupeiro 12 Portas", material: "Aço Galvanizado", image: "catalog/roupeiro-12-portas-medias-lisas.png", badge: "Vestiário" }
         ];
 
-        const gridContainer = document.getElementById('product-grid');
-        gridContainer.innerHTML = products.map(prod => `
+        document.getElementById('product-grid').innerHTML = products.map(prod => `
             <div class="group cursor-pointer">
                 <div class="relative w-full h-[450px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
                     <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
@@ -289,11 +267,8 @@ html.lenis { height: auto; }
                         <span class="font-mono text-[10px] uppercase font-bold text-primary">${prod.badge}</span>
                     </div>
                 </div>
-                <div>
-                    <p class="font-mono text-xs text-primary/50 mb-1">${prod.id}</p>
-                    <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
-                    <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
-                </div>
+                <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
+                <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
             </div>
         `).join('');
 
@@ -303,9 +278,7 @@ html.lenis { height: auto; }
 
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
-        const frameCount = 54; 
-        const images = [];
-        let loadedImages = 0;
+        const frameCount = 54; const images = []; let loadedImages = 0;
 
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
@@ -323,50 +296,39 @@ html.lenis { height: auto; }
         }
 
         function render() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
             const scrollTop = window.scrollY;
-            const heroHeight = document.getElementById('scroll-hero').offsetHeight;
-            const fraction = Math.max(0, Math.min(1, scrollTop / (heroHeight - window.innerHeight)));
+            const scrollMax = document.getElementById('scroll-hero').offsetHeight - window.innerHeight;
+            const fraction = Math.max(0, Math.min(1, scrollTop / scrollMax));
             const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
 
             const img = images[frameIndex];
             if (img && img.complete) {
                 const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
-                const x = (canvas.width - img.width * ratio) / 2;
-                const y = (canvas.height - img.height * ratio) / 2;
-                context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
+                context.drawImage(img, (canvas.width - img.width * ratio) / 2, (canvas.height - img.height * ratio) / 2, img.width * ratio, img.height * ratio);
             }
 
             document.getElementById('hero-text-container').style.opacity = Math.max(0, 1 - (fraction * 12)); 
             
-            const toggleLabel = (el, show) => {
-                if (show) {
-                    el.classList.remove('opacity-0', 'translate-y-4');
-                    el.classList.add('opacity-100', 'translate-y-0');
-                } else {
-                    el.classList.add('opacity-0', 'translate-y-4');
-                    el.classList.remove('opacity-100', 'translate-y-0');
-                }
+            const toggleLabel = (id, show) => {
+                const el = document.getElementById(id);
+                if (show) { el.classList.remove('opacity-0', 'translate-y-4'); el.classList.add('opacity-100', 'translate-y-0'); }
+                else { el.classList.add('opacity-0', 'translate-y-4'); el.classList.remove('opacity-100', 'translate-y-0'); }
             };
 
-            toggleLabel(document.getElementById('label-1'), frameIndex >= 5 && frameIndex <= 18);
-            toggleLabel(document.getElementById('label-2'), frameIndex >= 22 && frameIndex <= 35);
-            toggleLabel(document.getElementById('label-3'), frameIndex >= 38 && frameIndex <= 50);
-
-            // Trigger reveal for testimonials
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
-            });
+            toggleLabel('label-1', frameIndex >= 5 && frameIndex <= 18);
+            toggleLabel('label-2', frameIndex >= 22 && frameIndex <= 35);
+            toggleLabel('label-3', frameIndex >= 38 && frameIndex <= 50);
         }
         
-        window.addEventListener('scroll', render);
-        window.addEventListener('resize', render);
+        window.addEventListener('scroll', () => {
+            render();
+            // REVEAL SYSTEM
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+            });
+        });
 
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('translate-x-full');
-        }
+        function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('translate-x-full'); }
     </script>
 </body></html>

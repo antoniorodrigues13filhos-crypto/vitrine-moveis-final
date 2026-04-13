@@ -257,4 +257,118 @@
 
                     <div class="md:col-span-4 flex flex-col items-center justify-center text-center reveal" style="transition-delay: 400ms;">
                         <div class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="icon-box bg-blue-900 p-4 rounded-xl"><svg class="text-white w-8 h-8" fill="none"
+                            <div class="icon-box bg-blue-900 p-4 rounded-xl"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
+                            <div class="icon-box bg-yellow-500 p-4 rounded-xl" style="animation-delay: 0.5s;"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+                            <div class="icon-box bg-yellow-500 p-4 rounded-xl" style="animation-delay: 1s;"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg></div>
+                            <div class="icon-box bg-blue-900 p-4 rounded-xl" style="animation-delay: 1.5s;"><svg class="text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                        </div>
+                        <h3 class="text-3xl font-bold text-blue-900 tracking-tighter mb-2">ENTREGA GARANTIDA</h3>
+                        <p class="font-mono text-xs uppercase tracking-widest text-primary/60 border-t border-blue-900/20 pt-2">No prazo combinado</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // MOTOR DE RENDERIZAÇÃO
+        const products = [
+            { id: "CH-001", name: "Cadeira Addit Presidente Frisokar", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
+            { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
+            { id: "LK-001", name: "Roupeiro 12 Portas", material: "Aço Galvanizado", image: "catalog/roupeiro-12-portas-medias-lisas.png", badge: "Vestiário" }
+        ];
+
+        const gridContainer = document.getElementById('product-grid');
+        gridContainer.innerHTML = products.map(prod => `
+            <a href="produto.html?id=${prod.id}" class="group block reveal">
+                <div class="relative w-full h-[400px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
+                    <img src="${prod.image}" alt="${prod.name}" class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                    <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
+                        <span class="font-mono text-[10px] uppercase font-bold">${prod.badge}</span>
+                    </div>
+                </div>
+                <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
+                <p class="text-sm text-primary/50">${prod.material}</p>
+            </a>
+        `).join('');
+
+        // MOTION: REVEAL AO SCROLL
+        const reveal = () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) el.classList.add('active');
+            });
+        };
+        window.addEventListener('scroll', reveal);
+        reveal(); // Executa inicial
+
+        // CONTADORES
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = +el.getAttribute('data-target');
+                    let count = 0;
+                    const timer = setInterval(() => {
+                        count += target / 50;
+                        if(count >= target) { el.innerText = target.toString().padStart(2, '0'); clearInterval(timer); }
+                        else el.innerText = Math.ceil(count).toString().padStart(2, '0');
+                    }, 30);
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => observer.observe(c));
+
+        // ATENDENTE E MENU
+        function toggleAtendente() {
+            const win = document.getElementById('atendente-window');
+            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+        }
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('translate-x-full');
+        }
+
+        // LENIS & CANVAS
+        const lenis = new Lenis({ lerp: 0.05 });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        const canvas = document.getElementById("hero-canvas");
+        const ctx = canvas.getContext("2d");
+        const frameCount = 54;
+        const images = [];
+        let loaded = 0;
+        for (let i = 1; i <= frameCount; i++) {
+            const img = new Image();
+            img.onload = () => {
+                loaded++;
+                document.getElementById('progress-bar').style.width = `${Math.floor((loaded/frameCount)*100)}%`;
+                if(loaded === frameCount) {
+                    document.getElementById('loader').style.opacity = '0';
+                    setTimeout(() => document.getElementById('loader').style.visibility = 'hidden', 500);
+                    render();
+                }
+            };
+            img.src = `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
+            images.push(img);
+        }
+
+        function render() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const scrollFraction = window.scrollY / (document.getElementById('scroll-hero').offsetHeight - window.innerHeight);
+            const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
+            if(images[frameIndex]) {
+                const ratio = Math.max(canvas.width / images[frameIndex].width, canvas.height / images[frameIndex].height);
+                ctx.drawImage(images[frameIndex], (canvas.width - images[frameIndex].width * ratio) / 2, (canvas.height - images[frameIndex].height * ratio) / 2, images[frameIndex].width * ratio, images[frameIndex].height * ratio);
+            }
+        }
+        window.addEventListener('scroll', render);
+    </script>
+</body>
+</html>

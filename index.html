@@ -117,28 +117,34 @@
             #product-grid img { filter: none !important; grayscale: 0 !important; }
         }
 
+        /* WHATSAPP ICON ATUALIZADO */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 80px; 
-            height: 80px; 
+            width: 90px; /* Aumentado um pouco */
+            height: 90px; /* Aumentado um pouco */
             z-index: 100;
-            transition: transform 0.3s ease;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
-            animation: pulse-green 2s infinite;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.25));
             cursor: pointer;
+            animation: float-motion 3s ease-in-out infinite; /* Motion leve */
         }
-        @keyframes pulse-green {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes float-motion {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         #atendente-window {
             display: none;
             position: fixed;
-            bottom: 120px;
+            bottom: 130px;
             right: 30px;
             width: 350px;
             height: 520px;
@@ -382,53 +388,15 @@
     </main>
 
     <script>
-        // BANCO DE DADOS DINÂMICO DOS PRODUTOS (AJUSTADO PARA PASTA /catalog/ E EXTENSÃO .png)
         const products = [
-            {
-                id: "CH-001",
-                name: "Cadeira Addit Presidente Frisokar",
-                material: "Tecido Mesh & Base Nylon",
-                image: "catalog/cadeira-addit-presidente-frisokar.png",
-                badge: "Ergonomia Premium"
-            },
-            {
-                id: "CH-002",
-                name: "Cadeira Diretor Ergonômica NR17",
-                material: "Espuma Injetada & Regulagem Total",
-                image: "catalog/cadeira-diretor-ergonomica-nr17.png",
-                badge: "Norma NR17"
-            },
-            {
-                id: "CH-003",
-                name: "Cadeira Executiva Back System Costurada",
-                material: "Couro Ecológico & Braços Reguláveis",
-                image: "catalog/cadeira-executiva-back-system-costurada-c-bracos-regulaveis.png",
-                badge: "Conforto Diário"
-            },
-            {
-                id: "ST-001",
-                name: "Estante de Aço Dupla Flex Preta",
-                material: "Aço Carbono Pintura Epóxi",
-                image: "catalog/estante-de-aco-dupla-flex-preta.png",
-                badge: "Organização"
-            },
-            {
-                id: "TB-001",
-                name: "Mesa de Reunião Gebb Work",
-                material: "Madeira MDP & Pé Metálico Quadrado",
-                image: "catalog/mesa-de-reuniao-gebb-work-pe-metalico-quadrado.png",
-                badge: "Linha Gebb Work"
-            },
-            {
-                id: "LK-001",
-                name: "Roupeiro 12 Portas Médias Lisas",
-                material: "Aço Galvanizado com Chave",
-                image: "catalog/roupeiro-12-portas-medias-lisas.png",
-                badge: "Vestiário"
-            }
+            { id: "CH-001", name: "Cadeira Addit Presidente Frisokar", material: "Tecido Mesh & Base Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia Premium" },
+            { id: "CH-002", name: "Cadeira Diretor Ergonômica NR17", material: "Espuma Injetada & Regulagem Total", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "Norma NR17" },
+            { id: "CH-003", name: "Cadeira Executiva Back System Costurada", material: "Couro Ecológico & Braços Reguláveis", image: "catalog/cadeira-executiva-back-system-costurada-c-bracos-regulaveis.png", badge: "Conforto Diário" },
+            { id: "ST-001", name: "Estante de Aço Dupla Flex Preta", material: "Aço Carbono Pintura Epóxi", image: "catalog/estante-de-aco-dupla-flex-preta.png", badge: "Organização" },
+            { id: "TB-001", name: "Mesa de Reunião Gebb Work", material: "Madeira MDP & Pé Metálico Quadrado", image: "catalog/mesa-de-reuniao-gebb-work-pe-metalico-quadrado.png", badge: "Linha Gebb Work" },
+            { id: "LK-001", name: "Roupeiro 12 Portas Médias Lisas", material: "Aço Galvanizado com Chave", image: "catalog/roupeiro-12-portas-medias-lisas.png", badge: "Vestiário" }
         ];
 
-        // MOTOR DE RENDERIZAÇÃO DO GRID
         const gridContainer = document.getElementById('product-grid');
         function renderProducts() {
             gridContainer.innerHTML = products.map(prod => `
@@ -454,7 +422,6 @@
         }
         renderProducts();
 
-        // CONTADOR ANIMADO
         const counters = document.querySelectorAll('.counter');
         const startCounters = () => {
             counters.forEach(counter => {
@@ -479,7 +446,6 @@
         }, { threshold: 0.5 });
         observer.observe(document.getElementById('stats-container'));
 
-        // ATENDENTE
         function toggleAtendente() {
             const win = document.getElementById('atendente-window');
             win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
@@ -510,12 +476,10 @@
         }
         document.getElementById('atendente-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') enviarAtendente(); });
 
-        // LENIS SMOOTH SCROLL
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // HERO VIDEO SCRUBBING
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const frameCount = 54; 

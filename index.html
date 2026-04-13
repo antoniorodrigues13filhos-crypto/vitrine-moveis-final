@@ -109,7 +109,6 @@ html.lenis { height: auto; }
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #FFFFFF; }
 ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #CCCCCC; }
 
 #mobile-menu {
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -119,23 +118,25 @@ html.lenis { height: auto; }
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Transição suave para o sumiço do título */
 #hero-text-container {
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
+
+/* Animação para depoimentos */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
 
     <div id="loader" style="position: fixed; inset: 0px; background: linear-gradient(135deg, rgb(17, 17, 17), rgb(42, 42, 42)); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s; opacity: 1; visibility: visible;">
         <div class="mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white w-16 h-16" aria-hidden="true"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path><path d="M5 18v2"></path><path d="M19 18v2"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white w-16 h-16"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path></svg>
         </div>
         <h2 class="text-3xl font-serif text-white mb-2 tracking-tight uppercase">VITRINE MÓVEL</h2>
         <div style="width:16rem;height:0.5rem;background:rgba(255,255,255,0.3);border-radius:9999px;overflow:hidden;margin-top:0.5rem;">
             <div id="progress-bar" style="height: 100%; background: white; transition: 100ms ease-out; width: 0%;"></div>
         </div>
-        <p id="loading-text" class="text-white/80 mt-3 font-mono text-xs uppercase tracking-widest">Ajustando ergonomia...</p>
     </div>
 
     <header class="extreme-glass fixed top-6 left-1/2 w-[90%] max-w-7xl rounded-full z-50 flex items-center justify-between px-10 py-4">
@@ -153,7 +154,7 @@ html.lenis { height: auto; }
         </nav>
 
         <button onclick="toggleMenu()" class="md:hidden ml-auto p-1 z-[60] relative">
-            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
         </button>
     </header>
 
@@ -204,13 +205,48 @@ html.lenis { height: auto; }
                 </div>
                 <div class="w-full md:w-2/3">
                     <p class="text-lg md:text-xl text-primary/80 leading-[1.8] font-light mb-8">
-                        Acreditamos que o ambiente de trabalho molda a mente. Nossas peças não são apenas móveis; são instrumentos de foco e criação. Construídos com tolerâncias extremas e materiais que envelhecem com dignidade, cada linha é pensada para suportar a rotina sem perder a elegância.
+                        Acreditamos que o ambiente de trabalho molda a mente. Nossas peças não são apenas móveis; são instrumentos de foco e criação. cada linha é pensada para suportar a rotina sem perder a elegância.
                     </p>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border-light pt-8">
                         <div><span class="block font-mono text-2xl mb-1">01</span><span class="text-xs uppercase text-primary/60 font-medium">Design Autoral</span></div>
                         <div><span class="block font-mono text-2xl mb-1">02</span><span class="text-xs uppercase text-primary/60 font-medium">Acabamento Manual</span></div>
                         <div><span class="block font-mono text-2xl mb-1">03</span><span class="text-xs uppercase text-primary/60 font-medium">Ergonomia</span></div>
                         <div><span class="block font-mono text-2xl mb-1">04</span><span class="text-xs uppercase text-primary/60 font-medium">Garantia 10 Anos</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 px-6 bg-[#FAFAFA] border-t border-border-light overflow-hidden">
+            <div class="max-w-7xl mx-auto">
+                <div class="reveal text-center mb-20">
+                    <h2 class="font-serif text-4xl md:text-5xl mb-4">Confiança de quem constrói o futuro.</h2>
+                    <div class="w-20 h-1 bg-black mx-auto"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="reveal p-10 rounded-[2rem] bg-white border border-black/5 relative shadow-sm">
+                        <img src="catalogtestimonials/fabiana.jpg.png" class="w-20 h-20 rounded-full absolute -top-10 left-10 object-cover border-4 border-white shadow-xl" alt="Fabiana">
+                        <div class="mt-6 mb-8">
+                            <span class="font-bold text-lg tracking-tighter opacity-40 block mb-4 uppercase">Castro Construtora</span>
+                            <p class="text-primary/70 leading-relaxed font-light text-xl italic">"Precisávamos mobiliar uma escola inteira no Pará em tempo recorde. A Vitrine entregou tudo em 3 dias com organização impecável."</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm tracking-widest uppercase">Fabiana</p>
+                            <p class="text-xs text-primary/40 font-mono">Ipixuna - PA</p>
+                        </div>
+                    </div>
+
+                    <div class="reveal p-10 rounded-[2rem] bg-white border border-black/5 relative shadow-sm" style="transition-delay: 200ms;">
+                        <img src="catalogtestimonials/vinicios.jpg.png" class="w-20 h-20 rounded-full absolute -top-10 left-10 object-cover border-4 border-white shadow-xl" alt="Vinicios">
+                        <div class="mt-6 mb-8">
+                            <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-5 grayscale opacity-40 mb-6" alt="Unimed">
+                            <p class="text-primary/70 leading-relaxed font-light text-xl italic">"O atendimento da Vitrine Móveis superou as expectativas. A equipe garantiu que cada detalhe do projeto fosse executado com perfeição."</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm tracking-widest uppercase">Vinicios</p>
+                            <p class="text-xs text-primary/40 font-mono">Unimed - Araguaia</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -223,7 +259,7 @@ html.lenis { height: auto; }
                     <p class="font-mono text-sm text-primary/50 uppercase tracking-wider">Mobiliário de Alta Performance</p>
                 </div>
             </div>
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16"></div>
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16"></div>
         </section>
     </main>
 
@@ -235,13 +271,12 @@ html.lenis { height: auto; }
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
 
-        // LISTA DE PRODUTOS ATUALIZADA COM O CAMINHO catalog/
         const products = [
-            { id: "CH-001", name: "Cadeira Addit Presidente Frisokar", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
+            { id: "CH-001", name: "Cadeira Addit Presidente", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
-            { id: "CH-003", name: "Cadeira Executiva Back System", material: "Couro Ecológico", image: "catalog/cadeira-executiva-back-system-costurada-c-bracos-regulaveis.png", badge: "Conforto" },
-            { id: "ST-001", name: "Estante de Aço Dupla Flex", material: "Aço Carbono", image: "catalog/estante-de-aco-dupla-flex-preta.png", badge: "Organização" },
-            { id: "TB-001", name: "Mesa de Reunião Gebb Work", material: "MDP & Metal", image: "catalog/mesa-de-reuniao-gebb-work-pe-metalico-quadrado.png", badge: "Premium" },
+            { id: "CH-003", name: "Executiva Back System", material: "Couro Ecológico", image: "catalog/cadeira-executiva-back-system-costurada-c-bracos-regulaveis.png", badge: "Conforto" },
+            { id: "ST-001", name: "Estante Aço Dupla", material: "Aço Carbono", image: "catalog/estante-de-aco-dupla-flex-preta.png", badge: "Organização" },
+            { id: "TB-001", name: "Mesa Reunião Gebb", material: "MDP & Metal", image: "catalog/mesa-de-reuniao-gebb-work-pe-metalico-quadrado.png", badge: "Premium" },
             { id: "LK-001", name: "Roupeiro 12 Portas", material: "Aço Galvanizado", image: "catalog/roupeiro-12-portas-medias-lisas.png", badge: "Vestiário" }
         ];
 
@@ -251,15 +286,13 @@ html.lenis { height: auto; }
                 <div class="relative w-full h-[450px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6">
                     <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
                     <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light">
-                        <span class="font-mono text-[10px] uppercase tracking-widest text-primary font-bold">${prod.badge}</span>
+                        <span class="font-mono text-[10px] uppercase font-bold text-primary">${prod.badge}</span>
                     </div>
                 </div>
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="font-mono text-xs text-primary/50 mb-1">${prod.id}</p>
-                        <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
-                        <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
-                    </div>
+                <div>
+                    <p class="font-mono text-xs text-primary/50 mb-1">${prod.id}</p>
+                    <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
+                    <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
                 </div>
             </div>
         `).join('');
@@ -274,22 +307,18 @@ html.lenis { height: auto; }
         const images = [];
         let loadedImages = 0;
 
-        const getPath = i => `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
-
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             img.onload = () => {
                 loadedImages++;
-                const percent = Math.floor((loadedImages / frameCount) * 100);
-                document.getElementById('progress-bar').style.width = `${percent}%`;
+                document.getElementById('progress-bar').style.width = `${Math.floor((loadedImages/frameCount)*100)}%`;
                 if (loadedImages === frameCount) {
-                    const loader = document.getElementById('loader');
-                    loader.style.opacity = '0';
-                    setTimeout(() => loader.style.visibility = 'hidden', 500);
+                    document.getElementById('loader').style.opacity = '0';
+                    setTimeout(() => document.getElementById('loader').style.visibility = 'hidden', 500);
                     render();
                 }
             };
-            img.src = getPath(i);
+            img.src = `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
             images.push(img);
         }
 
@@ -309,15 +338,8 @@ html.lenis { height: auto; }
                 context.drawImage(img, x, y, img.width * ratio, img.height * ratio);
             }
 
-            const heroText = document.getElementById('hero-text-container');
-            const textOpacity = Math.max(0, 1 - (fraction * 12)); 
-            heroText.style.opacity = textOpacity;
-            heroText.style.transform = `translateY(${fraction * -50}px)`;
-
-            const l1 = document.getElementById('label-1');
-            const l2 = document.getElementById('label-2');
-            const l3 = document.getElementById('label-3');
-
+            document.getElementById('hero-text-container').style.opacity = Math.max(0, 1 - (fraction * 12)); 
+            
             const toggleLabel = (el, show) => {
                 if (show) {
                     el.classList.remove('opacity-0', 'translate-y-4');
@@ -328,9 +350,15 @@ html.lenis { height: auto; }
                 }
             };
 
-            toggleLabel(l1, frameIndex >= 5 && frameIndex <= 18);
-            toggleLabel(l2, frameIndex >= 22 && frameIndex <= 35);
-            toggleLabel(l3, frameIndex >= 38 && frameIndex <= 50);
+            toggleLabel(document.getElementById('label-1'), frameIndex >= 5 && frameIndex <= 18);
+            toggleLabel(document.getElementById('label-2'), frameIndex >= 22 && frameIndex <= 35);
+            toggleLabel(document.getElementById('label-3'), frameIndex >= 38 && frameIndex <= 50);
+
+            // Trigger reveal for testimonials
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+            });
         }
         
         window.addEventListener('scroll', render);
@@ -338,16 +366,7 @@ html.lenis { height: auto; }
 
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
-            const isClosed = menu.classList.contains('translate-x-full');
-            
-            if (isClosed) {
-                menu.classList.remove('translate-x-full');
-                icon.innerHTML = '<path d="M18 6L6 18M6 6l12 12"></path>';
-            } else {
-                menu.classList.add('translate-x-full');
-                icon.innerHTML = '<path d="M4 5h16M4 12h16M4 19h16"></path>';
-            }
+            menu.classList.toggle('translate-x-full');
         }
     </script>
 </body></html>

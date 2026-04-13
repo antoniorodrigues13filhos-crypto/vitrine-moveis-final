@@ -350,11 +350,23 @@
                     <p class="text-lg md:text-xl text-primary/80 leading-[1.8] font-light mb-8">
                         Acreditamos que o ambiente de trabalho molda a mente. Nossas peças não são apenas móveis; são instrumentos de foco e criação. Construídos com tolerâncias extremas e materiais que envelhegem com dignidade, cada linha é pensada para suportar a rotina sem perder a elegância.
                     </p>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border-light pt-8">
-                        <div><span class="block font-mono text-2xl mb-1">01</span><span class="text-xs uppercase text-primary/60 font-medium">Design Autoral</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">02</span><span class="text-xs uppercase text-primary/60 font-medium">Acabamento Manual</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">03</span><span class="text-xs uppercase text-primary/60 font-medium">Ergonomia</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">04</span><span class="text-xs uppercase text-primary/60 font-medium">Garantia 10 Anos</span></div>
+                    <div id="stats-container" class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border-light pt-8">
+                        <div>
+                            <span class="counter block font-mono text-2xl mb-1" data-target="1">0</span>
+                            <span class="text-xs uppercase text-primary/60 font-medium">Design Autoral</span>
+                        </div>
+                        <div>
+                            <span class="counter block font-mono text-2xl mb-1" data-target="63">0</span>
+                            <span class="text-xs uppercase text-primary/60 font-medium">Acabamento Manual</span>
+                        </div>
+                        <div>
+                            <span class="counter block font-mono text-2xl mb-1" data-target="40">0</span>
+                            <span class="text-xs uppercase text-primary/60 font-medium">Ergonomia</span>
+                        </div>
+                        <div>
+                            <span class="counter block font-mono text-2xl mb-1" data-target="89">0</span>
+                            <span class="text-xs uppercase text-primary/60 font-medium">Garantia 10 Anos</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -372,6 +384,41 @@
     </main>
 
     <script>
+        // LÓGICA DO CONTADOR ANIMADO
+        const counters = document.querySelectorAll('.counter');
+        const speed = 100;
+
+        const startCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target.toString().padStart(2, '0');
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        const observerOptions = { threshold: 0.5 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    startCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(document.getElementById('stats-container'));
+
+        // ATENDENTE
         function toggleAtendente() {
             const win = document.getElementById('atendente-window');
             const isVisible = win.style.display === 'flex';
@@ -382,10 +429,8 @@
             const input = document.getElementById('atendente-input');
             const text = input.value.trim();
             if(!text) return;
-
             addMsgUI(text, 'user');
             input.value = '';
-
             try {
                 const res = await fetch('https://hook.us2.make.com/nodnz5uzkjsu6wnha8phgh8eo1ccpfdj', {
                     method: 'POST',
@@ -395,7 +440,7 @@
                 const data = await res.json();
                 if(data.resposta) addMsgUI(data.resposta, 'bot');
             } catch(e) { 
-                addMsgUI("Olá! Gostaria de falar diretamente pelo WhatsApp para um atendimento mais rápido?", 'bot'); 
+                addMsgUI("Olá! Gostaria de falar diretamente pelo WhatsApp?", 'bot'); 
             }
         }
 
@@ -410,6 +455,7 @@
 
         document.getElementById('atendente-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') enviarAtendente(); });
 
+        // OUTROS SCRIPTS
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
 

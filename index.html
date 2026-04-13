@@ -116,6 +116,19 @@
         @media (max-width: 768px) {
             #product-grid img { filter: none !important; grayscale: 0 !important; }
         }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
@@ -155,6 +168,10 @@
         <a href="#solucoes" onclick="toggleMenu()" class="font-serif text-3xl">Soluções</a>
         <a href="#contato" onclick="toggleMenu()" class="font-serif text-3xl">Fale Conosco</a>
     </div>
+
+    <a href="https://wa.me/5511999999999" target="_blank" class="whatsapp-float">
+        <img src="3d-whatsapp-icon.png" alt="WhatsApp" class="w-full h-full object-contain">
+    </a>
 
     <main>
         <section id="scroll-hero" style="height:400vh;position:relative;">

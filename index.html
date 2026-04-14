@@ -187,18 +187,16 @@
             </div>
 
             <div id="chat-options" class="p-6 pt-0 space-y-2 border-t border-black/5 bg-white/50">
-                <p class="text-[10px] font-bold text-primary/30 uppercase tracking-widest mb-3 text-center">Como posso te ajudar?</p>
+                <p class="text-[10px] font-bold text-primary/30 uppercase tracking-widest mb-3 text-center">Inicie uma conversa</p>
                 <div class="grid grid-cols-1 gap-2 overflow-y-auto max-h-[160px] pr-1 chat-scroll">
-                    <button onclick="askCamila('addit')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">🪑 Cadeira Addit Presidente</button>
-                    <button onclick="askCamila('diretor')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">🪑 Cadeira Diretor NR17</button>
-                    <button onclick="askCamila('backsystem')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">🪑 Cadeira Executiva Back System</button>
-                    <button onclick="askCamila('roupeiro')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">🚪 Roupeiro 12 Portas</button>
-                    <button onclick="askCamila('mesa')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">🏢 Mesa de Reunião Gebb</button>
-                    <button onclick="askCamila('entrega')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">🚚 Entrega e Prazos</button>
-                    <button onclick="askCamila('localizacao')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">📍 Onde fica a loja?</button>
+                    <button onclick="askCamila('produtos')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">🪑 Ver Móveis Disponíveis</button>
+                    <button onclick="askCamila('entrega')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">🚚 Como funciona a entrega?</button>
+                    <button onclick="askCamila('localizacao')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">📍 Onde fica a loja física?</button>
+                    <button onclick="askCamila('preco')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">💰 Consultar Preço/Promoção</button>
+                    <button onclick="askCamila('garantia')" class="text-left p-3 rounded-xl border border-black/5 hover:bg-primary hover:text-white transition-all text-[11px] font-medium">🛡️ Tem Garantia?</button>
                 </div>
                 <a id="wa-link" href="https://wa.me/5562999999999" target="_blank" class="flex items-center justify-center gap-2 w-full py-3 bg-green-600 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-green-700 transition-all mt-2">
-                    Finalizar Pedido no WhatsApp
+                    Falar com Consultor Agora
                 </a>
             </div>
         </div>
@@ -241,12 +239,6 @@
         </button>
     </header>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-xl z-[55] translate-x-full flex flex-col items-center justify-center gap-8">
-        <a href="#produtos" onclick="toggleMenu()" class="font-serif text-3xl">Produtos</a>
-        <a href="#solucoes" onclick="toggleMenu()" class="font-serif text-3xl">Soluções</a>
-        <a href="#contato" onclick="toggleMenu()" class="font-serif text-3xl">Fale Conosco</a>
-    </div>
-
     <main>
         <section id="scroll-hero" style="height:400vh;position:relative;">
             <div style="position:sticky;top:0;height:100vh;width:100%;overflow:hidden;">
@@ -271,30 +263,6 @@
             </div>
         </section>
 
-        <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto bg-white">
-            <div class="flex flex-col md:flex-row gap-16 items-start">
-                <div class="w-full md:w-1/3">
-                    <h2 class="font-serif text-3xl md:text-4xl leading-tight mb-6">Redefinindo o Padrão Corporativo.</h2>
-                    <div class="w-12 h-[1px] bg-primary mb-6"></div>
-                    <p class="text-sm font-mono text-primary/60 uppercase tracking-widest">Manifesto VM</p>
-                </div>
-                <div class="w-full md:w-2/3">
-                    <p class="text-lg md:text-xl text-primary/80 leading-[1.8] font-light mb-8">Acreditamos que o ambiente de trabalho molda a mente. Nossas peças são instrumentos de foco e criação. cada linha é pensada para suportar a rotina sem perder a elegância.</p>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border-light pt-8">
-                        <div><span class="block font-mono text-2xl mb-1">01</span><span class="text-xs uppercase text-primary/60 font-medium">Design Autoral</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">02</span><span class="text-xs uppercase text-primary/60 font-medium">Acabamento Manual</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">03</span><span class="text-xs uppercase text-primary/60 font-medium">Ergonomia</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">04</span><span class="text-xs uppercase text-primary/60 font-medium">Garantia 10 Anos</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="produtos" class="py-24 px-6 max-w-[90rem] mx-auto border-t border-border-light">
-            <h2 class="font-serif text-4xl mb-16">Coleção Executiva</h2>
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16"></div>
-        </section>
-
         <section class="py-32 px-6 bg-texture border-t border-border-light overflow-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="reveal text-center mb-24">
@@ -312,10 +280,6 @@
                                     "<span id="fabiana-text" class="typewriter" data-text="Precisávamos mobiliar uma escola inteira no Pará em tempo recorde. A Vitrine entregou tudo em 3 dias com organização impecável."></span>"
                                 </p>
                             </div>
-                            <div class="transition-all duration-700 group-hover:translate-y-[-4px]">
-                                <p class="font-bold text-sm tracking-widest uppercase text-primary">Fabiana</p>
-                                <p class="text-[10px] text-primary/40 font-mono uppercase tracking-wider">Ipixuna - PA</p>
-                            </div>
                         </div>
                         <div id="vinicios-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4" style="transition-delay: 100ms;">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
@@ -325,10 +289,6 @@
                                 <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">
                                     "<span id="vinicios-text" class="typewriter" data-text="O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim e garantiu que tudo saísse conforme o combinado."></span>"
                                 </p>
-                            </div>
-                            <div class="transition-all duration-700 group-hover:translate-y-[-4px]">
-                                <p class="font-bold text-sm tracking-widest uppercase text-primary">Vinicios</p>
-                                <p class="text-[10px] text-primary/40 font-mono uppercase tracking-wider">Unimed - Araguaia</p>
                             </div>
                         </div>
                         <div id="rodrigo-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4" style="transition-delay: 200ms;">
@@ -340,10 +300,6 @@
                                     "<span id="rodrigo-text" class="typewriter" data-text="Ótimo local, loja organizada e bem estruturada. Atendimento, bom e preços razoáveis. Sem estacionamento, mas nas ruas próximas é fácil de encontrar."></span>"
                                 </p>
                             </div>
-                            <div class="transition-all duration-700 group-hover:translate-y-[-4px]">
-                                <p class="font-bold text-sm tracking-widest uppercase text-primary">Rodrigo Sousa</p>
-                                <p class="text-[10px] text-primary/40 font-mono uppercase tracking-wider">Google Review</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -352,30 +308,46 @@
     </main>
 
     <script>
-        // Lógica de Produtos
-        const products = [
-            { id: "CH-001", name: "Cadeira Addit Presidente", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
-            { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
-            { id: "CH-003", name: "Executiva Back System", material: "Couro Ecológico", image: "catalog/cadeira-executiva-back-system-costurada-c-bracos-regulaveis.png", badge: "Conforto" },
-            { id: "ST-001", name: "Estante Aço Dupla", material: "Aço Carbono", image: "catalog/estante-de-aco-dupla-flex-preta.png", badge: "Organização" },
-            { id: "TB-001", name: "Mesa Reunião Gebb", material: "MDP & Metal", image: "catalog/mesa-de-reuniao-gebb-work-pe-metalico-quadrado.png", badge: "Premium" },
-            { id: "LK-001", name: "Roupeiro 12 Portas", material: "Aço Galvanizado", image: "catalog/roupeiro-12-portas-medias-lisas.png", badge: "Vestiário" }
-        ];
+        // LÓGICA DO CÉREBRO DA IA (CHATBOT CAMILA)
+        const camilaBrain = {
+            produtos: "Trabalhamos com cadeiras, mesas, estantes e roupeiros voltados pra escritório, empresas e uso pessoal 👍 Me fala o que você está procurando que eu te ajudo a escolher a melhor opção 😉",
+            entrega: "Fazemos entrega sim 🚚 Me passa seu CEP que já verifico o valor do frete e o prazo certinho pra você 👍",
+            localizacao: "Temos loja física em Anápolis 👍 📍 Avenida Senador José Lourenço Dias, nº 63 – Bairro Maracanã. Se quiser, posso te mandar a localização no mapa também 😊",
+            preco: "Consigo te passar o melhor valor sim 😊 Me fala qual produto você tem interesse ou se prefere que eu te indique uma opção ideal pro seu uso.",
+            garantia: "Sim, nossos produtos têm garantia 👍 Trabalhamos com móveis de qualidade, feitos pra durar e aguentar uso no dia a dia. Qual produto você está vendo?",
+            saudacao: "Olá! Tudo bem sim 😊 É um prazer te atender! Me conta, você está procurando algum móvel específico ou quer ajuda pra escolher?"
+        };
 
-        document.getElementById('product-grid').innerHTML = products.map(prod => `
-            <div class="group cursor-pointer">
-                <div class="relative w-full h-[450px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6 shadow-inner">
-                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
-                    <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light shadow-sm">
-                        <span class="font-mono text-[10px] uppercase font-bold text-primary">${prod.badge}</span>
-                    </div>
-                </div>
-                <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
-                <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
-            </div>
-        `).join('');
+        function toggleChat() { document.getElementById('chat-window').classList.toggle('hidden'); }
 
-        // Lenis e Canvas
+        function askCamila(intent) {
+            const chatContent = document.getElementById('chat-content');
+            const response = camilaBrain[intent];
+            
+            // Pergunta do Usuário
+            const userMsg = document.createElement('div');
+            userMsg.className = "flex flex-col gap-1 items-end";
+            userMsg.innerHTML = `<div class="bg-primary text-white p-4 rounded-2xl rounded-tr-none max-w-[85%] shadow-sm"><p class="text-xs">Gostaria de saber sobre ${intent}</p></div>`;
+            chatContent.appendChild(userMsg);
+
+            // Simula Digitante
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = "flex flex-col gap-1 items-start animate-pulse";
+                botMsg.innerHTML = `<div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5 max-w-[85%]"><p class="text-xs text-primary/40 italic">Digitando...</p></div>`;
+                chatContent.appendChild(botMsg);
+                chatContent.scrollTop = chatContent.scrollHeight;
+
+                // Resposta conduzida
+                setTimeout(() => {
+                    botMsg.classList.remove('animate-pulse');
+                    botMsg.innerHTML = `<div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5 max-w-[85%] shadow-sm"><p class="text-sm text-primary/80 leading-relaxed italic">"${response}"</p></div>`;
+                    chatContent.scrollTop = chatContent.scrollHeight;
+                }, 800);
+            }, 300);
+        }
+
+        // Scripts de Scroll e Renderização (Originais)
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
@@ -388,12 +360,7 @@
             const img = new Image();
             img.onload = () => {
                 loadedImages++;
-                document.getElementById('progress-bar').style.width = `${Math.floor((loadedImages/frameCount)*100)}%`;
-                if (loadedImages === frameCount) {
-                    document.getElementById('loader').style.opacity = '0';
-                    setTimeout(() => document.getElementById('loader').style.visibility = 'hidden', 500);
-                    render();
-                }
+                if (loadedImages === frameCount) render();
             };
             img.src = `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
             images.push(img);
@@ -410,94 +377,13 @@
                 const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
                 context.drawImage(img, (canvas.width - img.width * ratio) / 2, (canvas.height - img.height * ratio) / 2, img.width * ratio, img.height * ratio);
             }
-            document.getElementById('hero-text-container').style.opacity = Math.max(0, 1 - (fraction * 12)); 
-            const toggleLabel = (id, show) => {
-                const el = document.getElementById(id);
-                if (show) { el.classList.remove('opacity-0', 'translate-y-4'); el.classList.add('opacity-100', 'translate-y-0'); }
-                else { el.classList.add('opacity-0', 'translate-y-4'); el.classList.remove('opacity-100', 'translate-y-0'); }
-            };
-            toggleLabel('label-1', frameIndex >= 5 && frameIndex <= 18);
-            toggleLabel('label-2', frameIndex >= 22 && frameIndex <= 35);
-            toggleLabel('label-3', frameIndex >= 38 && frameIndex <= 50);
         }
-
-        // LÓGICA DO CHAT INTELIGENTE
-        const botData = {
-            addit: "Ótima escolha! A Cadeira Addit Presidente é perfeita pra quem passa muitas horas sentado 💺 Ela tem encosto em mesh (telado), que evita calor nas costas, além de ser super confortável e resistente. Você vai usar mais pra escritório ou home office?",
-            diretor: "Essa cadeira já é mais robusta e segue padrão NR17, ideal pra ergonomia no trabalho 👍 A espuma injetada não deforma fácil, então você pode usar por horas sem perder o conforto. Quer algo mais executivo ou mais focado em custo-benefício?",
-            backsystem: "Essa é uma das mais procuradas 👀 A linha Back System permite ajuste do encosto, então você consegue adaptar bem ao seu corpo. É uma ótima escolha pra quem quer conforto no dia a dia sem gastar muito.",
-            roupeiro: "Esse roupeiro é muito usado em empresas, academias e vestiários 👍 Ele é feito em aço galvanizado, então não enferruja fácil e tem alta durabilidade. Você pretende usar em empresa ou uso pessoal?",
-            mesa: "Essa mesa é ideal pra dar um ar mais profissional no ambiente 🏢 Estrutura em metal com tampo em MDP, bem resistente e com ótimo acabamento. Quantas pessoas você pretende acomodar mais ou menos?",
-            estante: "Essa estante é perfeita pra organização 💪 Aguenta bastante peso e é muito usada em estoque, escritório ou até em casa. Você vai usar pra armazenar o quê? Posso te indicar a melhor configuração.",
-            entrega: "Fazemos entrega sim 🚚 Me informa seu CEP que já verifico prazo e valor certinho pra você.",
-            localizacao: "Estamos em Anápolis 👍 📍 Avenida Senador José Lourenço Dias, nº 63, Bairro Maracanã. Se quiser, posso te mandar a localização no mapa também 😊"
-        };
-
-        function toggleChat() { document.getElementById('chat-window').classList.toggle('hidden'); }
-
-        function askCamila(key) {
-            const chatContent = document.getElementById('chat-content');
-            const response = botData[key];
-            
-            // Adiciona balão do usuário
-            const userMsg = document.createElement('div');
-            userMsg.className = "flex flex-col gap-1 items-end";
-            userMsg.innerHTML = `<div class="bg-primary text-white p-4 rounded-2xl rounded-tr-none max-w-[85%] shadow-sm"><p class="text-sm">Gostaria de saber sobre ${key}</p></div>`;
-            chatContent.appendChild(userMsg);
-
-            // Simula "Digitando..."
-            setTimeout(() => {
-                const botMsg = document.createElement('div');
-                botMsg.className = "flex flex-col gap-1 items-start animate-pulse";
-                botMsg.innerHTML = `<div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5 max-w-[85%]"><p class="text-sm text-primary/40 italic">Digitando...</p></div>`;
-                chatContent.appendChild(botMsg);
-                chatContent.scrollTop = chatContent.scrollHeight;
-
-                // Resposta real
-                setTimeout(() => {
-                    botMsg.classList.remove('animate-pulse');
-                    botMsg.innerHTML = `<div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5 max-w-[85%] shadow-sm"><p class="text-sm text-primary/80 leading-relaxed italic">"${response}"</p></div>`;
-                    chatContent.scrollTop = chatContent.scrollHeight;
-                }, 1000);
-            }, 400);
-        }
-
-        // Typewriter (Inalterado)
-        function initTypewriter(element) {
-            const text = element.getAttribute('data-text');
-            if (!text) return;
-            let index = 0;
-            element.textContent = '';
-            function type() {
-                if (index < text.length) {
-                    element.textContent += text.charAt(index);
-                    index++;
-                    setTimeout(type, 30 + Math.random() * 40); 
-                } else {
-                    element.style.borderRight = 'none'; 
-                }
-            }
-            type();
-        }
-
-        let fabianaStarted = false, viniciosStarted = false, rodrigoStarted = false;
 
         window.addEventListener('scroll', () => {
             render();
             document.querySelectorAll('.reveal').forEach(el => {
                 if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
             });
-            const checkAndStart = (id, textId, startedVar, setter) => {
-                const el = document.getElementById(id), txt = document.getElementById(textId);
-                if (el && txt && !startedVar && el.getBoundingClientRect().top < window.innerHeight * 0.8) {
-                    initTypewriter(txt); setter(true);
-                }
-            };
-            checkAndStart('fabiana-card', 'fabiana-text', fabianaStarted, v => fabianaStarted = v);
-            checkAndStart('vinicios-card', 'vinicios-text', viniciosStarted, v => viniciosStarted = v);
-            checkAndStart('rodrigo-card', 'rodrigo-text', rodrigoStarted, v => rodrigoStarted = v);
         });
-
-        function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('translate-x-full'); }
     </script>
 </body></html>

@@ -40,7 +40,6 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <style type="text/tailwindcss">
@@ -76,21 +75,20 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* TÉCNICA DE CSS SPRITE PROFISSIONAL */
-        .sprite-wrapper {
-            background-image: url('vitrine-assets/icons-entrega.png.png');
-            background-size: 200% 200%; /* Define que a imagem é uma grade 2x2 */
-            background-repeat: no-repeat;
+        /* AJUSTE PROPORCIONAL DO SPRITE */
+        .sprite-item {
             width: 100%;
             height: 100%;
-            transition: transform 0.5s ease;
+            background-image: url('vitrine-assets/icons-entrega.png.png');
+            background-size: 200% 200%; /* Imagem única dividida em 4 */
+            background-repeat: no-repeat;
         }
-        .sprite-wrapper:hover { transform: scale(1.1); }
         
-        .icon-1 { background-position: 0% 0%; }     /* Topo Esquerda */
-        .icon-2 { background-position: 100% 0%; }   /* Topo Direita */
-        .icon-3 { background-position: 0% 100%; }   /* Baixo Esquerda */
-        .icon-4 { background-position: 100% 100%; } /* Baixo Direita */
+        /* Posicionamento exato para cada quadrante da imagem */
+        .pos-1 { background-position: 0% 0%; }     /* Canto superior esquerdo */
+        .pos-2 { background-position: 100% 0%; }   /* Canto superior direito */
+        .pos-3 { background-position: 0% 100%; }   /* Canto inferior esquerdo */
+        .pos-4 { background-position: 100% 100%; } /* Canto inferior direito */
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative">
@@ -168,9 +166,9 @@
             </div>
         </section>
 
-        <section id="produtos" class="py-24 px-6 max-w-[90rem] mx-auto border-t border-border-light">
+        <section id="produtos" class="py-24 px-6 max-w-[90rem] mx-auto border-t border-border-light text-primary">
             <h2 class="font-serif text-4xl mb-16">Coleção Executiva</h2>
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16 text-primary"></div>
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16"></div>
         </section>
 
         <section class="py-32 px-6 bg-[#FAFAFA] border-t border-border-light overflow-hidden text-primary">
@@ -202,15 +200,15 @@
                         </div>
                     </div>
                     
-                    <div class="reveal md:w-1/3 flex flex-col items-center justify-center p-8 bg-white rounded-3xl border border-black/5 shadow-sm text-center" style="transition-delay: 400ms;">
-                        <div class="grid grid-cols-2 gap-2 mb-8 w-full max-w-[200px]">
-                            <div class="reveal aspect-square bg-[#1d4477] rounded-lg overflow-hidden" style="transition-delay: 500ms;"><div class="sprite-wrapper icon-1"></div></div>
-                            <div class="reveal aspect-square bg-[#f5b800] rounded-lg overflow-hidden" style="transition-delay: 600ms;"><div class="sprite-wrapper icon-2"></div></div>
-                            <div class="reveal aspect-square bg-[#f5b800] rounded-lg overflow-hidden" style="transition-delay: 700ms;"><div class="sprite-wrapper icon-3"></div></div>
-                            <div class="reveal aspect-square bg-[#1d4477] rounded-lg overflow-hidden" style="transition-delay: 800ms;"><div class="sprite-wrapper icon-4"></div></div>
+                    <div class="reveal md:w-1/3 flex flex-col items-center justify-center p-10 bg-white rounded-3xl border border-black/5 shadow-sm text-center" style="transition-delay: 400ms;">
+                        <div class="grid grid-cols-2 gap-3 mb-10 w-full max-w-[220px] aspect-square">
+                            <div class="reveal overflow-hidden rounded-xl bg-white shadow-sm" style="transition-delay: 500ms;"><div class="sprite-item pos-1"></div></div>
+                            <div class="reveal overflow-hidden rounded-xl bg-white shadow-sm" style="transition-delay: 600ms;"><div class="sprite-item pos-2"></div></div>
+                            <div class="reveal overflow-hidden rounded-xl bg-white shadow-sm" style="transition-delay: 700ms;"><div class="sprite-item pos-3"></div></div>
+                            <div class="reveal overflow-hidden rounded-xl bg-white shadow-sm" style="transition-delay: 800ms;"><div class="sprite-item pos-4"></div></div>
                         </div>
                         <h4 class="font-extrabold text-3xl tracking-tighter text-[#1d4477] mb-0 leading-none">ENTREGA</h4>
-                        <h4 class="font-extrabold text-3xl tracking-tighter text-[#1d4477] mb-2 leading-none">GARANTIDA</h4>
+                        <h4 class="font-extrabold text-3xl tracking-tighter text-[#1d4477] mb-3 leading-none">GARANTIDA</h4>
                         <div class="w-full h-[1px] bg-[#1d4477] mb-3 opacity-20"></div>
                         <p class="text-[11px] text-[#1d4477] font-bold uppercase tracking-widest">NO PRAZO COMBINADO</p>
                     </div>
@@ -220,7 +218,6 @@
     </main>
 
     <script>
-        // Renderização dinâmica de produtos mantendo a lógica original
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
@@ -243,12 +240,10 @@
             </div>
         `).join('');
 
-        // Lógica do Smooth Scroll (Lenis)
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // Canvas e Hero Animation
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const frameCount = 54; const images = []; let loadedImages = 0;

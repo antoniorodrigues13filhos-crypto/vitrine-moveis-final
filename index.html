@@ -130,7 +130,6 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
             </div>
-
             <div id="chat-content" class="p-6 space-y-4 h-[300px] overflow-y-auto chat-scroll bg-texture/30">
                 <div class="flex flex-col gap-1">
                     <div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5 self-start max-w-[85%]">
@@ -138,7 +137,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="p-6 pt-4 border-t border-black/5 bg-white/80">
                 <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-2xl border border-black/5">
                     <input type="text" id="chat-input" placeholder="Digite sua dúvida..." class="flex-1 bg-transparent border-none outline-none px-3 text-sm text-primary" onkeypress="handleChatKey(event)">
@@ -153,7 +151,6 @@
                 </div>
             </div>
         </div>
-
         <button onclick="toggleChat()" class="group float-btn relative">
             <div class="relative flex items-center justify-center">
                 <div class="absolute right-full mr-6 bg-primary text-white px-5 py-2 rounded-full shadow-2xl opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none whitespace-nowrap"><p class="text-[9px] font-mono uppercase tracking-[0.2em]">Falar com Camila</p></div>
@@ -236,7 +233,6 @@
     </main>
 
     <script>
-        // PRODUTOS
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
@@ -246,17 +242,20 @@
             { id: "LK-001", name: "Roupeiro 12 Portas", material: "Aço Galvanizado", image: "catalog/roupeiro-12-portas-medias-lisas.png", badge: "Vestiário" }
         ];
 
+        // Lógica para desativar grayscale apenas no mobile
+        const isMobile = window.innerWidth < 768;
+        const grayscaleClass = isMobile ? "" : "grayscale";
+
         document.getElementById('product-grid').innerHTML = products.map(prod => `
             <div class="group cursor-pointer">
                 <div class="relative w-full h-[450px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6 shadow-inner">
-                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
+                    <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover ${grayscaleClass} transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
                     <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light shadow-sm"><span class="font-mono text-[10px] uppercase font-bold text-primary">${prod.badge}</span></div>
                 </div>
                 <h3 class="font-serif text-2xl mb-1">${prod.name}</h3><p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
             </div>
         `).join('');
 
-        // SCROLL & CANVAS
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
@@ -302,7 +301,7 @@
             toggleLabel('label-3', frameIndex >= 38 && frameIndex <= 50);
         }
 
-        // LÓGICA DO CHAT DA CAMILA
+        // CHAT CAMILA
         const camilaBrain = [
             { keys: ['bom dia', 'boa tarde', 'boa noite', 'oi', 'olá', 'tudo bem'], reply: "Olá! Tudo bem sim 😊 É um prazer te atender! Me conta, você está procurando algum móvel específico ou quer ajuda pra escolher?" },
             { keys: ['onde', 'fica', 'localização', 'endereço', 'loja física'], reply: "Estamos em Anápolis 👍 📍 Avenida Senador José Lourenço Dias, nº 63 – Bairro Maracanã. Se quiser, posso te mandar a localização no mapa também 😊" },
@@ -347,7 +346,6 @@
             }, 1200);
         }
 
-        // TYPEWRITER
         function initTypewriter(element) {
             const text = element.getAttribute('data-text');
             if (!text) return;

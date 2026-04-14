@@ -124,10 +124,9 @@
                 url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3%3Feburbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1' stitchTiles='stitch'/%3%3F/filter%3%3Frect width='100%25' height='100%25' filter='noiseFilter' opacity='0.015'/%3%3F/svg%3%3F");
         }
 
-        /* Efeito de texto sendo digitado (Typewriter) */
         .typewriter {
             display: inline;
-            border-right: 2px solid rgba(17, 17, 17, 0.7); /* Cursor */
+            border-right: 2px solid rgba(17, 17, 17, 0.7);
             animation: blink-caret 0.75s step-end infinite;
         }
 
@@ -251,7 +250,7 @@
 
                         <div id="vinicios-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4" style="transition-delay: 100ms;">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
-                            <img src="catalogtestimonials/vinicios.jpg" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2" alt="Vinicios">
+                            <img src="catalogtestimonials/vinicios.jpg.png" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2" alt="Vinicios">
                             <div class="relative z-10 mb-10 overflow-hidden min-h-[140px]">
                                 <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-5 grayscale opacity-40 mb-6 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:translate-x-2">
                                 <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">
@@ -285,7 +284,6 @@
     </main>
 
     <script>
-        // Lógica dos produtos (inalterada)
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
@@ -308,7 +306,6 @@
             </div>
         `).join('');
 
-        // Lógica do Lenis, Canvas e Scroll (inalterada)
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
@@ -358,29 +355,23 @@
             toggleLabel('label-3', frameIndex >= 38 && frameIndex <= 50);
         }
 
-        // NOVO: Lógica do efeito Typewriter (Texto sendo digitado)
         function initTypewriter(element) {
             const text = element.getAttribute('data-text');
-            if (!text) return; // Segurança
-            
+            if (!text) return;
             let index = 0;
-            element.textContent = ''; // Limpa o texto inicial
-
+            element.textContent = '';
             function type() {
                 if (index < text.length) {
                     element.textContent += text.charAt(index);
                     index++;
-                    // Velocidade natural: variação sutil entre as letras
                     setTimeout(type, 30 + Math.random() * 40); 
                 } else {
-                    // Remove o cursor após finalizar
                     element.style.borderRight = 'none'; 
                 }
             }
             type();
         }
 
-        // NOVO: Gatilhos independentes para o Typewriter e Animações de Scroll original
         let fabianaStarted = false;
         let viniciosStarted = false;
         let rodrigoStarted = false;
@@ -391,7 +382,6 @@
                 if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
             });
 
-            // Gatilho do Typewriter - Fabiana
             const fabianaCard = document.getElementById('fabiana-card');
             const fabianaText = document.getElementById('fabiana-text');
             if (fabianaCard && fabianaText && !fabianaStarted) {
@@ -402,7 +392,6 @@
                 }
             }
 
-            // Gatilho do Typewriter - Vinicios
             const viniciosCard = document.getElementById('vinicios-card');
             const viniciosText = document.getElementById('vinicios-text');
             if (viniciosCard && viniciosText && !viniciosStarted) {
@@ -413,7 +402,6 @@
                 }
             }
 
-            // Gatilho do Typewriter - Rodrigo
             const rodrigoCard = document.getElementById('rodrigo-card');
             const rodrigoText = document.getElementById('rodrigo-text');
             if (rodrigoCard && rodrigoText && !rodrigoStarted) {

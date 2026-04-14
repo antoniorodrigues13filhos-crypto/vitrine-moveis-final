@@ -41,12 +41,6 @@
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
-    <script>
-      window.lucide = {
-        createIcons: function() {}
-      };
-    </script>
-    
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <style type="text/tailwindcss">
@@ -54,8 +48,6 @@
             --color-primary: #111111;
             --color-secondary: #2A2A2A;
             --color-border-light: #E5E5E5;
-            --color-brand-blue: #1e3a8a;
-            --color-brand-yellow: #facc15;
             --font-serif: 'Playfair Display', serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -76,51 +68,36 @@
             backface-visibility: hidden;
             transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .extreme-glass:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-        .nav-link {
-            position: relative;
-            color: #111;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -2px;
-            left: 0;
-            background-color: #111;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #FFFFFF; }
-        ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 4px; }
-
-        #mobile-menu {
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .floating-label {
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        #hero-text-container {
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-
+        .extreme-glass:hover { background: rgba(255, 255, 255, 0.25); }
+        .nav-link { position: relative; color: #111; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0; background-color: #111; transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+        
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* TÉCNICA DE CSS SPRITE PROFISSIONAL */
+        .sprite-wrapper {
+            background-image: url('vitrine-assets/icons-entrega.png.png');
+            background-size: 200% 200%; /* Define que a imagem é uma grade 2x2 */
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+        .sprite-wrapper:hover { transform: scale(1.1); }
+        
+        .icon-1 { background-position: 0% 0%; }     /* Topo Esquerda */
+        .icon-2 { background-position: 100% 0%; }   /* Topo Direita */
+        .icon-3 { background-position: 0% 100%; }   /* Baixo Esquerda */
+        .icon-4 { background-position: 100% 100%; } /* Baixo Direita */
     </style>
 </head>
-<body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
+<body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative">
 
-    <div id="loader" style="position: fixed; inset: 0px; background: linear-gradient(135deg, rgb(17, 17, 17), rgb(42, 42, 42)); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s; opacity: 1; visibility: visible;">
-        <div class="mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white w-16 h-16"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path></svg>
+    <div id="loader" style="position: fixed; inset: 0px; background: linear-gradient(135deg, rgb(17, 17, 17), rgb(42, 42, 42)); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s;">
+        <div class="mb-4 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path></svg>
         </div>
         <h2 class="text-3xl font-serif text-white mb-2 tracking-tight uppercase">VITRINE MÓVEL</h2>
         <div style="width:16rem;height:0.5rem;background:rgba(255,255,255,0.3);border-radius:9999px;overflow:hidden;">
@@ -132,19 +109,14 @@
         <nav class="hidden md:flex items-center gap-8">
             <a href="#produtos" class="nav-link text-sm font-medium tracking-wide">Produtos</a>
         </nav>
-
         <a href="#" class="absolute left-1/2 -translate-x-1/2 select-none hover:scale-105 transition-transform duration-300 z-20">
             <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/user-images/207d01fe-9154-44a2-a035-5a4810effc12.webp" alt="logo" class="logo h-8 md:h-10 lg:h-11 w-auto brightness-0">
         </a>
-
         <nav class="hidden md:flex items-center gap-8">
             <a href="#solucoes" class="nav-link text-sm font-medium tracking-wide">Soluções</a>
             <a href="#contato" class="nav-link text-sm font-medium tracking-wide">Fale Conosco</a>
         </nav>
-
-        <button onclick="toggleMenu()" class="md:hidden ml-auto p-1 z-[60] relative">
-            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
-        </button>
+        <button onclick="toggleMenu()" class="md:hidden ml-auto p-1 z-[60] relative"><svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M4 5h16M4 12h16M4 19h16"/></svg></button>
     </header>
 
     <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-xl z-[55] translate-x-full flex flex-col items-center justify-center gap-8">
@@ -157,22 +129,19 @@
         <section id="scroll-hero" style="height:400vh;position:relative;">
             <div style="position:sticky;top:0;height:100vh;width:100%;overflow:hidden;">
                 <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></canvas>
-                
-                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none">
+                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-white">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Estrutura</p>
-                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
+                    <h3 class="text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3>
                 </div>
-                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right">
+                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right text-white">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Revestimento</p>
-                    <h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
+                    <h3 class="text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3>
                 </div>
-                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center">
+                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center text-white">
                     <p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Mecanismo</p>
-                    <h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3>
+                    <h3 class="text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3>
                 </div>
-
                 <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),rgba(0,0,0,0.2) 50%,transparent);z-index:1;"></div>
-                
                 <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6 text-center" style="padding-top: 10vh;">
                     <span class="font-mono text-xs md:text-sm text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
                     <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight max-w-5xl">A Arte de Equipar<br><span class="italic text-white/90 font-light">Seu Espaço</span></h1>
@@ -182,18 +151,18 @@
 
         <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto bg-white">
             <div class="flex flex-col md:flex-row gap-16 items-start">
-                <div class="w-full md:w-1/3">
+                <div class="w-full md:w-1/3 text-primary">
                     <h2 class="font-serif text-3xl md:text-4xl leading-tight mb-6">Redefinindo o Padrão Corporativo.</h2>
                     <div class="w-12 h-[1px] bg-primary mb-6"></div>
-                    <p class="text-sm font-mono text-primary/60 uppercase tracking-widest">Manifesto VM</p>
+                    <p class="text-sm font-mono opacity-60 uppercase tracking-widest">Manifesto VM</p>
                 </div>
                 <div class="w-full md:w-2/3">
                     <p class="text-lg md:text-xl text-primary/80 leading-[1.8] font-light mb-8">Acreditamos que o ambiente de trabalho molda a mente. Nossas peças são instrumentos de foco e criação. cada linha é pensada para suportar a rotina sem perder a elegância.</p>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border-light pt-8">
-                        <div><span class="block font-mono text-2xl mb-1">01</span><span class="text-xs uppercase text-primary/60 font-medium">Design Autoral</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">02</span><span class="text-xs uppercase text-primary/60 font-medium">Acabamento Manual</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">03</span><span class="text-xs uppercase text-primary/60 font-medium">Ergonomia</span></div>
-                        <div><span class="block font-mono text-2xl mb-1">04</span><span class="text-xs uppercase text-primary/60 font-medium">Garantia 10 Anos</span></div>
+                        <div><span class="block font-mono text-2xl mb-1">01</span><span class="text-xs uppercase opacity-60 font-medium">Design Autoral</span></div>
+                        <div><span class="block font-mono text-2xl mb-1">02</span><span class="text-xs uppercase opacity-60 font-medium">Acabamento Manual</span></div>
+                        <div><span class="block font-mono text-2xl mb-1">03</span><span class="text-xs uppercase opacity-60 font-medium">Ergonomia</span></div>
+                        <div><span class="block font-mono text-2xl mb-1">04</span><span class="text-xs uppercase opacity-60 font-medium">Garantia 10 Anos</span></div>
                     </div>
                 </div>
             </div>
@@ -201,10 +170,10 @@
 
         <section id="produtos" class="py-24 px-6 max-w-[90rem] mx-auto border-t border-border-light">
             <h2 class="font-serif text-4xl mb-16">Coleção Executiva</h2>
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16"></div>
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16 text-primary"></div>
         </section>
 
-        <section class="py-32 px-6 bg-[#FAFAFA] border-t border-border-light">
+        <section class="py-32 px-6 bg-[#FAFAFA] border-t border-border-light overflow-hidden text-primary">
             <div class="max-w-7xl mx-auto">
                 <div class="reveal text-center mb-24">
                     <h2 class="font-serif text-4xl md:text-5xl mb-6">Projetos complexos exigem mais do que habilidade técnica — exigem confiança. E foi isso que encontramos aqui.</h2>
@@ -216,41 +185,33 @@
                         <div class="reveal testimonial-card p-10 rounded-[2.5rem] bg-white border border-black/5 relative shadow-sm">
                             <img src="catalogtestimonials/fabiana.jpg.png" class="w-20 h-20 rounded-full absolute -top-10 left-10 object-cover border-4 border-white shadow-xl" alt="Fabiana">
                             <div class="mt-6 mb-8">
-                                <span class="font-bold text-lg tracking-tighter opacity-40 block mb-4 uppercase">Castro Construtora</span>
+                                <span class="font-bold text-lg tracking-tighter opacity-40 block mb-4 uppercase text-[#003366]">Castro Construtora</span>
                                 <p class="text-primary/70 leading-relaxed font-light text-xl italic">"Precisávamos mobiliar uma escola inteira no Pará em tempo recorde. A Vitrine entregou tudo em 3 dias com organização impecável."</p>
                             </div>
                             <p class="font-bold text-sm tracking-widest uppercase">Fabiana</p>
-                            <p class="text-xs text-primary/40 font-mono uppercase">Ipixuna - PA</p>
+                            <p class="text-xs opacity-40 font-mono uppercase">Ipixuna - PA</p>
                         </div>
                         <div class="reveal testimonial-card p-10 rounded-[2.5rem] bg-white border border-black/5 relative shadow-sm" style="transition-delay: 200ms;">
                             <img src="catalogtestimonials/vinicios.jpg.png" class="w-20 h-20 rounded-full absolute -top-10 left-10 object-cover border-4 border-white shadow-xl" alt="Vinicios">
                             <div class="mt-6 mb-8">
-                                <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-5 grayscale opacity-40 mb-6">
+                                <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-5 grayscale opacity-40 mb-6" alt="Unimed">
                                 <p class="text-primary/70 leading-relaxed font-light text-xl italic">"O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim e garantiu que tudo saísse conforme o combinado."</p>
                             </div>
                             <p class="font-bold text-sm tracking-widest uppercase">Vinicios</p>
-                            <p class="text-xs text-primary/40 font-mono uppercase">Unimed - Araguaia</p>
+                            <p class="text-xs opacity-40 font-mono uppercase">Unimed - Araguaia</p>
                         </div>
                     </div>
                     
                     <div class="reveal md:w-1/3 flex flex-col items-center justify-center p-8 bg-white rounded-3xl border border-black/5 shadow-sm text-center" style="transition-delay: 400ms;">
-                        <div class="grid grid-cols-2 gap-2 mb-8 w-full max-w-[220px]">
-                            <div class="aspect-square bg-[#1d4477] rounded-lg flex items-center justify-center p-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-full h-full"><path d="M21 16.5v-9L12 3L3 7.5v9l9 4.5l9-4.5ZM12 5.25l6.3 3.15l-6.3 3.15l-6.3-3.15l6.3-3.15ZM4.5 9.45l6.75 3.375v6.525l-6.75-3.375V9.45Zm15 0v6.525l-6.75 3.375v-6.525L19.5 9.45Z"/><path d="M11.25 14.25h1.5v3h-1.5z"/><path d="m12 13.5l2.25 2.25h-4.5z"/></svg>
-                            </div>
-                            <div class="aspect-square bg-[#f5b800] rounded-lg flex items-center justify-center p-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-full h-full"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4ZM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5s-.67 1.5-1.5 1.5Zm13.5-9l1.96 2.5H17V9.5h2.5Zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5s-.67 1.5-1.5 1.5Z"/><path d="M5 8h6v2H5zM5 11h4v2H5z"/></svg>
-                            </div>
-                            <div class="aspect-square bg-[#f5b800] rounded-lg flex items-center justify-center p-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-full h-full"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2Zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8Z"/><path d="M7 11h10v2H7zM10 7h4v10h-4z" opacity=".3"/><path d="M18 10.5c0-.83-.67-1.5-1.5-1.5H13V7c0-.55-.45-1-1-1s-1 .45-1 1v2H7.5C6.67 9 6 9.67 6 10.5v3c0 .83.67 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5v-3Z"/></svg>
-                            </div>
-                            <div class="aspect-square bg-[#1d4477] rounded-lg flex items-center justify-center p-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-full h-full"><path d="M21 10.5c0-1.38-1.12-2.5-2.5-2.5H16l-3.23-3.23c-.39-.39-1.03-.39-1.42 0L8 8H5.5C4.12 8 3 9.12 3 10.5V14c0 1.38 1.12 2.5 2.5 2.5h1.61l3.5 3.5c.39.39 1.03.39 1.42 0l3.5-3.5h1.97c1.38 0 2.5-1.12 2.5-2.5v-3.5ZM12 5.41L14.59 8H9.41L12 5.41ZM5.5 14.5c-.55 0-1-.45-1-1v-3.5c0-.55.45-1 1-1h2.59l.7.7c.39.39 1.02.39 1.41 0l.71-.7h1.9l.71.7c.39.39 1.02.39 1.41 0l.7-.7h2.58c.55 0 1 .45 1 1v3.5c0 .55-.45 1-1 1h-1.97l-3.5 3.5l-3.5-3.5H5.5Z"/></svg>
-                            </div>
+                        <div class="grid grid-cols-2 gap-2 mb-8 w-full max-w-[200px]">
+                            <div class="reveal aspect-square bg-[#1d4477] rounded-lg overflow-hidden" style="transition-delay: 500ms;"><div class="sprite-wrapper icon-1"></div></div>
+                            <div class="reveal aspect-square bg-[#f5b800] rounded-lg overflow-hidden" style="transition-delay: 600ms;"><div class="sprite-wrapper icon-2"></div></div>
+                            <div class="reveal aspect-square bg-[#f5b800] rounded-lg overflow-hidden" style="transition-delay: 700ms;"><div class="sprite-wrapper icon-3"></div></div>
+                            <div class="reveal aspect-square bg-[#1d4477] rounded-lg overflow-hidden" style="transition-delay: 800ms;"><div class="sprite-wrapper icon-4"></div></div>
                         </div>
                         <h4 class="font-extrabold text-3xl tracking-tighter text-[#1d4477] mb-0 leading-none">ENTREGA</h4>
                         <h4 class="font-extrabold text-3xl tracking-tighter text-[#1d4477] mb-2 leading-none">GARANTIDA</h4>
-                        <div class="w-full h-[1px] bg-[#1d4477] mb-3"></div>
+                        <div class="w-full h-[1px] bg-[#1d4477] mb-3 opacity-20"></div>
                         <p class="text-[11px] text-[#1d4477] font-bold uppercase tracking-widest">NO PRAZO COMBINADO</p>
                     </div>
                 </div>
@@ -259,6 +220,7 @@
     </main>
 
     <script>
+        // Renderização dinâmica de produtos mantendo a lógica original
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
@@ -277,14 +239,16 @@
                     </div>
                 </div>
                 <h3 class="font-serif text-2xl mb-1">${prod.name}</h3>
-                <p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
+                <p class="font-sans text-sm opacity-60 font-light">${prod.material}</p>
             </div>
         `).join('');
 
+        // Lógica do Smooth Scroll (Lenis)
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
+        // Canvas e Hero Animation
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const frameCount = 54; const images = []; let loadedImages = 0;
@@ -310,21 +274,17 @@
             const scrollMax = document.getElementById('scroll-hero').offsetHeight - window.innerHeight;
             const fraction = Math.max(0, Math.min(1, scrollTop / scrollMax));
             const frameIndex = Math.min(frameCount - 1, Math.floor(fraction * frameCount));
-
             const img = images[frameIndex];
             if (img && img.complete) {
                 const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
                 context.drawImage(img, (canvas.width - img.width * ratio) / 2, (canvas.height - img.height * ratio) / 2, img.width * ratio, img.height * ratio);
             }
-
             document.getElementById('hero-text-container').style.opacity = Math.max(0, 1 - (fraction * 12)); 
-            
             const toggleLabel = (id, show) => {
                 const el = document.getElementById(id);
                 if (show) { el.classList.remove('opacity-0', 'translate-y-4'); el.classList.add('opacity-100', 'translate-y-0'); }
                 else { el.classList.add('opacity-0', 'translate-y-4'); el.classList.remove('opacity-100', 'translate-y-0'); }
             };
-
             toggleLabel('label-1', frameIndex >= 5 && frameIndex <= 18);
             toggleLabel('label-2', frameIndex >= 22 && frameIndex <= 35);
             toggleLabel('label-3', frameIndex >= 38 && frameIndex <= 50);
@@ -336,7 +296,6 @@
                 if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
             });
         });
-
         function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('translate-x-full'); }
     </script>
 </body></html>

@@ -134,29 +134,69 @@
             50% { border-color: rgba(17, 17, 17, 0.7); }
         }
 
-        /* Animação do botão flutuante */
         .float-btn {
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
-            0% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        }
+
+        /* Estilo do Chat Virtual */
+        #chat-window {
+            transform-origin: bottom right;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #chat-window.hidden {
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+            pointer-events: none;
         }
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
 
-    <a href="https://wa.me/SEUNUMERO" target="_blank" class="fixed bottom-8 right-8 z-[100] group float-btn">
-        <div class="relative flex items-center justify-center">
-            <div class="absolute right-full mr-4 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-black/5 shadow-xl opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
-                <p class="text-[10px] font-mono uppercase tracking-widest text-primary">Fale com uma atendente</p>
+    <div class="fixed bottom-8 right-8 z-[100]">
+        
+        <div id="chat-window" class="hidden mb-6 w-80 md:w-96 bg-white/80 backdrop-blur-2xl border border-white/50 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden">
+            <div class="p-6 bg-primary text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center border border-white/10">
+                        <img src="/midia w/3d-icon-social-media-app.png" class="w-full h-full object-cover rounded-full" alt="Atendente">
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest">Vitrine Virtual</p>
+                        <span class="text-[10px] opacity-60 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span> Online agora</span>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="opacity-50 hover:opacity-100 transition-opacity">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
             </div>
-            <div class="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-xl border border-white/50 rounded-full shadow-2xl flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-110">
-                <img src="/midia w/3d-icon-social-media-app.png" alt="WhatsApp" class="w-full h-full object-cover">
+
+            <div class="p-6 space-y-4 max-h-[300px] overflow-y-auto">
+                <div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5">
+                    <p class="text-sm text-primary/80 leading-relaxed italic">"Olá! Seja bem-vindo à Vitrine Móvel. Sou sua atendente virtual e estou aqui para ajudar a equipar seu espaço com excelência. Como posso auxiliá-lo hoje?"</p>
+                </div>
+            </div>
+
+            <div class="p-6 pt-0 space-y-2">
+                <a href="https://wa.me/SEUNUMERO?text=Gostaria de ver o catálogo premium" target="_blank" class="block w-full py-3 px-4 rounded-xl border border-primary/10 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-all text-center">Ver Catálogo Premium</a>
+                <a href="https://wa.me/SEUNUMERO?text=Quero falar com um consultor" target="_blank" class="block w-full py-3 px-4 rounded-xl border border-primary/10 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-all text-center">Falar com Consultor</a>
             </div>
         </div>
-    </a>
+
+        <button onclick="toggleChat()" class="group float-btn relative">
+            <div class="relative flex items-center justify-center">
+                <div class="absolute right-full mr-4 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-black/5 shadow-xl opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
+                    <p class="text-[10px] font-mono uppercase tracking-widest text-primary">Atendimento Virtual</p>
+                </div>
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-xl border border-white/50 rounded-full shadow-2xl flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-110 active:scale-95">
+                    <img src="/midia w/3d-icon-social-media-app.png" alt="WhatsApp" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </button>
+    </div>
 
     <div id="loader" style="position: fixed; inset: 0px; background: linear-gradient(135deg, rgb(17, 17, 17), rgb(42, 42, 42)); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s; opacity: 1; visibility: visible;">
         <div class="mb-4">
@@ -304,6 +344,7 @@
     </main>
 
     <script>
+        // Lógica de Produtos
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
@@ -326,6 +367,7 @@
             </div>
         `).join('');
 
+        // Lenis e Canvas
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
@@ -373,6 +415,12 @@
             toggleLabel('label-1', frameIndex >= 5 && frameIndex <= 18);
             toggleLabel('label-2', frameIndex >= 22 && frameIndex <= 35);
             toggleLabel('label-3', frameIndex >= 38 && frameIndex <= 50);
+        }
+
+        // Função para Abrir/Fechar Chat
+        function toggleChat() {
+            const chat = document.getElementById('chat-window');
+            chat.classList.toggle('hidden');
         }
 
         function initTypewriter(element) {

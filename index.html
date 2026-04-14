@@ -122,7 +122,6 @@ html.lenis { height: auto; }
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-/* Animação para depoimentos */
 .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 .reveal.active { opacity: 1; transform: translateY(0); }
 </style>
@@ -245,8 +244,8 @@ html.lenis { height: auto; }
         </section>
     </main>
 
-    <a href="https://wa.me/5511999999999" class="glass-fab fixed bottom-8 right-8 w-14 h-14 rounded-full flex items-center justify-center z-50 group overflow-hidden border border-white/30 shadow-lg">
-        <img src="assetschat camila.jpg.jpg" alt="Camila Atendente" class="w-full h-full object-cover">
+    <a href="https://wa.me/5511999999999" target="_blank" class="glass-fab fixed bottom-8 right-8 w-14 h-14 rounded-full flex items-center justify-center z-50 group">
+        <img src="3d-whatsapp-icon.png" alt="WhatsApp" class="w-8 h-8 object-contain">
     </a>
 
     <script>
@@ -323,7 +322,6 @@ html.lenis { height: auto; }
         
         window.addEventListener('scroll', () => {
             render();
-            // REVEAL SYSTEM
             document.querySelectorAll('.reveal').forEach(el => {
                 if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
             });

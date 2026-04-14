@@ -105,8 +105,6 @@
 
         #chat-window { transform-origin: bottom right; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: 120; }
         #chat-window.hidden { opacity: 0; transform: scale(0.8) translateY(20px); pointer-events: none; }
-        .chat-scroll::-webkit-scrollbar { width: 4px; }
-        .chat-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
@@ -140,21 +138,15 @@
             <div class="p-6 pt-4 border-t border-black/5 bg-white/80">
                 <div class="flex items-center gap-2 bg-primary/5 p-2 rounded-2xl border border-black/5">
                     <input type="text" id="chat-input" placeholder="Digite sua dúvida..." class="flex-1 bg-transparent border-none outline-none px-3 text-sm text-primary" onkeypress="handleChatKey(event)">
-                    <button onclick="sendMessage()" class="bg-primary text-white p-2 rounded-xl hover:scale-105 transition-transform">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                    <button onclick="sendMessage()" class="bg-primary text-white p-2 rounded-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
                     </button>
-                </div>
-                <div class="mt-3 flex gap-2 overflow-x-auto pb-2 chat-scroll">
-                    <button onclick="quickMessage('Onde fica a loja?')" class="whitespace-nowrap text-[10px] px-3 py-1.5 rounded-full border border-black/10 hover:bg-primary hover:text-white transition-all">📍 Localização</button>
-                    <button onclick="quickMessage('Vocês entregam?')" class="whitespace-nowrap text-[10px] px-3 py-1.5 rounded-full border border-black/10 hover:bg-primary hover:text-white transition-all">🚚 Entrega</button>
-                    <button onclick="quickMessage('Qual o valor?')" class="whitespace-nowrap text-[10px] px-3 py-1.5 rounded-full border border-black/10 hover:bg-primary hover:text-white transition-all">💰 Preço</button>
                 </div>
             </div>
         </div>
         <button onclick="toggleChat()" class="group float-btn relative">
             <div class="relative flex items-center justify-center">
-                <div class="absolute right-full mr-6 bg-primary text-white px-5 py-2 rounded-full shadow-2xl opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none whitespace-nowrap"><p class="text-[9px] font-mono uppercase tracking-[0.2em]">Falar com Camila</p></div>
-                <div class="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-xl border border-white/50 rounded-full shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-110 active:scale-95 group-hover:rotate-6">
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-xl border border-white/50 rounded-full shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-110">
                     <img src="/midia w/3d-icon-social-media-app.png" alt="WhatsApp" class="w-full h-full object-cover p-3">
                 </div>
             </div>
@@ -162,7 +154,7 @@
     </div>
 
     <div id="loader" style="position: fixed; inset: 0px; background: linear-gradient(135deg, rgb(17, 17, 17), rgb(42, 42, 42)); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s; opacity: 1; visibility: visible;">
-        <div class="mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white w-16 h-16"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path></svg></div>
+        <div class="mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white w-16 h-16"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path></svg></div>
         <h2 class="text-3xl font-serif text-white mb-2 tracking-tight uppercase">VITRINE MÓVEL</h2>
         <div style="width:16rem;height:0.5rem;background:rgba(255,255,255,0.3);border-radius:9999px;overflow:hidden;"><div id="progress-bar" style="height: 100%; background: white; width: 0%;"></div></div>
     </div>
@@ -178,9 +170,9 @@
         <section id="scroll-hero" style="height:400vh;position:relative;">
             <div style="position:sticky;top:0;height:100vh;width:100%;overflow:hidden;">
                 <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></canvas>
-                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-left"><h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3></div>
-                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right"><h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3></div>
-                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center"><h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3></div>
+                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-left"><p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Estrutura</p><h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3></div>
+                <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right"><p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Revestimento</p><h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3></div>
+                <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center"><p class="font-mono text-[10px] uppercase tracking-tighter text-white/50 mb-1">Mecanismo</p><h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3></div>
                 <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),rgba(0,0,0,0.2) 50%,transparent);z-index:1;"></div>
                 <div id="hero-text-container" class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6 text-center" style="padding-top: 10vh;">
                     <span class="font-mono text-xs md:text-sm text-white/80 border border-white/20 px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">Nova Coleção</span>
@@ -194,26 +186,26 @@
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16"></div>
         </section>
 
-        <section class="py-32 px-6 bg-texture border-t border-border-light overflow-hidden">
+        <section class="py-32 px-6 bg-texture border-t border-border-light overflow-hidden text-left">
             <div class="max-w-7xl mx-auto">
                 <div class="reveal text-center mb-24"><h2 class="font-serif text-4xl md:text-5xl mb-6 tracking-tight text-primary">A confiança de quem constrói o amanhã.</h2><div class="w-20 h-[1px] bg-primary/10 mx-auto"></div></div>
                 <div class="flex flex-col md:flex-row items-stretch gap-8">
-                    <div class="reveal md:w-full grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch text-left">
+                    <div class="reveal md:w-full grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
                         <div id="fabiana-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
-                            <img src="catalogtestimonials/fabiana.jpg.png" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110" alt="Fabiana">
+                            <img src="catalogtestimonials/fabiana.jpg.png" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 group-hover:scale-110 transition-transform duration-700" alt="Fabiana">
                             <div class="relative z-10 mb-10 min-h-[140px]"><span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary">Castro Construtora</span><p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="fabiana-text" class="typewriter" data-text="Precisávamos mobiliar uma escola inteira no Pará em tempo recorde. A Vitrine entregou tudo em 3 dias com organização impecável."></span>"</p></div>
                             <p class="font-bold text-sm tracking-widest uppercase text-primary">Fabiana</p>
                         </div>
                         <div id="vinicios-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
-                            <img src="catalogtestimonials/vinicios.jpg.png" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110" alt="Vinicios">
+                            <img src="catalogtestimonials/vinicios.jpg.png" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 group-hover:scale-110 transition-transform duration-700" alt="Vinicios">
                             <div class="relative z-10 mb-10 min-h-[140px]"><img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-5 grayscale opacity-40 mb-6 group-hover:grayscale-0 transition-all"><p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="vinicios-text" class="typewriter" data-text="O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim e garantiu que tudo saísse conforme o combinado."></span>"</p></div>
                             <p class="font-bold text-sm tracking-widest uppercase text-primary">Vinicios</p>
                         </div>
                         <div id="rodrigo-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
-                            <img src="catalogtestimonials/rodrigo.jpg.jpg" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110" alt="Rodrigo">
+                            <img src="catalogtestimonials/rodrigo.jpg.jpg" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 group-hover:scale-110 transition-transform duration-700" alt="Rodrigo">
                             <div class="relative z-10 mb-10 min-h-[140px]"><span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary">Avaliação do Cliente</span><p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="rodrigo-text" class="typewriter" data-text="Ótimo local, loja organizada e bem estruturada. Atendimento, bom e preços razoáveis. Sem estacionamento, mas nas ruas próximas é fácil de encontrar."></span>"</p></div>
                             <p class="font-bold text-sm tracking-widest uppercase text-primary">Rodrigo Sousa</p>
                         </div>
@@ -222,61 +214,32 @@
             </div>
         </section>
 
-        <section id="contato" class="py-32 px-6 bg-white border-t border-border-light relative">
+        <section id="contato" class="py-32 px-6 bg-white border-t border-border-light relative text-left">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-stretch">
-                
-                <div class="w-full md:w-1/2 text-left reveal">
+                <div class="w-full md:w-1/2 reveal">
                     <h2 class="font-serif text-5xl md:text-6xl mb-4 text-primary tracking-tight">Envie-nos uma Mensagem</h2>
                     <div class="w-16 h-1 bg-primary mb-8 rounded-full"></div>
                     <p class="text-lg text-primary/60 mb-12 font-light">Fale com a gente e receba atendimento rápido e personalizado.</p>
-
                     <form class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">Seu Nome</label>
-                                <input type="text" placeholder="Como podemos te chamar?" class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 focus:border-primary/20 focus:bg-white outline-none transition-all text-sm font-light">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">Telefone</label>
-                                <input type="tel" placeholder="(00) 00000-0000" class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 focus:border-primary/20 focus:bg-white outline-none transition-all text-sm font-light">
-                            </div>
+                            <div class="space-y-2"><label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">Seu Nome</label><input type="text" placeholder="Nome completo" class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 outline-none text-sm font-light"></div>
+                            <div class="space-y-2"><label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">Telefone</label><input type="tel" placeholder="(00) 00000-0000" class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 outline-none text-sm font-light"></div>
                         </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">E-mail Corporativo</label>
-                            <input type="email" placeholder="exemplo@empresa.com" class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 focus:border-primary/20 focus:bg-white outline-none transition-all text-sm font-light">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">Sua Mensagem</label>
-                            <textarea rows="5" placeholder="Descreva seu projeto ou necessidade..." class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 focus:border-primary/20 focus:bg-white outline-none transition-all text-sm font-light resize-none"></textarea>
-                        </div>
-                        <button type="button" class="w-full py-5 px-8 rounded-2xl bg-primary text-white text-xs font-bold uppercase tracking-[0.2em] shadow-2xl shadow-black/20 hover:scale-[1.02] hover:bg-primary/90 transition-all active:scale-95">
-                            Falar com um Especialista
-                        </button>
+                        <div class="space-y-2"><label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">E-mail</label><input type="email" placeholder="exemplo@empresa.com" class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 outline-none text-sm font-light"></div>
+                        <div class="space-y-2"><label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">Sua Mensagem</label><textarea rows="4" placeholder="Como podemos ajudar?" class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 outline-none text-sm font-light resize-none"></textarea></div>
+                        <button type="button" class="w-full py-5 rounded-2xl bg-primary text-white text-xs font-bold uppercase tracking-[0.2em] shadow-xl hover:scale-[1.02] transition-all">Falar com um Especialista</button>
                     </form>
                 </div>
-
-                <div class="w-full md:w-1/2 reveal" style="transition-delay: 200ms;">
-                    <div class="h-full min-h-[500px] w-full bg-primary/5 rounded-[3rem] overflow-hidden border border-black/5 shadow-2xl relative group">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3826.9632313627915!2d-48.9567406!3d-16.331294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935ea48316c0211f%3A0xc34b726487e4125a!2sAv.%20Sen.%20Jos%C3%A9%20Louren%C3%A7o%20Dias%2C%2063%20-%20St.%20Central%2C%20An%C3%A1polis%20-%20GO%2C%2075020-010!5e0!3m2!1spt-BR!2sbr!4v1713000000000!5m2!1spt-BR!2sbr" 
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="grayscale contrast-125 opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
-                        </iframe>
-                        
-                        <div class="absolute bottom-8 left-8 right-8 bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] border border-white shadow-2xl pointer-events-none group-hover:translate-y-2 transition-transform duration-500 text-left">
-                            <p class="text-[10px] font-mono uppercase tracking-widest text-primary/40 mb-2">Visite nossa Loja Física</p>
-                            <h4 class="font-serif text-xl text-primary mb-1">Vitrine Móvel Anápolis</h4>
-                            <p class="text-sm text-primary/60 font-light leading-relaxed">
-                                Avenida Senador José Lourenço Dias, nº 63<br>
-                                Bairro Maracanã – CEP: 75020-187<br>
-                                Anápolis - GO
-                            </p>
-                            <a href="https://www.google.com/maps/place/Vitrine+M%C3%B3veis+An%C3%A1polis+-+Loja+F%C3%ADsica/@-16.319314,-48.953481,14z/data=!4m6!3m5!1s0x935ea48963f6b4eb:0xa3dfbbeba7fa910a!8m2!3d-16.3193136!4d-48.9534808!16s%2Fg%2F1tcvk5fq?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="pointer-events-auto inline-block mt-4 text-[10px] font-bold uppercase tracking-widest text-primary hover:opacity-50 transition-opacity underline decoration-primary/20 underline-offset-4">
-                                Ver rota no GPS
-                            </a>
+                <div class="w-full md:w-1/2 reveal">
+                    <div class="h-full min-h-[450px] bg-primary/5 rounded-[3rem] overflow-hidden border border-black/5 shadow-2xl relative group">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3824.582885934571!2d-48.95655182414777!3d-16.331235184386766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935ea3df6d8417c9%3A0xc31991d9600e1262!2sAv.%20Sen.%20Jos%C3%A9%20Louren%C3%A7o%20Dias%2C%2063%20-%20St.%20Central%2C%20An%C3%A1polis%20-%20GO%2C%2075020-010!5e0!3m2!1spt-BR!2sbr!4v1711200000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="grayscale group-hover:grayscale-0 transition-all duration-700"></iframe>
+                        <div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-xl p-8 rounded-[2rem] border border-white shadow-2xl">
+                            <h4 class="font-serif text-xl mb-1">Vitrine Móvel</h4>
+                            <p class="text-sm text-primary/60 font-light">Av. Senador José Lourenço Dias, nº 63<br>Anápolis - GO</p>
+                            <a href="https://www.google.com/maps/place/Vitrine+M%C3%B3veis+An%C3%A1polis+-+Loja+F%C3%ADsica/@-16.319314,-48.953481,14z/data=!4m6!3m5!1s0x935ea48963f6b4eb:0xa3dfbbeba7fa910a!8m2!3d-16.3193136!4d-48.9534808!16s%2Fg%2F1tcvk5fq?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="inline-block mt-4 text-[10px] font-bold uppercase tracking-widest text-primary underline">Ver rota no GPS</a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>
@@ -293,16 +256,13 @@
 
         const isMobile = window.innerWidth < 768;
         const grayscaleClass = isMobile ? "" : "grayscale";
-
         document.getElementById('product-grid').innerHTML = products.map(prod => `
             <div class="group cursor-pointer">
-                <div class="relative w-full h-[450px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6 shadow-inner text-left">
+                <div class="relative w-full h-[450px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6 shadow-inner">
                     <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover ${grayscaleClass} transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
                     <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light shadow-sm"><span class="font-mono text-[10px] uppercase font-bold text-primary">${prod.badge}</span></div>
                 </div>
-                <div class="text-left">
-                    <h3 class="font-serif text-2xl mb-1">${prod.name}</h3><p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
-                </div>
+                <h3 class="font-serif text-2xl mb-1">${prod.name}</h3><p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
             </div>
         `).join('');
 
@@ -340,48 +300,50 @@
                 const ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
                 context.drawImage(img, (canvas.width - img.width * ratio) / 2, (canvas.height - img.height * ratio) / 2, img.width * ratio, img.height * ratio);
             }
+            // RESTAURAÇÃO DAS ANIMAÇÕES DO HERO
+            document.getElementById('hero-text-container').style.opacity = Math.max(0, 1 - (fraction * 12)); 
+            const toggleLabel = (id, show) => {
+                const el = document.getElementById(id);
+                if (show) { el.classList.remove('opacity-0', 'translate-y-4'); el.classList.add('opacity-100', 'translate-y-0'); }
+                else { el.classList.add('opacity-0', 'translate-y-4'); el.classList.remove('opacity-100', 'translate-y-0'); }
+            };
+            toggleLabel('label-1', frameIndex >= 5 && frameIndex <= 18);
+            toggleLabel('label-2', frameIndex >= 22 && frameIndex <= 35);
+            toggleLabel('label-3', frameIndex >= 38 && frameIndex <= 50);
         }
 
-        // LÓGICA DO CHAT DA CAMILA
+        // CHAT CAMILA
         const camilaBrain = [
             { keys: ['bom dia', 'boa tarde', 'boa noite', 'oi', 'olá', 'tudo bem'], reply: "Olá! Tudo bem sim 😊 É um prazer te atender! Me conta, você está procurando algum móvel específico ou quer ajuda pra escolher?" },
-            { keys: ['onde', 'fica', 'localização', 'endereço', 'loja física'], reply: "Estamos em Anápolis 👍 📍 Avenida Senador José Lourenço Dias, nº 63 – Bairro Maracanã. Se quiser, posso te mandar a localização no mapa também 😊" },
-            { keys: ['entrega', 'entregam', 'frete', 'envio', 'prazo'], reply: "Fazemos entrega sim 🚚 Me informa seu CEP que já verifico o valor do frete e o prazo certinho pra você 👍" },
-            { keys: ['preço', 'valor', 'quanto custa', 'orçamento', 'promoção'], reply: "Consigo te passar o melhor valor sim 😊 Me fala qual produto você tem interesse ou se prefere que eu te indique uma opção ideal." },
-            { keys: ['garantia', 'problema', 'defeito'], reply: "Sim, nossos produtos possuem garantia 👍 Trabalhamos com móveis de qualidade, pensados pra durabilidade. Qual produto você está vendo? Posso te explicar certinho 😉" },
-            { keys: ['cadeira', 'mesa', 'estante', 'roupeiro'], reply: "Trabalhamos com cadeiras, mesas, estantes e roupeiros 👍 Tudo voltado pra escritório e empresas. Me fala o que você está procurando que eu te ajudo 😉" }
+            { keys: ['onde', 'fica', 'localização', 'endereço', 'loja física'], reply: "Estamos em Anápolis 👍 📍 Avenida Senador José Lourenço Dias, nº 63 – Bairro Maracanã. Se quiser, mando o mapa!" },
+            { keys: ['entrega', 'frete', 'envio'], reply: "Fazemos entrega sim 🚚 Me passa seu CEP que já verifico valor e prazo pra você 👍" },
+            { keys: ['preço', 'valor', 'quanto custa'], reply: "Consigo te passar o melhor valor sim 😊 Qual produto te interessou?" }
         ];
-
         function toggleChat() { document.getElementById('chat-window').classList.toggle('hidden'); }
         function handleChatKey(e) { if(e.key === 'Enter') sendMessage(); }
         function quickMessage(text) { document.getElementById('chat-input').value = text; sendMessage(); }
-
         function sendMessage() {
             const input = document.getElementById('chat-input');
             const chatContent = document.getElementById('chat-content');
             const userText = input.value.trim().toLowerCase();
             if(!userText) return;
-
             const userDiv = document.createElement('div');
-            userDiv.className = "flex flex-col gap-1 items-end text-right";
+            userDiv.className = "flex flex-col gap-1 items-end";
             userDiv.innerHTML = `<div class="bg-primary text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-sm text-xs">${input.value}</div>`;
             chatContent.appendChild(userDiv);
             input.value = '';
-
-            let finalReply = "Conseguiu ver direitinho? 😊 Se quiser, posso te ajudar a escolher a melhor opção pro seu caso 👍";
+            let finalReply = "Pode me contar mais? Posso te ajudar a escolher a melhor opção 👍";
             for(let item of camilaBrain) { if(item.keys.some(key => userText.includes(key))) { finalReply = item.reply; break; } }
-
             const typingDiv = document.createElement('div');
-            typingDiv.className = "flex flex-col gap-1 items-start text-left";
-            typingDiv.innerHTML = `<div class="bg-primary/5 p-3 rounded-2xl rounded-tl-none border border-black/5 max-w-[85%] text-xs italic text-primary/40 animate-pulse">Camila está digitando...</div>`;
+            typingDiv.className = "flex flex-col gap-1 items-start";
+            typingDiv.innerHTML = `<div class="bg-primary/5 p-3 rounded-2xl rounded-tl-none border border-black/5 text-xs italic text-primary/40 animate-pulse">Digitando...</div>`;
             chatContent.appendChild(typingDiv);
             chatContent.scrollTop = chatContent.scrollHeight;
-
             setTimeout(() => {
                 typingDiv.remove();
                 const botDiv = document.createElement('div');
-                botDiv.className = "flex flex-col gap-1 items-start text-left";
-                botDiv.innerHTML = `<div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5 max-w-[85%] text-sm italic text-primary/80 shadow-sm">"${finalReply}"</div>`;
+                botDiv.className = "flex flex-col gap-1 items-start";
+                botDiv.innerHTML = `<div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5 text-sm italic text-primary/80">"${finalReply}"</div>`;
                 chatContent.appendChild(botDiv);
                 chatContent.scrollTop = chatContent.scrollHeight;
             }, 1200);
@@ -392,10 +354,8 @@
             if (!text) return;
             let index = 0; element.textContent = '';
             function type() {
-                if (index < text.length) {
-                    element.textContent += text.charAt(index); index++;
-                    setTimeout(type, 30 + Math.random() * 40); 
-                } else { element.style.borderRight = 'none'; }
+                if (index < text.length) { element.textContent += text.charAt(index); index++; setTimeout(type, 30 + Math.random() * 40); }
+                else { element.style.borderRight = 'none'; }
             }
             type();
         }

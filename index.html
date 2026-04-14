@@ -114,6 +114,27 @@
 
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Textura de fundo sutil para realçar o Glassmorphism */
+        .bg-texture {
+            background-color: #ffffff;
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(30, 58, 138, 0.03) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(250, 204, 21, 0.02) 0px, transparent 50%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3%3Feburbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1' stitchTiles='stitch'/%3%3F/filter%3%3Frect width='100%25' height='100%25' filter='noiseFilter' opacity='0.015'/%3%3F/svg%3%3F");
+        }
+
+        /* Efeito de texto sendo digitado (Typewriter) */
+        .typewriter {
+            display: inline;
+            border-right: 2px solid rgba(17, 17, 17, 0.7); /* Cursor */
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(17, 17, 17, 0.7); }
+        }
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
@@ -204,7 +225,7 @@
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16"></div>
         </section>
 
-        <section class="py-32 px-6 bg-white border-t border-border-light overflow-hidden">
+        <section class="py-32 px-6 bg-texture border-t border-border-light overflow-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="reveal text-center mb-24">
                     <h2 class="font-serif text-4xl md:text-5xl mb-6 tracking-tight text-primary">A confiança de quem constrói o amanhã.</h2>
@@ -215,8 +236,8 @@
                     <div class="reveal md:w-full grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
                         <div class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
-                            <img src="catalogtestimonials/fabiana.jpg.png" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2" alt="Fabiana">
-                            <div class="relative z-10 mb-10">
+                            <img src="uploaded:PORRA.png-62687aed-b751-4fb8-8f8f-b2bd8197b22a" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2" alt="Fabiana">
+                            <div class="relative z-10 mb-10 overflow-hidden">
                                 <span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary transition-all duration-500 group-hover:translate-x-2 group-hover:opacity-100">Castro Construtora</span>
                                 <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary group-hover:translate-x-3">
                                     "Precisávamos mobiliar uma escola inteira no Pará em tempo recorde. A Vitrine entregou tudo em 3 dias com organização impecável."
@@ -230,8 +251,8 @@
 
                         <div class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4" style="transition-delay: 100ms;">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
-                            <img src="catalogtestimonials/vinicios.jpg.png" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2" alt="Vinicios">
-                            <div class="relative z-10 mb-10">
+                            <img src="uploaded:PORRA.png-62687aed-b751-4fb8-8f8f-b2bd8197b22a" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2" alt="Vinicios">
+                            <div class="relative z-10 mb-10 overflow-hidden">
                                 <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-5 grayscale opacity-40 mb-6 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:translate-x-2">
                                 <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary group-hover:translate-x-3">
                                     "O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim e garantiu que tudo saísse conforme o combinado."
@@ -243,13 +264,13 @@
                             </div>
                         </div>
 
-                        <div class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4" style="transition-delay: 200ms;">
+                        <div id="rodrigo-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4" style="transition-delay: 200ms;">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
-                            <img src="catalogtestimonials/rodrigo.jpg.jpg" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2" alt="Rodrigo Sousa">
-                            <div class="relative z-10 mb-10">
+                            <img src="uploaded:PORRA.png-62687aed-b751-4fb8-8f8f-b2bd8197b22a" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2" alt="Rodrigo Sousa">
+                            <div class="relative z-10 mb-10 overflow-hidden">
                                 <span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary transition-all duration-500 group-hover:translate-x-2 group-hover:opacity-100">Avaliação do Cliente</span>
-                                <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary group-hover:translate-x-3">
-                                    "Ótimo local, loja organizada e bem estruturada. Atendimento, bom e preços razoáveis. Sem estacionamento, mas nas ruas próximas é fácil de encontrar."
+                                <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary min-h-[120px]">
+                                    "<span id="typewriter-text" class="typewriter" data-text="Ótimo local, loja organizada e bem estruturada. Atendimento, bom e preços razoáveis. Sem estacionamento, mas nas ruas próximas é fácil de encontrar."></span>"
                                 </p>
                             </div>
                             <div class="transition-all duration-700 group-hover:translate-y-[-4px]">
@@ -264,6 +285,7 @@
     </main>
 
     <script>
+        // ... (Script de produtos original - inalterado) ...
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
@@ -286,6 +308,7 @@
             </div>
         `).join('');
 
+        // ... (Lenis e Canvas original - inalterado) ...
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
@@ -334,12 +357,48 @@
             toggleLabel('label-2', frameIndex >= 22 && frameIndex <= 35);
             toggleLabel('label-3', frameIndex >= 38 && frameIndex <= 50);
         }
-        
+
+        // Lógica do efeito Typewriter (Texto sendo digitado)
+        function initTypewriter(element) {
+            const text = element.getAttribute('data-text');
+            let index = 0;
+            element.textContent = ''; // Limpa o texto inicial
+
+            function type() {
+                if (index < text.length) {
+                    element.textContent += text.charAt(index);
+                    index++;
+                    // Velocidade natural: variação sutil entre as letras
+                    setTimeout(type, 30 + Math.random() * 40); 
+                } else {
+                    // Remove o cursor após finalizar
+                    element.style.borderRight = 'none'; 
+                }
+            }
+            type();
+        }
+
+        // Gatilho para o Typewriter e Animações de Scroll original
+        let typewriterStarted = false; // Garante que digite apenas uma vez
+
         window.addEventListener('scroll', () => {
             render();
             document.querySelectorAll('.reveal').forEach(el => {
                 if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
             });
+
+            // Gatilho do Typewriter quando o card do Rodrigo estiver visível
+            const rodrigoCard = document.getElementById('rodrigo-card');
+            const typewriterElement = document.getElementById('typewriter-text');
+            
+            if (rodrigoCard && typewriterElement && !typewriterStarted) {
+                const rect = rodrigoCard.getBoundingClientRect();
+                // Inicia quando o topo do card estiver 20% visível na tela
+                if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
+                    initTypewriter(typewriterElement);
+                    typewriterStarted = true;
+                }
+            }
         });
 
         function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('translate-x-full'); }

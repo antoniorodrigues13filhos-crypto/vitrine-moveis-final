@@ -130,8 +130,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
             </div>
-            <div id="chat-content" class="p-6 space-y-4 h-[300px] overflow-y-auto chat-scroll bg-texture/30">
-                <div class="flex flex-col gap-1 text-left">
+            <div id="chat-content" class="p-6 space-y-4 h-[300px] overflow-y-auto chat-scroll bg-texture/30 text-left">
+                <div class="flex flex-col gap-1">
                     <div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5 self-start max-w-[85%]">
                         <p class="text-sm text-primary/80 leading-relaxed italic">"Olá! Seja bem-vindo 😊 Me conta, você está procurando algum móvel específico ou quer ajuda pra escolher o melhor modelo?"</p>
                     </div>
@@ -178,7 +178,7 @@
         <section id="scroll-hero" style="height:400vh;position:relative;">
             <div style="position:sticky;top:0;height:100vh;width:100%;overflow:hidden;">
                 <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></canvas>
-                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none"><h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3></div>
+                <div id="label-1" class="floating-label absolute top-[30%] left-[15%] md:left-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-left"><h3 class="text-white text-xl md:text-2xl font-serif italic border-l border-white/30 pl-4">Alumínio Aeronáutico</h3></div>
                 <div id="label-2" class="floating-label absolute top-[55%] right-[15%] md:right-[25%] opacity-0 translate-y-4 z-20 pointer-events-none text-right"><h3 class="text-white text-xl md:text-2xl font-serif italic border-r border-white/30 pr-4">Couro Top Grain</h3></div>
                 <div id="label-3" class="floating-label absolute bottom-[25%] left-1/2 -translate-x-1/2 opacity-0 translate-y-4 z-20 pointer-events-none text-center"><h3 class="text-white text-xl md:text-2xl font-serif italic">Sincronizado 4D</h3></div>
                 <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),rgba(0,0,0,0.2) 50%,transparent);z-index:1;"></div>
@@ -189,7 +189,7 @@
             </div>
         </section>
 
-        <section id="produtos" class="py-24 px-6 max-w-[90rem] mx-auto border-t border-border-light">
+        <section id="produtos" class="py-24 px-6 max-w-[90rem] mx-auto border-t border-border-light text-left">
             <h2 class="font-serif text-4xl mb-16">Coleção Executiva</h2>
             <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16"></div>
         </section>
@@ -202,32 +202,81 @@
                         <div id="fabiana-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
                             <img src="catalogtestimonials/fabiana.jpg.png" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110" alt="Fabiana">
-                            <div class="relative z-10 mb-10 min-h-[140px]">
-                                <span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary">Castro Construtora</span>
-                                <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="fabiana-text" class="typewriter" data-text="Precisávamos mobiliar uma escola inteira no Pará em tempo recorde. A Vitrine entregou tudo em 3 dias com organização impecável."></span>"</p>
-                            </div>
+                            <div class="relative z-10 mb-10 min-h-[140px]"><span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary">Castro Construtora</span><p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="fabiana-text" class="typewriter" data-text="Precisávamos mobiliar uma escola inteira no Pará em tempo recorde. A Vitrine entregou tudo em 3 dias com organização impecável."></span>"</p></div>
                             <p class="font-bold text-sm tracking-widest uppercase text-primary">Fabiana</p>
                         </div>
                         <div id="vinicios-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
                             <img src="catalogtestimonials/vinicios.jpg.png" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110" alt="Vinicios">
-                            <div class="relative z-10 mb-10 min-h-[140px]">
-                                <img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-5 grayscale opacity-40 mb-6 group-hover:grayscale-0 transition-all">
-                                <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="vinicios-text" class="typewriter" data-text="O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim e garantiu que tudo saísse conforme o combinado."></span>"</p>
-                            </div>
+                            <div class="relative z-10 mb-10 min-h-[140px]"><img src="https://logodownload.org/wp-content/uploads/2014/05/unimed-logo-1.png" class="h-5 grayscale opacity-40 mb-6 group-hover:grayscale-0 transition-all"><p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="vinicios-text" class="typewriter" data-text="O atendimento da Vitrine Móveis fez toda a diferença. A equipe foi atenciosa do início ao fim e garantiu que tudo saísse conforme o combinado."></span>"</p></div>
                             <p class="font-bold text-sm tracking-widest uppercase text-primary">Vinicios</p>
                         </div>
                         <div id="rodrigo-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
                             <img src="catalogtestimonials/rodrigo.jpg.jpg" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110" alt="Rodrigo">
-                            <div class="relative z-10 mb-10 min-h-[140px]">
-                                <span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary">Avaliação do Cliente</span>
-                                <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="rodrigo-text" class="typewriter" data-text="Ótimo local, loja organizada e bem estruturada. Atendimento, bom e preços razoáveis. Sem estacionamento, mas nas ruas próximas é fácil de encontrar."></span>"</p>
-                            </div>
+                            <div class="relative z-10 mb-10 min-h-[140px]"><span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary">Avaliação do Cliente</span><p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="rodrigo-text" class="typewriter" data-text="Ótimo local, loja organizada e bem estruturada. Atendimento, bom e preços razoáveis. Sem estacionamento, mas nas ruas próximas é fácil de encontrar."></span>"</p></div>
                             <p class="font-bold text-sm tracking-widest uppercase text-primary">Rodrigo Sousa</p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="contato" class="py-32 px-6 bg-white border-t border-border-light relative">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-stretch">
+                
+                <div class="w-full md:w-1/2 text-left reveal">
+                    <h2 class="font-serif text-5xl md:text-6xl mb-4 text-primary tracking-tight">Envie-nos uma Mensagem</h2>
+                    <div class="w-16 h-1 bg-primary mb-8 rounded-full"></div>
+                    <p class="text-lg text-primary/60 mb-12 font-light">Fale com a gente e receba atendimento rápido e personalizado.</p>
+
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">Seu Nome</label>
+                                <input type="text" placeholder="Como podemos te chamar?" class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 focus:border-primary/20 focus:bg-white outline-none transition-all text-sm font-light">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">Telefone</label>
+                                <input type="tel" placeholder="(00) 00000-0000" class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 focus:border-primary/20 focus:bg-white outline-none transition-all text-sm font-light">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">E-mail Corporativo</label>
+                            <input type="email" placeholder="exemplo@empresa.com" class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 focus:border-primary/20 focus:bg-white outline-none transition-all text-sm font-light">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-mono tracking-widest text-primary/40 ml-2">Sua Mensagem</label>
+                            <textarea rows="5" placeholder="Descreva seu projeto ou necessidade..." class="w-full px-6 py-4 rounded-2xl bg-primary/5 border border-black/5 focus:border-primary/20 focus:bg-white outline-none transition-all text-sm font-light resize-none"></textarea>
+                        </div>
+                        <button type="button" class="w-full py-5 px-8 rounded-2xl bg-primary text-white text-xs font-bold uppercase tracking-[0.2em] shadow-2xl shadow-black/20 hover:scale-[1.02] hover:bg-primary/90 transition-all active:scale-95">
+                            Falar com um Especialista
+                        </button>
+                    </form>
+                </div>
+
+                <div class="w-full md:w-1/2 reveal" style="transition-delay: 200ms;">
+                    <div class="h-full min-h-[500px] w-full bg-primary/5 rounded-[3rem] overflow-hidden border border-black/5 shadow-2xl relative group">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3826.9632313627915!2d-48.9567406!3d-16.331294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935ea48316c0211f%3A0xc34b726487e4125a!2sAv.%20Sen.%20Jos%C3%A9%20Louren%C3%A7o%20Dias%2C%2063%20-%20St.%20Central%2C%20An%C3%A1polis%20-%20GO%2C%2075020-010!5e0!3m2!1spt-BR!2sbr!4v1713000000000!5m2!1spt-BR!2sbr" 
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="grayscale contrast-125 opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                        </iframe>
+                        
+                        <div class="absolute bottom-8 left-8 right-8 bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] border border-white shadow-2xl pointer-events-none group-hover:translate-y-2 transition-transform duration-500 text-left">
+                            <p class="text-[10px] font-mono uppercase tracking-widest text-primary/40 mb-2">Visite nossa Loja Física</p>
+                            <h4 class="font-serif text-xl text-primary mb-1">Vitrine Móvel Anápolis</h4>
+                            <p class="text-sm text-primary/60 font-light leading-relaxed">
+                                Avenida Senador José Lourenço Dias, nº 63<br>
+                                Bairro Maracanã – CEP: 75020-187<br>
+                                Anápolis - GO
+                            </p>
+                            <a href="https://www.google.com/maps/place/Vitrine+M%C3%B3veis+An%C3%A1polis+-+Loja+F%C3%ADsica/@-16.319314,-48.953481,14z/data=!4m6!3m5!1s0x935ea48963f6b4eb:0xa3dfbbeba7fa910a!8m2!3d-16.3193136!4d-48.9534808!16s%2Fg%2F1tcvk5fq?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="pointer-events-auto inline-block mt-4 text-[10px] font-bold uppercase tracking-widest text-primary hover:opacity-50 transition-opacity underline decoration-primary/20 underline-offset-4">
+                                Ver rota no GPS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </main>
@@ -299,7 +348,8 @@
             { keys: ['onde', 'fica', 'localização', 'endereço', 'loja física'], reply: "Estamos em Anápolis 👍 📍 Avenida Senador José Lourenço Dias, nº 63 – Bairro Maracanã. Se quiser, posso te mandar a localização no mapa também 😊" },
             { keys: ['entrega', 'entregam', 'frete', 'envio', 'prazo'], reply: "Fazemos entrega sim 🚚 Me informa seu CEP que já verifico o valor do frete e o prazo certinho pra você 👍" },
             { keys: ['preço', 'valor', 'quanto custa', 'orçamento', 'promoção'], reply: "Consigo te passar o melhor valor sim 😊 Me fala qual produto você tem interesse ou se prefere que eu te indique uma opção ideal." },
-            { keys: ['garantia', 'problema', 'defeito'], reply: "Sim, nossos produtos possuem garantia 👍 Trabalhamos com móveis de qualidade, pensados pra durabilidade. Qual produto você está vendo? Posso te explicar certinho 😉" }
+            { keys: ['garantia', 'problema', 'defeito'], reply: "Sim, nossos produtos possuem garantia 👍 Trabalhamos com móveis de qualidade, pensados pra durabilidade. Qual produto você está vendo? Posso te explicar certinho 😉" },
+            { keys: ['cadeira', 'mesa', 'estante', 'roupeiro'], reply: "Trabalhamos com cadeiras, mesas, estantes e roupeiros 👍 Tudo voltado pra escritório e empresas. Me fala o que você está procurando que eu te ajudo 😉" }
         ];
 
         function toggleChat() { document.getElementById('chat-window').classList.toggle('hidden'); }

@@ -103,7 +103,7 @@
         .float-btn { animation: float 3s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
-        #chat-window { transform-origin: bottom right; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        #chat-window { transform-origin: bottom right; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: 120; }
         #chat-window.hidden { opacity: 0; transform: scale(0.8) translateY(20px); pointer-events: none; }
         .chat-scroll::-webkit-scrollbar { width: 4px; }
         .chat-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
@@ -126,12 +126,12 @@
                         <p class="text-md font-serif italic">Camila</p>
                     </div>
                 </div>
-                <button onclick="toggleChat(); event.stopPropagation();" class="absolute top-6 right-6 text-white/40 hover:text-white transition-colors cursor-pointer p-2 z-[110]" aria-label="Fechar chat">
+                <button onclick="toggleChat()" class="absolute top-6 right-6 text-white/40 hover:text-white transition-colors cursor-pointer p-2 z-[130]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
             </div>
             <div id="chat-content" class="p-6 space-y-4 h-[300px] overflow-y-auto chat-scroll bg-texture/30">
-                <div class="flex flex-col gap-1">
+                <div class="flex flex-col gap-1 text-left">
                     <div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5 self-start max-w-[85%]">
                         <p class="text-sm text-primary/80 leading-relaxed italic">"Olá! Seja bem-vindo 😊 Me conta, você está procurando algum móvel específico ou quer ajuda pra escolher o melhor modelo?"</p>
                     </div>
@@ -198,12 +198,12 @@
             <div class="max-w-7xl mx-auto">
                 <div class="reveal text-center mb-24"><h2 class="font-serif text-4xl md:text-5xl mb-6 tracking-tight text-primary">A confiança de quem constrói o amanhã.</h2><div class="w-20 h-[1px] bg-primary/10 mx-auto"></div></div>
                 <div class="flex flex-col md:flex-row items-stretch gap-8">
-                    <div class="reveal md:w-full grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                    <div class="reveal md:w-full grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch text-left">
                         <div id="fabiana-card" class="p-12 rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.02)] relative group transition-all duration-700 ease-out hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:-translate-y-4">
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
                             <img src="catalogtestimonials/fabiana.jpg.png" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110" alt="Fabiana">
                             <div class="relative z-10 mb-10 min-h-[140px]">
-                                <span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary transition-all duration-500 group-hover:translate-x-2">Castro Construtora</span>
+                                <span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary">Castro Construtora</span>
                                 <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="fabiana-text" class="typewriter" data-text="Precisávamos mobiliar uma escola inteira no Pará em tempo recorde. A Vitrine entregou tudo em 3 dias com organização impecável."></span>"</p>
                             </div>
                             <p class="font-bold text-sm tracking-widest uppercase text-primary">Fabiana</p>
@@ -221,7 +221,7 @@
                             <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[2.5rem]"></div>
                             <img src="catalogtestimonials/rodrigo.jpg.jpg" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-xl mb-8 transition-transform duration-700 group-hover:scale-110" alt="Rodrigo">
                             <div class="relative z-10 mb-10 min-h-[140px]">
-                                <span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary transition-all duration-500 group-hover:translate-x-2">Avaliação do Cliente</span>
+                                <span class="font-bold text-[10px] tracking-[0.2em] opacity-40 block mb-4 uppercase text-primary">Avaliação do Cliente</span>
                                 <p class="text-primary/70 leading-relaxed font-light text-xl italic transition-all duration-700 group-hover:text-primary">"<span id="rodrigo-text" class="typewriter" data-text="Ótimo local, loja organizada e bem estruturada. Atendimento, bom e preços razoáveis. Sem estacionamento, mas nas ruas próximas é fácil de encontrar."></span>"</p>
                             </div>
                             <p class="font-bold text-sm tracking-widest uppercase text-primary">Rodrigo Sousa</p>
@@ -247,11 +247,13 @@
 
         document.getElementById('product-grid').innerHTML = products.map(prod => `
             <div class="group cursor-pointer">
-                <div class="relative w-full h-[450px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6 shadow-inner">
+                <div class="relative w-full h-[450px] overflow-hidden rounded-2xl border border-border-light bg-[#F5F5F5] mb-6 shadow-inner text-left">
                     <img src="${prod.image}" alt="${prod.name}" class="absolute top-0 left-0 w-full h-full object-cover ${grayscaleClass} transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
                     <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full border border-border-light shadow-sm"><span class="font-mono text-[10px] uppercase font-bold text-primary">${prod.badge}</span></div>
                 </div>
-                <h3 class="font-serif text-2xl mb-1">${prod.name}</h3><p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
+                <div class="text-left">
+                    <h3 class="font-serif text-2xl mb-1">${prod.name}</h3><p class="font-sans text-sm text-primary/60 font-light">${prod.material}</p>
+                </div>
             </div>
         `).join('');
 
@@ -268,7 +270,11 @@
             img.onload = () => {
                 loadedImages++;
                 document.getElementById('progress-bar').style.width = `${Math.floor((loadedImages/frameCount)*100)}%`;
-                if (loadedImages === frameCount) { render(); }
+                if (loadedImages === frameCount) { 
+                    document.getElementById('loader').style.opacity = '0';
+                    setTimeout(() => document.getElementById('loader').style.visibility = 'hidden', 500);
+                    render(); 
+                }
             };
             img.src = `./frames/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
             images.push(img);
@@ -293,15 +299,10 @@
             { keys: ['onde', 'fica', 'localização', 'endereço', 'loja física'], reply: "Estamos em Anápolis 👍 📍 Avenida Senador José Lourenço Dias, nº 63 – Bairro Maracanã. Se quiser, posso te mandar a localização no mapa também 😊" },
             { keys: ['entrega', 'entregam', 'frete', 'envio', 'prazo'], reply: "Fazemos entrega sim 🚚 Me informa seu CEP que já verifico o valor do frete e o prazo certinho pra você 👍" },
             { keys: ['preço', 'valor', 'quanto custa', 'orçamento', 'promoção'], reply: "Consigo te passar o melhor valor sim 😊 Me fala qual produto você tem interesse ou se prefere que eu te indique uma opção ideal." },
-            { keys: ['garantia', 'problema', 'defeito'], reply: "Sim, nossos produtos possuem garantia 👍 Trabalhamos com móveis de qualidade, pensados pra durabilidade. Qual produto você está vendo? Posso te explicar certinho 😉" },
-            { keys: ['cadeira', 'mesa', 'estante', 'roupeiro'], reply: "Trabalhamos com cadeiras, mesas, estantes e roupeiros 👍 Tudo voltado pra escritório e empresas. Me fala o que você está procurando que eu te ajudo 😉" }
+            { keys: ['garantia', 'problema', 'defeito'], reply: "Sim, nossos produtos possuem garantia 👍 Trabalhamos com móveis de qualidade, pensados pra durabilidade. Qual produto você está vendo? Posso te explicar certinho 😉" }
         ];
 
-        function toggleChat() { 
-            const chat = document.getElementById('chat-window');
-            chat.classList.toggle('hidden');
-        }
-
+        function toggleChat() { document.getElementById('chat-window').classList.toggle('hidden'); }
         function handleChatKey(e) { if(e.key === 'Enter') sendMessage(); }
         function quickMessage(text) { document.getElementById('chat-input').value = text; sendMessage(); }
 
@@ -312,7 +313,7 @@
             if(!userText) return;
 
             const userDiv = document.createElement('div');
-            userDiv.className = "flex flex-col gap-1 items-end";
+            userDiv.className = "flex flex-col gap-1 items-end text-right";
             userDiv.innerHTML = `<div class="bg-primary text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-sm text-xs">${input.value}</div>`;
             chatContent.appendChild(userDiv);
             input.value = '';
@@ -321,7 +322,7 @@
             for(let item of camilaBrain) { if(item.keys.some(key => userText.includes(key))) { finalReply = item.reply; break; } }
 
             const typingDiv = document.createElement('div');
-            typingDiv.className = "flex flex-col gap-1 items-start";
+            typingDiv.className = "flex flex-col gap-1 items-start text-left";
             typingDiv.innerHTML = `<div class="bg-primary/5 p-3 rounded-2xl rounded-tl-none border border-black/5 max-w-[85%] text-xs italic text-primary/40 animate-pulse">Camila está digitando...</div>`;
             chatContent.appendChild(typingDiv);
             chatContent.scrollTop = chatContent.scrollHeight;
@@ -329,7 +330,7 @@
             setTimeout(() => {
                 typingDiv.remove();
                 const botDiv = document.createElement('div');
-                botDiv.className = "flex flex-col gap-1 items-start";
+                botDiv.className = "flex flex-col gap-1 items-start text-left";
                 botDiv.innerHTML = `<div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5 max-w-[85%] text-sm italic text-primary/80 shadow-sm">"${finalReply}"</div>`;
                 chatContent.appendChild(botDiv);
                 chatContent.scrollTop = chatContent.scrollHeight;

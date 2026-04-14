@@ -142,7 +142,6 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* Estilo do Chat Virtual */
         #chat-window {
             transform-origin: bottom right;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -158,41 +157,53 @@
 
     <div class="fixed bottom-8 right-8 z-[100]">
         
-        <div id="chat-window" class="hidden mb-6 w-80 md:w-96 bg-white/80 backdrop-blur-2xl border border-white/50 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden">
-            <div class="p-6 bg-primary text-white flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center border border-white/10">
-                        <img src="/midia w/3d-icon-social-media-app.png" class="w-full h-full object-cover rounded-full" alt="Atendente">
+        <div id="chat-window" class="hidden mb-6 w-80 md:w-96 bg-white/90 backdrop-blur-3xl border border-white rounded-[2.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.12)] overflow-hidden">
+            <div class="p-8 bg-primary text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                <div class="flex items-center gap-4 relative z-10">
+                    <div class="relative">
+                        <div class="w-14 h-14 rounded-full border-2 border-white/20 p-0.5">
+                            <img src="assetschat/camila.jpg.jpg" class="w-full h-full object-cover rounded-full shadow-lg" alt="Camila">
+                        </div>
+                        <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-primary rounded-full"></div>
                     </div>
                     <div>
-                        <p class="text-xs font-bold uppercase tracking-widest">Vitrine Virtual</p>
-                        <span class="text-[10px] opacity-60 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span> Online agora</span>
+                        <p class="text-[10px] font-mono uppercase tracking-[0.2em] opacity-50 mb-1">Especialista Vitrine</p>
+                        <p class="text-lg font-serif italic tracking-wide">Camila</p>
                     </div>
                 </div>
-                <button onclick="toggleChat()" class="opacity-50 hover:opacity-100 transition-opacity">
+                <button onclick="toggleChat()" class="absolute top-8 right-8 text-white/40 hover:text-white transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
             </div>
 
-            <div class="p-6 space-y-4 max-h-[300px] overflow-y-auto">
-                <div class="bg-primary/5 p-4 rounded-2xl rounded-tl-none border border-black/5">
-                    <p class="text-sm text-primary/80 leading-relaxed italic">"Olá! Seja bem-vindo à Vitrine Móvel. Sou sua atendente virtual e estou aqui para ajudar a equipar seu espaço com excelência. Como posso auxiliá-lo hoje?"</p>
+            <div class="p-8 space-y-6">
+                <div class="flex flex-col gap-2">
+                    <div class="bg-primary/5 p-5 rounded-3xl rounded-tl-none border border-black/5 shadow-sm">
+                        <p class="text-sm text-primary/80 leading-relaxed italic">"Olá! Sou a Camila. É um prazer recebê-lo aqui. Estou pronta para transformar seu projeto corporativo em realidade. Como posso te ajudar?"</p>
+                    </div>
+                    <span class="text-[9px] font-mono text-primary/30 uppercase ml-2 tracking-widest">Enviado agora</span>
                 </div>
             </div>
 
-            <div class="p-6 pt-0 space-y-2">
-                <a href="https://wa.me/SEUNUMERO?text=Gostaria de ver o catálogo premium" target="_blank" class="block w-full py-3 px-4 rounded-xl border border-primary/10 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-all text-center">Ver Catálogo Premium</a>
-                <a href="https://wa.me/SEUNUMERO?text=Quero falar com um consultor" target="_blank" class="block w-full py-3 px-4 rounded-xl border border-primary/10 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-all text-center">Falar com Consultor</a>
+            <div class="p-8 pt-0 space-y-3">
+                <a href="https://wa.me/SEUNUMERO?text=Oi Camila, quero conhecer o catálogo" target="_blank" class="flex items-center justify-between w-full py-4 px-6 rounded-2xl bg-primary text-white text-[10px] font-bold uppercase tracking-widest hover:scale-[1.02] transition-all shadow-lg shadow-black/10 group">
+                    Explorar Catálogo 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                <a href="https://wa.me/SEUNUMERO?text=Oi Camila, gostaria de um orçamento personalizado" target="_blank" class="flex items-center justify-center w-full py-4 px-6 rounded-2xl border border-primary/10 text-[10px] font-bold uppercase tracking-widest text-primary/60 hover:bg-primary/5 transition-all">
+                    Orçamento Personalizado
+                </a>
             </div>
         </div>
 
         <button onclick="toggleChat()" class="group float-btn relative">
             <div class="relative flex items-center justify-center">
-                <div class="absolute right-full mr-4 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-black/5 shadow-xl opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
-                    <p class="text-[10px] font-mono uppercase tracking-widest text-primary">Atendimento Virtual</p>
+                <div class="absolute right-full mr-6 bg-primary text-white px-5 py-2 rounded-full shadow-2xl opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
+                    <p class="text-[9px] font-mono uppercase tracking-[0.2em]">Falar com Camila</p>
                 </div>
-                <div class="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-xl border border-white/50 rounded-full shadow-2xl flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-110 active:scale-95">
-                    <img src="/midia w/3d-icon-social-media-app.png" alt="WhatsApp" class="w-full h-full object-cover">
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-xl border border-white/50 rounded-full shadow-2xl flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-110 active:scale-95 group-hover:rotate-6">
+                    <img src="/midia w/3d-icon-social-media-app.png" alt="WhatsApp" class="w-full h-full object-cover p-3">
                 </div>
             </div>
         </button>
@@ -344,7 +355,6 @@
     </main>
 
     <script>
-        // Lógica de Produtos
         const products = [
             { id: "CH-001", name: "Cadeira Addit Presidente", material: "Mesh & Nylon", image: "catalog/cadeira-addit-presidente-frisokar.png", badge: "Ergonomia" },
             { id: "CH-002", name: "Cadeira Diretor NR17", material: "Espuma Injetada", image: "catalog/cadeira-diretor-ergonomica-nr17.png", badge: "NR17" },
@@ -367,7 +377,6 @@
             </div>
         `).join('');
 
-        // Lenis e Canvas
         const lenis = new Lenis({ lerp: 0.05 });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
@@ -417,7 +426,6 @@
             toggleLabel('label-3', frameIndex >= 38 && frameIndex <= 50);
         }
 
-        // Função para Abrir/Fechar Chat
         function toggleChat() {
             const chat = document.getElementById('chat-window');
             chat.classList.toggle('hidden');

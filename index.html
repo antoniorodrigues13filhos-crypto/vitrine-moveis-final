@@ -115,7 +115,6 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Textura de fundo sutil para realçar o Glassmorphism */
         .bg-texture {
             background-color: #ffffff;
             background-image: 
@@ -134,9 +133,30 @@
             from, to { border-color: transparent }
             50% { border-color: rgba(17, 17, 17, 0.7); }
         }
+
+        /* Animação do botão flutuante */
+        .float-btn {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
     </style>
 </head>
 <body class="bg-white text-primary font-sans antialiased selection:bg-black selection:text-white relative" style="overflow: auto;">
+
+    <a href="https://wa.me/SEUNUMERO" target="_blank" class="fixed bottom-8 right-8 z-[100] group float-btn">
+        <div class="relative flex items-center justify-center">
+            <div class="absolute right-full mr-4 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-black/5 shadow-xl opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
+                <p class="text-[10px] font-mono uppercase tracking-widest text-primary">Fale com uma atendente</p>
+            </div>
+            <div class="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-xl border border-white/50 rounded-full shadow-2xl flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-110">
+                <img src="/midia w/3d-icon-social-media-app.png" alt="WhatsApp" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </a>
 
     <div id="loader" style="position: fixed; inset: 0px; background: linear-gradient(135deg, rgb(17, 17, 17), rgb(42, 42, 42)); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s; opacity: 1; visibility: visible;">
         <div class="mb-4">
